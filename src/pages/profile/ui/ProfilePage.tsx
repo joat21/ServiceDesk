@@ -1,4 +1,11 @@
-import { Card, CardBody, CardHeader, Divider, Image } from '@heroui/react';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Divider,
+  Image,
+} from '@heroui/react';
 
 export const ProfilePage = () => {
   return (
@@ -15,6 +22,7 @@ export const ProfilePage = () => {
               className="mb-14"
             />
             <span className="mb-14">Борис Иванов</span>
+            <Button color="primary">aaa</Button>
           </CardHeader>
           <Divider />
           <CardBody className="gap-5 p-0">
