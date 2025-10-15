@@ -3,3 +3,7 @@ export { default as DepartmentIcon } from './department.svg?react';
 export { default as EmailIcon } from './email.svg?react';
 export { default as LocationIcon } from './location.svg?react';
 export { default as UserProfileAvatarIcon } from './user-profile-avatar.svg?react';
+export { default as AlfaLogo } from './alfa-logo.svg?react';
+export { default as NotificationIcon } from './notification.svg?react';
+export { default as UserHeaderAvatarIcon } from './user-header-avatar.svg?react';
+export { default as DropdownArrowIcon } from './dropdown-arrow.svg?react';
