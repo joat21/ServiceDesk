@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
-import {
-  AlfaLogo,
-  DropdownArrowIcon,
-  NotificationIcon,
-  UserHeaderAvatarIcon,
-} from '../../../shared/ui/icons';
+import { AlfaLogo, NotificationIcon } from '../../../shared/ui/icons';
 import { Button } from '@heroui/react';
+import { UserDropdown } from './UserDropdown';
 
 export const Header = () => {
   return (
@@ -19,7 +15,7 @@ export const Header = () => {
           </div>
         </Link>
         <div
-          className="flex justify-between items-center gap-4 pl-7 py-4 max-w-[440px] w-full"
+          className="flex justify-between items-center gap-4 pl-7 py-2 max-w-[440px] w-full h-full"
           style={{ boxShadow: '-10px -4px 16px 0 rgba(0,0,0,0.08)' }}
         >
           <Button
@@ -28,14 +24,7 @@ export const Header = () => {
           >
             <NotificationIcon />
           </Button>
-          <Link className="flex gap-4 items-center" to="/profile">
-            <div className="flex flex-col items-end">
-              <span className="text-xl font-medium">Борис Иванов</span>
-              <span className="text-[#666]">Маркетинг</span>
-            </div>
-            <UserHeaderAvatarIcon />
-            <DropdownArrowIcon />
-          </Link>
+          <UserDropdown />
         </div>
       </div>
     </header>
