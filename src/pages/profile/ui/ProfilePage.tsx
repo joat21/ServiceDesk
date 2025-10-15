@@ -1,69 +1,66 @@
+import { Card, CardBody, CardFooter, CardHeader, Divider } from '@heroui/react';
 import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Image,
-} from '@heroui/react';
+  UserIcon,
+  EmailIcon,
+  LocationIcon,
+  DepartmentIcon,
+  UserProfileAvatarIcon,
+} from '../../../shared/ui/icons';
+import { PersonalInfoItem } from './PersonalInfoItem';
 
 export const ProfilePage = () => {
   return (
-    <div className="content pt-24">
-      <div className="container flex justify-between items-center gap-24">
-        <Card className="p-7 max-w-[400px] w-full">
-          <CardHeader className="flex flex-col p-0">
-            <Image
-              alt="heroui logo"
-              height={200}
-              radius="full"
-              src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-              width={200}
-              className="mb-14"
+    <div className="flex justify-between items-center gap-20 max-w-[1050px] w-full">
+      <Card className="gap-10 px-5 py-10 rounded-4xl max-w-[330px] w-full">
+        <CardBody className="items-center gap-10 p-0">
+          <UserProfileAvatarIcon />
+          <div className="flex flex-col items-center gap-1">
+            <span className="text-xl font-semibold">Борис Иванов</span>
+            <span>Сотрудник</span>
+          </div>
+        </CardBody>
+        <Divider />
+        <CardFooter className="p-0">
+          <div className="flex justify-between w-full">
+            <span>ID сотрудника</span>
+            <span>EMP-0004</span>
+          </div>
+        </CardFooter>
+      </Card>
+      <Card className="px-6 py-7 rounded-4xl w-full max-h-fit">
+        <CardHeader className="mb-7 p-0">
+          <div className="flex items-center gap-5">
+            <UserIcon />
+            <span className="text-xl font-medium">Личная информация</span>
+          </div>
+        </CardHeader>
+        <CardBody as="ul" className="grid grid-cols-2 gap-x-3 gap-y-8 p-0">
+          <li>
+            <PersonalInfoItem
+              label="Email"
+              value="ivanov@company.com"
+              icon={EmailIcon}
             />
-            <span className="mb-14">Борис Иванов</span>
-            <Button color="primary">aaa</Button>
-          </CardHeader>
-          <Divider />
-          <CardBody className="gap-5 p-0">
-            <div className="flex justify-between">
-              <span>ID сотрудника</span>
-              <span>EMP-0004</span>
-            </div>
-            <div className="flex justify-between">
-              <span>График работы</span>
-              <span>Пн-Пт 9:00-18:00</span>
-            </div>
-          </CardBody>
-        </Card>
-        <Card className="p-7 w-full max-h-fit">
-          <CardHeader className="p-0">
-            <span className="text-2xl">Личная информация</span>
-          </CardHeader>
-          <CardBody className="grid grid-cols-2 gap-3 p-0">
-            <div className="flex flex-col gap-1.5">
-              <span className="font-bold">Email</span>
-              <span>ivanov@company.com</span>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <span className="font-bold">Местоположение</span>
-              <span>Екатеринбург, Генеральская 8</span>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <span className="font-bold">Телефон</span>
-              <span>+ 7 (495) 123-45-67</span>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <span className="font-bold">Должность</span>
-              <span>Сотрудник?</span>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <span className="font-bold">Отдел</span>
-              <span>Маркетинг</span>
-            </div>
-          </CardBody>
-        </Card>
-      </div>
+          </li>
+          <li>
+            <PersonalInfoItem
+              label="Местоположение"
+              value="Екатеринбург, Генеральская 8"
+              icon={LocationIcon}
+            />
+          </li>
+          <li>
+            <PersonalInfoItem
+              label="Отдел"
+              value="Маркетинг"
+              icon={DepartmentIcon}
+            />
+          </li>
+          <li>
+            <PersonalInfoItem label="Роль" value="Сотрудник" icon={UserIcon} />
+          </li>
+        </CardBody>
+      </Card>
     </div>
   );
 };
