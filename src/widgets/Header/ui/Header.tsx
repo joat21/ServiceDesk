@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { AlfaLogo, NotificationIcon } from '../../../shared/ui/icons';
-import { Button } from '@heroui/react';
+import { AlfaLogo } from '../../../shared/ui/icons';
 import { UserDropdown } from './UserDropdown';
+import { NotificationsDropdown } from './NotificationsDropdown';
 
 export const Header = () => {
   return (
@@ -18,12 +18,7 @@ export const Header = () => {
           className="flex justify-between items-center gap-4 pl-7 py-2 max-w-[440px] w-full h-full"
           style={{ boxShadow: '-10px -4px 16px 0 rgba(0,0,0,0.08)' }}
         >
-          <Button
-            className="p-0 w-[60px] h-[60px] min-w-0 bg-[#fafafa]"
-            radius="full"
-          >
-            <NotificationIcon />
-          </Button>
+          <NotificationsDropdown />
           <UserDropdown />
         </div>
       </div>
