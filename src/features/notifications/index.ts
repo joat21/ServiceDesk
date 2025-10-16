@@ -1,1 +1,1 @@
-export { NotificationsList } from './ui/NotificationsList';
+export { useNotifications } from './model/query';
