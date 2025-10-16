@@ -9,14 +9,18 @@ import {
 } from '@heroui/react';
 import {
   DropdownArrowIcon,
+  LogoutIcon,
   UserHeaderAvatarIcon,
+  UserIcon,
 } from '../../../shared/ui/icons';
 
 export const UserDropdown: FC = () => {
   return (
     <Dropdown
+      placement="bottom-end"
+      offset={25}
       classNames={{
-        content: 'text-base! rounded-2xl',
+        content: 'rounded-2xl min-w-44 text-base -translate-x-7',
       }}
     >
       <DropdownTrigger>
@@ -31,12 +35,31 @@ export const UserDropdown: FC = () => {
       </DropdownTrigger>
       <DropdownMenu>
         <DropdownSection showDivider>
-          <DropdownItem key="profile" href="/profile">
+          <DropdownItem
+            key="profile"
+            href="/profile"
+            startContent={<UserIcon width={24} height={24} />}
+            classNames={{
+              base: 'py-1',
+              title: 'text-secondary-foreground text-base',
+            }}
+          >
             Профиль
           </DropdownItem>
         </DropdownSection>
         <DropdownSection className="mb-0">
-          <DropdownItem key="logout">Выйти</DropdownItem>
+          <DropdownItem
+            key="logout"
+            classNames={{
+              base: 'py-1',
+              title: 'text-base',
+            }}
+            className="text-[#e24444]"
+            color="danger"
+            startContent={<LogoutIcon />}
+          >
+            Выйти
+          </DropdownItem>
         </DropdownSection>
       </DropdownMenu>
     </Dropdown>

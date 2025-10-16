@@ -7,3 +7,4 @@ export { default as AlfaLogo } from './alfa-logo.svg?react';
 export { default as NotificationIcon } from './notification.svg?react';
 export { default as UserHeaderAvatarIcon } from './user-header-avatar.svg?react';
 export { default as DropdownArrowIcon } from './dropdown-arrow.svg?react';
+export { default as LogoutIcon } from './logout-icon.svg?react';
