@@ -36,8 +36,10 @@ const items = [
 export const NotificationsDropdown: FC = () => {
   return (
     <Dropdown
+      placement="bottom-end"
+      offset={30}
       classNames={{
-        content: 'p-4 rounded-4xl',
+        content: 'p-4 rounded-4xl translate-x-11',
       }}
     >
       <DropdownTrigger>
