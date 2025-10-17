@@ -1,7 +1,7 @@
 import { Route, useNavigate, useHref, Routes } from 'react-router-dom';
 import { HeroUIProvider } from '@heroui/react';
 
-import { MainLayout } from '@/app/layouts/MainLayout';
+import { MainLayout } from './layouts/MainLayout';
 import { SignInPage } from '@/pages/sign-in';
 import { ProfilePage } from '@/pages/profile';
 
