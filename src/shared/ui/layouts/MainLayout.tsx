@@ -1,9 +1,10 @@
-import { HeroUIProvider } from '@heroui/react';
 import { Outlet, useHref, useNavigate } from 'react-router-dom';
-import { Header } from '../../../widgets/Header';
+import { HeroUIProvider } from '@heroui/react';
+import { Header } from '@/widgets/Header';
 
 export const MainLayout = () => {
   const navigate = useNavigate();
+
   return (
     <HeroUIProvider navigate={navigate} useHref={useHref}>
       <div className="flex flex-col min-h-screen">

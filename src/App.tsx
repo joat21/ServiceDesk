@@ -1,9 +1,9 @@
 import { Route, useNavigate, useHref, Routes } from 'react-router-dom';
 import { HeroUIProvider } from '@heroui/react';
 
-import { ProfilePage } from './pages/profile';
-import { MainLayout } from './shared/ui';
-import { SignInPage } from './pages/sign-in';
+import { SignInPage } from '@/pages/sign-in';
+import { ProfilePage } from '@/pages/profile';
+import { MainLayout } from '@/shared/ui';
 
 function App() {
   const navigate = useNavigate();

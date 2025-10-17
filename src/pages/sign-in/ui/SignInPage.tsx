@@ -1,7 +1,7 @@
-import { Button, Card, CardBody, CardHeader, Form } from '@heroui/react';
 import { Link } from 'react-router-dom';
+import { Button, Card, CardBody, CardHeader, Form } from '@heroui/react';
 import { SignInInput } from './SignInInput';
-import loginHouse from '../../../assets/img/login-house.svg';
+import loginHouse from '@/assets/img/login-house.svg';
 
 export const SignInPage = () => {
   return (

@@ -7,9 +7,9 @@ import {
   DropdownSection,
   DropdownTrigger,
 } from '@heroui/react';
-import { useNotifications } from '../../../features/notifications';
-import { NotificationIcon } from '../../../shared/ui/icons';
-import { NotificationsItem } from '../../../entities/notification';
+import { useNotifications } from '@/features/notifications';
+import { NotificationsItem } from '@/entities/notification';
+import { NotificationIcon } from '@/shared/ui/icons';
 
 export const NotificationsDropdown: FC = () => {
   const { notifications } = useNotifications();

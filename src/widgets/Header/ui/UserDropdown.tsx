@@ -12,7 +12,7 @@ import {
   LogoutIcon,
   UserHeaderAvatarIcon,
   UserIcon,
-} from '../../../shared/ui/icons';
+} from '@/shared/ui/icons';
 
 export const UserDropdown: FC = () => {
   return (

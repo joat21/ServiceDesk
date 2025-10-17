@@ -1,12 +1,12 @@
 import { Card, CardBody, CardFooter, CardHeader, Divider } from '@heroui/react';
+import { PersonalInfoItem } from './PersonalInfoItem';
 import {
   UserIcon,
   EmailIcon,
   LocationIcon,
   DepartmentIcon,
   UserProfileAvatarIcon,
-} from '../../../shared/ui/icons';
-import { PersonalInfoItem } from './PersonalInfoItem';
+} from '@/shared/ui/icons';
 
 export const ProfilePage = () => {
   return (

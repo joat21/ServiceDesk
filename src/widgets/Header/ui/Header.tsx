@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { AlfaLogo } from '../../../shared/ui/icons';
 import { UserDropdown } from './UserDropdown';
 import { NotificationsDropdown } from './NotificationsDropdown';
+import { AlfaLogo } from '@/shared/ui/icons';
 
 export const Header = () => {
   return (
