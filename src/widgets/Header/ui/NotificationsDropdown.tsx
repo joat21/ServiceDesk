@@ -51,6 +51,7 @@ export const NotificationsDropdown: FC = () => {
               key={notification.id}
               className="p-0"
               textValue={notification.title}
+              href={`/tickets/${notification.ticketId}`}
             >
               <NotificationsItem
                 title={notification.title}
