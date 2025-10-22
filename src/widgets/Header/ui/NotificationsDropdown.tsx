@@ -12,7 +12,7 @@ import { NotificationsItem } from '@/entities/notification';
 import { NotificationIcon } from '@/shared/ui/icons';
 
 export const NotificationsDropdown: FC = () => {
-  const { notifications } = useNotifications();
+  const { data: notifications } = useNotifications();
 
   return (
     <Dropdown

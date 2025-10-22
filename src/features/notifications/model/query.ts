@@ -1,26 +1,9 @@
-const items = [
-  {
-    id: 1,
-    title: 'Просрочена',
-    text: 'Заявка #[номер] [Тема] просрочена. Приносим извинения за задержку.',
-  },
-  {
-    id: 2,
-    title: 'Отклонена',
-    text: 'Заявка #[номер] [Тема] отклонена.',
-  },
-  {
-    id: 3,
-    title: 'Принята в работу',
-    text: 'Заявка #[номер] [Тема] принята в работу исполнителем.',
-  },
-  {
-    id: 4,
-    title: 'Выполнена',
-    text: 'Заявка #[номер] [Тема] выполнена. Ознакомьтесь с результатом и оцените работу.',
-  },
-];
+import { useQuery } from '@tanstack/react-query';
+import { getNotifications, type Notification } from '@/entities/notification';
 
-export const useNotifications = () => {
-  return { notifications: items };
-};
+export const useNotifications = () =>
+  useQuery<Notification[]>({
+    queryKey: ['notifications'],
+    queryFn: getNotifications,
+    refetchInterval: 1000 * 60,
+  });
