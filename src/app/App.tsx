@@ -5,6 +5,7 @@ import { MainLayout } from './layouts/MainLayout';
 import { SignInPage } from '@/pages/sign-in';
 import { ProfilePage } from '@/pages/profile';
 import { CreateTicketPage } from '@/pages/create-ticket';
+import { EmployeeTicketsPage } from '@/pages/tickets/employee';
 
 function App() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
 
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<h1>Дашборд</h1>} />
+          <Route index element={<EmployeeTicketsPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="create-ticket" element={<CreateTicketPage />} />
         </Route>
