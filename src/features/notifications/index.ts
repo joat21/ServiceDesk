@@ -1,1 +1,1 @@
-export { useNotifications } from './model/query';
+export { useNotifications, useMarkAsRead } from './model/query';

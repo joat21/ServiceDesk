@@ -7,12 +7,13 @@ import {
   DropdownSection,
   DropdownTrigger,
 } from '@heroui/react';
-import { useNotifications } from '@/features/notifications';
+import { useMarkAsRead, useNotifications } from '@/features/notifications';
 import { NotificationsItem } from '@/entities/notification';
 import { NotificationIcon } from '@/shared/ui/icons';
 
 export const NotificationsDropdown: FC = () => {
   const { data: notifications } = useNotifications();
+  const { mutate: markAsRead } = useMarkAsRead();
 
   return (
     <Dropdown
@@ -52,10 +53,12 @@ export const NotificationsDropdown: FC = () => {
               className="p-0"
               textValue={notification.title}
               href={`/tickets/${notification.ticketId}`}
+              onClick={() => markAsRead(notification.id)}
             >
               <NotificationsItem
                 title={notification.title}
                 text={notification.text}
+                isReaded={notification.isReaded}
               />
             </DropdownItem>
           )}

@@ -1,5 +1,5 @@
 export interface Notification {
-  id: string;
+  id: number; // временно меняю на number из за ограничений mokky.dev
   title: string;
   text: string;
   createdAt: Date;
