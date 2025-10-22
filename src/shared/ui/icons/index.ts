@@ -8,3 +8,7 @@ export { default as NotificationIcon } from './notification.svg?react';
 export { default as UserHeaderAvatarIcon } from './user-header-avatar.svg?react';
 export { default as DropdownArrowIcon } from './dropdown-arrow.svg?react';
 export { default as LogoutIcon } from './logout-icon.svg?react';
+export { default as TransportIcon } from './transport.svg?react';
+export { default as OfficeServicesIcon } from './office-services.svg?react';
+export { default as MovingIcon } from './moving.svg?react';
+export { default as CategoryOtherIcon } from './category-other.svg?react';
