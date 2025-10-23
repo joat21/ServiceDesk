@@ -1,32 +1,43 @@
 import type { FC } from 'react';
 import {
-  Autocomplete,
-  AutocompleteItem,
   Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
   Form,
-  RadioGroup,
-  Select,
-  SelectItem,
 } from '@heroui/react';
 import { CreateTicketInput } from './CreateTicketInput';
 import { CreateTicketTextarea } from './CreateTicketTextarea';
-import { CategoryRadio } from './CategoryRadio';
-import {
-  CategoryOtherIcon,
-  MovingIcon,
-  OfficeServicesIcon,
-  TransportIcon,
-} from '@/shared/ui/icons';
+import { CreateTicketSelect } from './CreateTicketSelect';
+import { CreateTicketAutocomplete } from './CreateTicketAutocomplete';
 import createTicketFile from '@/assets/img/create-ticket.svg';
+
+const categories = [
+  { id: 1, label: 'Транспорт' },
+  { id: 2, label: 'Офисные услуги' },
+  { id: 3, label: 'Переезд' },
+  { id: 4, label: 'Техническое обслуживание' },
+  { id: 5, label: 'Прочее' },
+];
+
+const priorities = [
+  { id: 1, label: 'Низкий' },
+  { id: 2, label: 'Низкий' },
+  { id: 3, label: 'Высокий' },
+  { id: 4, label: 'Срочный' },
+];
+
+const offices = [
+  { id: 1, label: 'Екатеринбург, ул. Генеральская, 8' },
+  { id: 2, label: 'Екатеринбург, ул. Сони Морозовой, 190' },
+  { id: 3, label: 'Екатеринбург, ул. 8 марта, 10' },
+];
 
 export const CreateTicketPage: FC = () => {
   return (
     <div className="flex justify-center items-start py-8 w-full">
-      <Card className="px-5 py-6 rounded-xl max-w-[910px] w-full" as={Form}>
+      <Card className="px-5 py-6 rounded-xl max-w-[725px] w-full" as={Form}>
         <CardHeader className="flex gap-5 mb-5 p-0">
           <img src={createTicketFile} alt="" />
           <h1 className="text-xl font-medium">Подать новую заявку</h1>
@@ -53,79 +64,31 @@ export const CreateTicketPage: FC = () => {
             label="Добавить фото"
             labelPlacement="outside"
             type="file"
+            isRequired={false}
           />
 
-          <RadioGroup
-            name="category"
-            label="Категория"
-            isRequired
-            orientation="horizontal"
-            classNames={{
-              wrapper: 'grid grid-cols-3 gap-x-4 gap-y-3.5',
-              label: 'text-xl font-medium',
-            }}
-          >
-            <CategoryRadio value="1" label="Транспорт" icon={TransportIcon} />
-            <CategoryRadio
-              value="2"
-              label="Офисные услуги"
-              icon={OfficeServicesIcon}
-            />
-            <CategoryRadio value="4" label="Переезд" icon={MovingIcon} />
-            <CategoryRadio
-              value="3"
-              label="Техническое обслуживание"
-              icon={CategoryOtherIcon}
-            />
-            <CategoryRadio value="5" label="Прочее" icon={CategoryOtherIcon} />
-          </RadioGroup>
-
           <div className="flex gap-5">
-            <Autocomplete
-              name="office"
-              label="Офис"
-              labelPlacement="outside"
-              placeholder="Выберите офис"
-              variant="bordered"
-              radius="full"
-              isRequired
-              inputProps={{
-                classNames: {
-                  label: 'text-xl font-medium',
-                  inputWrapper: 'border-1 border-[#bfbfbf] bg-[#EDEDED]',
-                },
-              }}
-            >
-              <AutocompleteItem key={1}>
-                Екатеринбург, Генеральская 8
-              </AutocompleteItem>
-              <AutocompleteItem key={2}>
-                Екатеринбург, Сони Морозовой 190
-              </AutocompleteItem>
-              <AutocompleteItem key={3}>
-                Екатеринбург, 8 марта 10
-              </AutocompleteItem>
-            </Autocomplete>
+            <CreateTicketSelect
+              name="category"
+              label="Категория"
+              placeholder="Выберите категорию"
+              options={categories}
+            />
 
-            <Select
+            <CreateTicketSelect
               name="priority"
               label="Приоритет"
-              labelPlacement="outside"
               placeholder="Выберите приоритет"
-              isRequired
-              variant="bordered"
-              radius="full"
-              classNames={{
-                label: 'text-xl font-medium',
-                trigger: 'border-1 border-[#bfbfbf] bg-[#EDEDED]',
-              }}
-            >
-              <SelectItem key={1}>Низкий</SelectItem>
-              <SelectItem key={2}>Средний</SelectItem>
-              <SelectItem key={3}>Высокий</SelectItem>
-              <SelectItem key={4}>Срочный</SelectItem>
-            </Select>
+              options={priorities}
+            />
           </div>
+
+          <CreateTicketAutocomplete
+            name="office"
+            label="Офис"
+            placeholder="Выберите офис"
+            options={offices}
+          />
 
           <CreateTicketTextarea
             name="additionalLocation"
