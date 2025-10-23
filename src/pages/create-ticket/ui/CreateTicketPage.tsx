@@ -7,34 +7,23 @@ import {
   CardHeader,
   Form,
 } from '@heroui/react';
+
 import { CreateTicketInput } from './CreateTicketInput';
 import { CreateTicketTextarea } from './CreateTicketTextarea';
 import { CreateTicketSelect } from './CreateTicketSelect';
 import { CreateTicketAutocomplete } from './CreateTicketAutocomplete';
+
+import { useCategories } from '@/features/categories';
+import { usePriorities } from '@/features/priorities';
+import { useOffices } from '@/features/offices';
+
 import createTicketFile from '@/assets/img/create-ticket.svg';
 
-const categories = [
-  { id: 1, label: 'Транспорт' },
-  { id: 2, label: 'Офисные услуги' },
-  { id: 3, label: 'Переезд' },
-  { id: 4, label: 'Техническое обслуживание' },
-  { id: 5, label: 'Прочее' },
-];
-
-const priorities = [
-  { id: 1, label: 'Низкий' },
-  { id: 2, label: 'Низкий' },
-  { id: 3, label: 'Высокий' },
-  { id: 4, label: 'Срочный' },
-];
-
-const offices = [
-  { id: 1, label: 'Екатеринбург, ул. Генеральская, 8' },
-  { id: 2, label: 'Екатеринбург, ул. Сони Морозовой, 190' },
-  { id: 3, label: 'Екатеринбург, ул. 8 марта, 10' },
-];
-
 export const CreateTicketPage: FC = () => {
+  const { data: categories } = useCategories();
+  const { data: priorities } = usePriorities();
+  const { data: offices } = useOffices();
+
   return (
     <div className="flex justify-center items-start py-8 w-full">
       <Card className="px-5 py-6 rounded-xl max-w-[725px] w-full" as={Form}>
@@ -72,14 +61,14 @@ export const CreateTicketPage: FC = () => {
               name="category"
               label="Категория"
               placeholder="Выберите категорию"
-              options={categories}
+              options={categories ?? []}
             />
 
             <CreateTicketSelect
               name="priority"
               label="Приоритет"
               placeholder="Выберите приоритет"
-              options={priorities}
+              options={priorities ?? []}
             />
           </div>
 
@@ -87,7 +76,8 @@ export const CreateTicketPage: FC = () => {
             name="office"
             label="Офис"
             placeholder="Выберите офис"
-            options={offices}
+            options={offices ?? []}
+            getLabel={(o) => o.fullAddress}
           />
 
           <CreateTicketTextarea

@@ -1,25 +1,27 @@
-import type { FC } from 'react';
 import {
   Autocomplete,
   AutocompleteItem,
   type AutocompleteProps,
 } from '@heroui/react';
 
-type Option = {
-  // id временно number
-  id: number;
-  label: string;
-};
-
-interface CreateTicketAutocompleteProps
-  extends Omit<AutocompleteProps<Option>, 'children'> {
-  options: Option[];
+interface CreateTicketAutocompleteProps<T extends object>
+  extends Omit<AutocompleteProps<T>, 'children'> {
+  options: T[];
+  getKey?: (item: T) => string | number;
+  getLabel?: (item: T) => string;
 }
 
-export const CreateTicketAutocomplete: FC<CreateTicketAutocompleteProps> = ({
+export const CreateTicketAutocomplete = <
+  T extends Record<string, string | number>,
+>({
   options,
+  getKey,
+  getLabel,
   ...props
-}) => {
+}: CreateTicketAutocompleteProps<T>) => {
+  const resolveKey = getKey ?? ((item: T) => item.id ?? item.value);
+  const resolveLabel = getLabel ?? ((item: T) => item.label ?? item.name);
+
   return (
     <Autocomplete
       labelPlacement="outside"
@@ -36,7 +38,9 @@ export const CreateTicketAutocomplete: FC<CreateTicketAutocompleteProps> = ({
       {...props}
     >
       {(option) => (
-        <AutocompleteItem key={option.id}>{option.label}</AutocompleteItem>
+        <AutocompleteItem key={resolveKey(option)}>
+          {resolveLabel(option)}
+        </AutocompleteItem>
       )}
     </Autocomplete>
   );

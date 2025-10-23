@@ -1,21 +1,21 @@
-import type { FC } from 'react';
 import { Select, SelectItem, type SelectProps } from '@heroui/react';
 
-type Option = {
-  // id временно number
-  id: number;
-  label: string;
-};
-
-interface CreateTicketSelectProps
-  extends Omit<SelectProps<Option>, 'children'> {
-  options: Option[];
+interface CreateTicketSelectProps<T extends object>
+  extends Omit<SelectProps<T>, 'children'> {
+  options: T[];
+  getKey?: (item: T) => string | number;
+  getLabel?: (item: T) => string;
 }
 
-export const CreateTicketSelect: FC<CreateTicketSelectProps> = ({
+export const CreateTicketSelect = <T extends Record<string, string | number>>({
   options,
+  getKey,
+  getLabel,
   ...props
-}) => {
+}: CreateTicketSelectProps<T>) => {
+  const resolveKey = getKey ?? ((item: T) => item.id ?? item.value);
+  const resolveLabel = getLabel ?? ((item: T) => item.label ?? item.name);
+
   return (
     <Select
       labelPlacement="outside"
@@ -29,7 +29,9 @@ export const CreateTicketSelect: FC<CreateTicketSelectProps> = ({
       items={options}
       {...props}
     >
-      {(option) => <SelectItem key={option.id}>{option.label}</SelectItem>}
+      {(option) => (
+        <SelectItem key={resolveKey(option)}>{resolveLabel(option)}</SelectItem>
+      )}
     </Select>
   );
 };
