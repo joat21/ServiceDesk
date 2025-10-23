@@ -4,23 +4,39 @@ import {
   type AutocompleteProps,
 } from '@heroui/react';
 
-interface CreateTicketAutocompleteProps<T extends object>
+type OptionKey = string | number;
+type OptionLabel = string;
+type OptionLike = {
+  id?: OptionKey;
+  value?: OptionKey;
+  label?: OptionLabel;
+  name?: OptionLabel;
+};
+
+interface CreateTicketAutocompleteProps<T extends OptionLike>
   extends Omit<AutocompleteProps<T>, 'children'> {
   options: T[];
-  getKey?: (item: T) => string | number;
-  getLabel?: (item: T) => string;
+  getKey?: (item: T) => OptionKey;
+  getLabel?: (item: T) => OptionLabel;
 }
 
-export const CreateTicketAutocomplete = <
-  T extends Record<string, string | number>,
->({
+export const CreateTicketAutocomplete = <T extends OptionLike>({
   options,
   getKey,
   getLabel,
   ...props
 }: CreateTicketAutocompleteProps<T>) => {
-  const resolveKey = getKey ?? ((item: T) => item.id ?? item.value);
-  const resolveLabel = getLabel ?? ((item: T) => item.label ?? item.name);
+  const resolveKey = (item: T) => {
+    if (getKey) return getKey(item);
+
+    return item.id ?? item.value ?? '';
+  };
+
+  const resolveLabel = (item: T) => {
+    if (getLabel) return getLabel(item);
+
+    return item.label ?? item.name ?? '';
+  };
 
   return (
     <Autocomplete

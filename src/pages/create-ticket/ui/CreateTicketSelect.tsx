@@ -1,20 +1,36 @@
 import { Select, SelectItem, type SelectProps } from '@heroui/react';
 
-interface CreateTicketSelectProps<T extends object>
+type OptionKey = string | number;
+type OptionLabel = string;
+type OptionLike = {
+  id?: OptionKey;
+  value?: OptionKey;
+  label?: OptionLabel;
+  name?: OptionLabel;
+};
+
+interface CreateTicketSelectProps<T extends OptionLike>
   extends Omit<SelectProps<T>, 'children'> {
   options: T[];
-  getKey?: (item: T) => string | number;
-  getLabel?: (item: T) => string;
+  getKey?: (item: T) => OptionKey;
+  getLabel?: (item: T) => OptionLabel;
 }
 
-export const CreateTicketSelect = <T extends Record<string, string | number>>({
+export const CreateTicketSelect = <T extends OptionLike>({
   options,
   getKey,
   getLabel,
   ...props
 }: CreateTicketSelectProps<T>) => {
-  const resolveKey = getKey ?? ((item: T) => item.id ?? item.value);
-  const resolveLabel = getLabel ?? ((item: T) => item.label ?? item.name);
+  const resolveKey = (item: T) => {
+    if (getKey) return getKey(item);
+    return item.id ?? item.value ?? '';
+  };
+
+  const resolveLabel = (item: T) => {
+    if (getLabel) return getLabel(item);
+    return item.label ?? item.name ?? '';
+  };
 
   return (
     <Select
