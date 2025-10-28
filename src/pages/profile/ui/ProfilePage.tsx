@@ -1,5 +1,6 @@
 import { Card, CardBody, CardFooter, CardHeader, Divider } from '@heroui/react';
 import { PersonalInfoItem } from './PersonalInfoItem';
+import { RoleLabel, useUser } from '@/entities/user';
 import {
   UserIcon,
   EmailIcon,
@@ -9,21 +10,27 @@ import {
 } from '@/shared/ui/icons';
 
 export const ProfilePage = () => {
+  const { data: user, isLoading } = useUser();
+
+  if (!user || isLoading) return 'Загрузка...';
+
+  const { name, surname, systemId, email, department, office, role } = user;
+
   return (
     <div className="flex justify-between items-center gap-20 max-w-[1050px] w-full">
       <Card className="gap-10 px-5 py-10 rounded-4xl max-w-[330px] w-full">
         <CardBody className="items-center gap-10 p-0">
           <UserProfileAvatarIcon />
           <div className="flex flex-col items-center gap-1">
-            <span className="text-xl font-semibold">Борис Иванов</span>
-            <span>Сотрудник</span>
+            <span className="text-xl font-semibold">{`${name} ${surname}`}</span>
+            <span>{RoleLabel[role]}</span>
           </div>
         </CardBody>
         <Divider />
         <CardFooter className="p-0">
           <div className="flex justify-between w-full">
             <span>ID сотрудника</span>
-            <span>EMP-0004</span>
+            <span>{systemId}</span>
           </div>
         </CardFooter>
       </Card>
@@ -36,23 +43,19 @@ export const ProfilePage = () => {
         </CardHeader>
         <CardBody as="ul" className="grid grid-cols-2 gap-x-3 gap-y-8 p-0">
           <li>
-            <PersonalInfoItem
-              label="Email"
-              value="ivanov@company.com"
-              icon={EmailIcon}
-            />
+            <PersonalInfoItem label="Email" value={email} icon={EmailIcon} />
           </li>
           <li>
             <PersonalInfoItem
               label="Местоположение"
-              value="Екатеринбург, Генеральская 8"
+              value={office[0]}
               icon={LocationIcon}
             />
           </li>
           <li>
             <PersonalInfoItem
               label="Отдел"
-              value="Маркетинг"
+              value={department}
               icon={DepartmentIcon}
             />
           </li>

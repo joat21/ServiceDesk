@@ -7,7 +7,7 @@ export interface User {
   role: Role;
   department: string;
   region: string;
-  office: string | string[];
+  office: string[];
   categories?: string[];
   rating?: number;
 }
@@ -21,3 +21,11 @@ export const Role = {
 } as const;
 
 export type Role = (typeof Role)[keyof typeof Role];
+
+export const RoleLabel: Record<Role, string> = {
+  employee: 'Сотрудник',
+  performer: 'Исполнитель',
+  admin: 'Администратор',
+  analyst: 'Аналитик',
+  superadmin: 'Главный администратор',
+};
