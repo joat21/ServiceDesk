@@ -44,7 +44,7 @@ export const CreateTicketAutocomplete = <T extends OptionLike>({
       variant="bordered"
       radius="full"
       isRequired
-      items={options}
+      defaultItems={options}
       inputProps={{
         classNames: {
           label: 'text-xl font-medium',
