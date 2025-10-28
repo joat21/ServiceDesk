@@ -14,7 +14,15 @@ import {
   UserIcon,
 } from '@/shared/ui/icons';
 
-export const UserDropdown: FC = () => {
+interface UserDropdownProps {
+  fullName: string;
+  department: string;
+}
+
+export const UserDropdown: FC<UserDropdownProps> = ({
+  fullName,
+  department,
+}) => {
   return (
     <Dropdown
       placement="bottom-end"
@@ -26,8 +34,8 @@ export const UserDropdown: FC = () => {
       <DropdownTrigger>
         <Button className="flex gap-4 items-center h-full" variant="light">
           <div className="flex flex-col items-end">
-            <span className="text-xl font-medium">Борис Иванов</span>
-            <span className="text-[#666]">Маркетинг</span>
+            <span className="text-xl font-medium">{fullName}</span>
+            <span className="text-[#666]">{department}</span>
           </div>
           <UserHeaderAvatarIcon className="max-w-none!" />
           <DropdownArrowIcon />

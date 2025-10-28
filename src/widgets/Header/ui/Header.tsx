@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { UserDropdown } from './UserDropdown';
 import { NotificationsDropdown } from './NotificationsDropdown';
+import { useUser } from '@/entities/user';
 import { AlfaLogo } from '@/shared/ui/icons';
 
 export const Header = () => {
+  const { data: user } = useUser();
+
   return (
     <header className="flex justify-center px-6 w-full bg-white">
       <div className="flex justify-between items-center gap-10 max-w-[1280px] w-full">
@@ -19,7 +22,10 @@ export const Header = () => {
           style={{ boxShadow: '-10px -4px 16px 0 rgba(0,0,0,0.08)' }}
         >
           <NotificationsDropdown />
-          <UserDropdown />
+          <UserDropdown
+            fullName={`${user?.name} ${user?.surname}`}
+            department={user?.department ?? ''}
+          />
         </div>
       </div>
     </header>
