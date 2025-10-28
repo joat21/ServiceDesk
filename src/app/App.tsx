@@ -7,9 +7,25 @@ import { ProfilePage } from '@/pages/profile';
 import { CreateTicketPage } from '@/pages/create-ticket';
 import { EmployeeTicketsPage } from '@/pages/tickets/employee';
 import { TicketPage } from '@/pages/ticket';
+import { useUser } from '@/entities/user';
 
 function App() {
   const navigate = useNavigate();
+
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    navigate('/sign-in', { replace: true });
+  }
+
+  const { error, isLoading } = useUser(!!token);
+
+  if (isLoading) return 'Загрузка...';
+
+  if (error) {
+    localStorage.removeItem('token');
+    navigate('/sign-in', { replace: true });
+  }
 
   return (
     <HeroUIProvider navigate={navigate} useHref={useHref}>
