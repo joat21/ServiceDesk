@@ -13,6 +13,7 @@ import {
   UserHeaderAvatarIcon,
   UserIcon,
 } from '@/shared/ui/icons';
+import { useNavigate } from 'react-router-dom';
 
 interface UserDropdownProps {
   fullName: string;
@@ -23,6 +24,12 @@ export const UserDropdown: FC<UserDropdownProps> = ({
   fullName,
   department,
 }) => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/sign-in', { replace: true });
+  };
+
   return (
     <Dropdown
       placement="bottom-end"
@@ -65,6 +72,7 @@ export const UserDropdown: FC<UserDropdownProps> = ({
             className="text-[#e24444]"
             color="danger"
             startContent={<LogoutIcon />}
+            onClick={handleLogout}
           >
             Выйти
           </DropdownItem>

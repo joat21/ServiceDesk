@@ -9,4 +9,5 @@ export const useUser = (enabled?: boolean) =>
     queryKey: userKey,
     queryFn: getMe,
     enabled,
+    retry: false,
   });
