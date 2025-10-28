@@ -1,9 +1,27 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, CardBody, CardHeader, Form } from '@heroui/react';
 import { SignInInput } from './SignInInput';
+import { useLogin, type LoginRequest } from '@/features/auth';
 import loginHouse from '@/assets/img/login-house.svg';
 
 export const SignInPage = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState<LoginRequest>({
+    email: '',
+    password: '',
+  });
+  const { mutate: login } = useLogin();
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    login(formData, {
+      onSuccess: () => {
+        navigate('/');
+      },
+    });
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Card className="flex flex-col items-center gap-8 p-6 rounded-4xl max-w-[500px] w-full h-fit">
@@ -16,13 +34,17 @@ export const SignInPage = () => {
         </CardHeader>
 
         <CardBody className="p-0 max-w-96">
-          <Form className="flex flex-col gap-5 mb-4">
+          <Form className="flex flex-col gap-5 mb-4" onSubmit={onSubmit}>
             <SignInInput
               name="email"
               label="Email"
               type="email"
               placeholder="your.email@mail.ru"
               errorMessage="Введите корректный email"
+              value={formData.email}
+              onValueChange={(value) =>
+                setFormData((prev) => ({ ...prev, email: value }))
+              }
             />
             <SignInInput
               name="password"
@@ -30,6 +52,10 @@ export const SignInPage = () => {
               type="password"
               placeholder="Введите пароль"
               errorMessage="Введите пароль"
+              value={formData.password}
+              onValueChange={(value) =>
+                setFormData((prev) => ({ ...prev, password: value }))
+              }
             />
             <Button className="w-full" type="submit" color="primary">
               Войти
