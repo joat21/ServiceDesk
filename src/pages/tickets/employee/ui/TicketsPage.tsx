@@ -12,6 +12,7 @@ import { TicketsTable } from './TicketsTable';
 import { useTickets } from '@/features/tickets';
 import { usePriorities } from '@/features/priorities';
 import type { TicketsFilter } from '@/entities/ticket';
+import { useUser } from '@/entities/user';
 
 const statuses = [
   { id: 1, name: 'На рассмотрении' },
@@ -36,14 +37,22 @@ export const TicketsPage: FC = () => {
     deadline: null,
   });
 
+  const { data: user } = useUser();
   const { data: tickets } = useTickets(filters);
   const { data: priorities } = usePriorities();
 
   return (
-    <div className="flex flex-col items-center pt-11 w-full">
+    <div className="flex flex-col items-center gap-16 pt-11 w-full">
       <div className="flex justify-between w-full">
-        <h2>Мои заявки</h2>
-        <Link href="/create-ticket">+ Создать заявку</Link>
+        <p className="text-2xl font-semibold">
+          Добро пожаловать, {user?.name} {user?.surname}
+        </p>
+        <Link
+          className="px-5 py-1 rounded-lg text-primary-foreground bg-primary"
+          href="/create-ticket"
+        >
+          + Создать заявку
+        </Link>
       </div>
       <Card className="px-4 py-5 rounded-xl w-full">
         <CardHeader className="p-0">
