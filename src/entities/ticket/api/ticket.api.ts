@@ -13,3 +13,7 @@ export const getTickets = async (filters?: TicketsFilter) => {
   const { data } = await api.get<Ticket[]>('/tickets', { params });
   return data;
 };
+
+// id временно number
+export const getTicket = (id: number) =>
+  api.get<Ticket>(`/tickets/${id}`).then((r) => r.data);

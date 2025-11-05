@@ -1,1 +1,1 @@
-export { useTickets } from './model/query';
+export { useTickets, useTicket } from './model/query';

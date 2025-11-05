@@ -8,6 +8,9 @@ export interface Ticket {
   deadline: string;
   performer: string;
   number: string;
+  createdAt: string;
+  photo: string[];
+  office: string;
 }
 
 export interface TicketsFilter {

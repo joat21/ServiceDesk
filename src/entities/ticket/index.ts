@@ -1,2 +1,2 @@
-export { getTickets } from './api/ticket.api';
+export { getTickets, getTicket } from './api/ticket.api';
 export type { Ticket, TicketsFilter } from './model/types';
