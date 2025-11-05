@@ -22,6 +22,8 @@ export const CreateTicketPage: FC = () => {
   const { data: priorities } = usePriorities();
   const { data: offices } = useOffices();
 
+  // TODO: сохранять состояние формы при переключении
+  // сейчас все поля очищаются
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
 
   const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {

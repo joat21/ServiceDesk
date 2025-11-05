@@ -1,1 +1,1 @@
-export { TicketsPage as EmployeeTicketsPage } from './TicketsPage';
+export { TicketsPage as EmployeeTicketsPage } from './ui/TicketsPage';
