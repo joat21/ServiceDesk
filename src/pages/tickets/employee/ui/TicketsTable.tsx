@@ -16,7 +16,7 @@ const columns = [
     label: 'Номер',
   },
   {
-    key: 'title',
+    key: 'theme',
     label: 'Заявка',
   },
   {
@@ -38,7 +38,6 @@ interface TicketsTableProps {
 }
 
 export const TicketsTable: FC<TicketsTableProps> = ({ tickets }) => {
-  console.log(tickets);
   const rows = tickets.map((ticket) => ({ key: ticket.id, ...ticket }));
 
   return (
