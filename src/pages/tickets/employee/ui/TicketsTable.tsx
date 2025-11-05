@@ -8,41 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/react';
-
-const rows = [
-  {
-    key: '1',
-    number: 'TK-0001',
-    title: 'Ремонт кондиционера в офисе',
-    priority: 'Низкий',
-    status: 'Принято в работу',
-    deadline: '10.12.25',
-  },
-  {
-    key: '2',
-    number: 'TK-0002',
-    title: 'Ремонт кондиционера в офисе',
-    priority: 'Средний',
-    status: 'На рассмотрении',
-    deadline: '10.12.25',
-  },
-  {
-    key: '3',
-    number: 'TK-0003',
-    title: 'Ремонт кондиционера в офисе',
-    priority: 'Высокий',
-    status: 'Принято в работу',
-    deadline: '10.12.25',
-  },
-  {
-    key: '4',
-    number: 'TK-0004',
-    title: 'Ремонт кондиционера в офисе',
-    priority: 'Срочный',
-    status: 'Выполнено',
-    deadline: '10.12.25',
-  },
-];
+import type { Ticket } from '@/entities/ticket';
 
 const columns = [
   {
@@ -67,7 +33,14 @@ const columns = [
   },
 ];
 
-export const TicketsTable: FC = () => {
+interface TicketsTableProps {
+  tickets: Ticket[];
+}
+
+export const TicketsTable: FC<TicketsTableProps> = ({ tickets }) => {
+  console.log(tickets);
+  const rows = tickets.map((ticket) => ({ key: ticket.id, ...ticket }));
+
   return (
     <Table
       classNames={{
@@ -78,9 +51,9 @@ export const TicketsTable: FC = () => {
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
-      <TableBody items={rows}>
+      <TableBody items={rows} emptyContent={'No rows to display.'}>
         {(item) => (
-          <TableRow key={item.key} href={`/ticket/${item.key}`}>
+          <TableRow key={item.key} href={`/tickets/${item.key}`}>
             {(columnKey) => (
               <TableCell>{getKeyValue(item, columnKey)}</TableCell>
             )}
