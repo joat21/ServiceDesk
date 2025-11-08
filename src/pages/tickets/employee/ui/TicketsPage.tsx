@@ -3,7 +3,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Input,
   Link,
   Select,
   SelectItem,
@@ -13,7 +12,7 @@ import { useTickets } from '@/features/tickets';
 import { usePriorities } from '@/features/priorities';
 import type { TicketsFilter } from '@/entities/ticket';
 import { useUser } from '@/entities/user';
-import { Button } from '@/shared/ui';
+import { Button, Input } from '@/shared/ui';
 
 const statuses = [
   { id: 1, name: 'На рассмотрении' },

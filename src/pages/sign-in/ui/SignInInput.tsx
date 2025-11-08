@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import { Input, type InputProps } from '@heroui/react';
+import { type InputProps } from '@heroui/react';
+import { Input } from '@/shared/ui';
 
 export const SignInInput: FC<InputProps> = (props) => {
   return (
@@ -8,8 +9,8 @@ export const SignInInput: FC<InputProps> = (props) => {
       labelPlacement="outside"
       variant="bordered"
       classNames={{
-        inputWrapper: 'border-[#bfbfbf]',
-        input: 'placeholder:text-[#666]',
+        inputWrapper: 'border-2',
+        input: 'placeholder:font-light',
       }}
       {...props}
     />

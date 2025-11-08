@@ -16,6 +16,7 @@ export const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <HeroButton
+      variant={variant}
       className={cn(
         'px-5 py-1 rounded-lg text-base',
         variantClassMap[variant],
