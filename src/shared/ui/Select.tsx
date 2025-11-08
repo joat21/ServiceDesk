@@ -1,4 +1,9 @@
-import { Select, SelectItem, type SelectProps } from '@heroui/react';
+import {
+  Select as HeroSelect,
+  mergeClasses,
+  SelectItem,
+  type SelectProps as HeroSelectProps,
+} from '@heroui/react';
 
 type OptionKey = string | number;
 type OptionLabel = string;
@@ -9,20 +14,20 @@ type OptionLike = {
   name?: OptionLabel;
 };
 
-interface CreateTicketSelectProps<T extends OptionLike>
-  extends Omit<SelectProps<T>, 'children'> {
-  options: T[];
+export interface SelectProps<T extends OptionLike>
+  extends Omit<HeroSelectProps<T>, 'children'> {
+  items: T[];
   getKey?: (item: T) => OptionKey;
   getLabel?: (item: T) => OptionLabel;
 }
 
-// TODO: переписать с использованием @/shared/ui/Select
-export const CreateTicketSelect = <T extends OptionLike>({
-  options,
+export const Select = <T extends OptionLike>({
+  items,
   getKey,
   getLabel,
+  classNames,
   ...props
-}: CreateTicketSelectProps<T>) => {
+}: SelectProps<T>) => {
   const resolveKey = (item: T) => {
     if (getKey) return getKey(item);
     return item.id ?? item.value ?? '';
@@ -33,22 +38,25 @@ export const CreateTicketSelect = <T extends OptionLike>({
     return item.label ?? item.name ?? '';
   };
 
+  const mergedClassNames = mergeClasses(
+    {
+      label: 'text-xl font-medium',
+      trigger: 'border border-[#c3c0c0] rounded-lg text-base bg-[#f8f8f8]',
+      popoverContent: 'rounded-lg',
+    },
+    classNames
+  );
+
   return (
-    <Select
-      labelPlacement="outside"
-      isRequired
+    <HeroSelect
+      classNames={mergedClassNames}
       variant="bordered"
-      radius="full"
-      classNames={{
-        label: 'text-xl font-medium',
-        trigger: 'border-1 border-[#bfbfbf] bg-[#EDEDED]',
-      }}
-      items={options}
+      items={items}
       {...props}
     >
       {(option) => (
         <SelectItem key={resolveKey(option)}>{resolveLabel(option)}</SelectItem>
       )}
-    </Select>
+    </HeroSelect>
   );
 };

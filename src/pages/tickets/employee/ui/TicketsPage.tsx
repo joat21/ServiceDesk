@@ -1,18 +1,11 @@
 import { useState, type FC } from 'react';
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Link,
-  Select,
-  SelectItem,
-} from '@heroui/react';
+import { Card, CardBody, CardHeader, Link } from '@heroui/react';
 import { TicketsTable } from './TicketsTable';
 import { useTickets } from '@/features/tickets';
 import { usePriorities } from '@/features/priorities';
 import type { TicketsFilter } from '@/entities/ticket';
 import { useUser } from '@/entities/user';
-import { Button, Input } from '@/shared/ui';
+import { Button, Input, Select } from '@/shared/ui';
 
 const statuses = [
   { id: 1, name: 'На рассмотрении' },
@@ -78,11 +71,7 @@ export const TicketsPage: FC = () => {
                   priorityId: Number.isNaN(id) ? null : id,
                 }));
               }}
-            >
-              {(priority) => (
-                <SelectItem key={priority.id}>{priority.name}</SelectItem>
-              )}
-            </Select>
+            />
             <Select
               aria-label="Статус"
               placeholder="Все статусы"
@@ -95,11 +84,7 @@ export const TicketsPage: FC = () => {
                   statusId: Number.isNaN(id) ? null : id,
                 }));
               }}
-            >
-              {(status) => (
-                <SelectItem key={status.id}>{status.name}</SelectItem>
-              )}
-            </Select>
+            />
             <Select
               aria-label="Дедлайн"
               placeholder="Дедлайн"
@@ -109,11 +94,7 @@ export const TicketsPage: FC = () => {
                 const value = Array.from(keys)[0] as string;
                 setFilters((prev) => ({ ...prev, deadline: value ?? null }));
               }}
-            >
-              {(option) => (
-                <SelectItem key={option.id}>{option.name}</SelectItem>
-              )}
-            </Select>
+            />
           </div>
           <TicketsTable tickets={tickets ?? []} />
         </CardBody>

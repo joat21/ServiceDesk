@@ -1,3 +1,4 @@
+// TODO: переписать, используя mergeClasses из HeroUI
 export function mergeSlotClasses(
   ...sources: Array<Record<string, unknown> | undefined>
 ) {

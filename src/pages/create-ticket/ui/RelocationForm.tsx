@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import { CreateTicketTextarea } from './CreateTicketTextarea';
 import { CreateTicketAutocomplete } from './CreateTicketAutocomplete';
-import { CreateTicketSelect } from './CreateTicketSelect';
 import { CreateTicketInput } from './CreateTicketInput';
 import type { Category } from '@/entities/category';
 import type { Priority } from '@/entities/priority';
 import type { Office } from '@/entities/office';
 import { DatePicker } from '@heroui/react';
+import { Select } from '@/shared/ui';
 
 interface RelocationFormProps {
   categories: Category[] | undefined;
@@ -48,22 +48,25 @@ export const RelocationForm: FC<RelocationFormProps> = ({
         type="file"
         isRequired={false}
       />
-
-      <CreateTicketSelect
+      <Select
         name="category"
         label="Категория"
         placeholder="Выберите категорию"
-        options={categories ?? []}
+        labelPlacement="outside"
+        isRequired
+        items={categories ?? []}
         selectedKeys={[selectedCategoryId]}
         onChange={onCategoryChange}
       />
 
       <div className="flex gap-3">
-        <CreateTicketSelect
+        <Select
           name="priority"
           label="Приоритет"
           placeholder="Выберите приоритет"
-          options={priorities ?? []}
+          labelPlacement="outside"
+          isRequired
+          items={priorities ?? []}
         />
 
         <DatePicker

@@ -1,11 +1,11 @@
 import type { FC } from 'react';
 import { CreateTicketInput } from './CreateTicketInput';
 import { CreateTicketTextarea } from './CreateTicketTextarea';
-import { CreateTicketSelect } from './CreateTicketSelect';
 import { CreateTicketAutocomplete } from './CreateTicketAutocomplete';
 import type { Category } from '@/entities/category';
 import type { Priority } from '@/entities/priority';
 import type { Office } from '@/entities/office';
+import { Select } from '@/shared/ui';
 
 interface DefaultFormProps {
   categories: Category[] | undefined;
@@ -49,19 +49,24 @@ export const DefaultForm: FC<DefaultFormProps> = ({
       />
 
       <div className="flex gap-3">
-        <CreateTicketSelect
+        <Select
           name="category"
           label="Категория"
           placeholder="Выберите категорию"
-          options={categories ?? []}
+          labelPlacement="outside"
+          isRequired
+          items={categories ?? []}
           selectedKeys={[selectedCategoryId]}
           onChange={onCategoryChange}
         />
-        <CreateTicketSelect
+
+        <Select
           name="priority"
           label="Приоритет"
           placeholder="Выберите приоритет"
-          options={priorities ?? []}
+          labelPlacement="outside"
+          isRequired
+          items={priorities ?? []}
         />
       </div>
 
