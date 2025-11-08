@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import {
-  Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -10,6 +9,7 @@ import {
 import { useMarkAsRead, useNotifications } from '@/features/notifications';
 import { NotificationsItem } from '@/entities/notification';
 import { NotificationIcon } from '@/shared/ui/icons';
+import { Button } from '@/shared/ui';
 
 export const NotificationsDropdown: FC = () => {
   const { data: notifications } = useNotifications();
@@ -25,8 +25,8 @@ export const NotificationsDropdown: FC = () => {
     >
       <DropdownTrigger>
         <Button
-          className="p-0 w-[60px] h-[60px] min-w-0 bg-[#fafafa]"
-          radius="full"
+          className="p-0 rounded-full w-[60px] h-[60px] min-w-0 bg-[#fafafa]"
+          variant="light"
         >
           <NotificationIcon />
         </Button>

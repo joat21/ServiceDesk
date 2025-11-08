@@ -13,6 +13,7 @@ import { useTickets } from '@/features/tickets';
 import { usePriorities } from '@/features/priorities';
 import type { TicketsFilter } from '@/entities/ticket';
 import { useUser } from '@/entities/user';
+import { Button } from '@/shared/ui';
 
 const statuses = [
   { id: 1, name: 'На рассмотрении' },
@@ -47,12 +48,9 @@ export const TicketsPage: FC = () => {
         <p className="text-2xl font-semibold">
           Добро пожаловать, {user?.name} {user?.surname}
         </p>
-        <Link
-          className="px-5 py-1 rounded-lg text-primary-foreground bg-primary"
-          href="/create-ticket"
-        >
+        <Button className="h-8" as={Link} href="/create-ticket">
           + Создать заявку
-        </Link>
+        </Button>
       </div>
       <Card className="px-4 py-5 rounded-xl w-full">
         <CardHeader className="p-0">

@@ -4,7 +4,6 @@ import {
   DropdownMenu,
   DropdownTrigger,
   DropdownItem,
-  Button,
   DropdownSection,
 } from '@heroui/react';
 import {
@@ -14,6 +13,7 @@ import {
   UserIcon,
 } from '@/shared/ui/icons';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@/shared/ui';
 
 interface UserDropdownProps {
   fullName: string;
@@ -39,7 +39,10 @@ export const UserDropdown: FC<UserDropdownProps> = ({
       }}
     >
       <DropdownTrigger>
-        <Button className="flex gap-4 items-center h-full" variant="light">
+        <Button
+          className="flex gap-4 items-center bg-transparent h-full"
+          variant="light"
+        >
           <div className="flex flex-col items-end">
             <span className="text-xl font-medium">{fullName}</span>
             <span className="text-[#666]">{department}</span>

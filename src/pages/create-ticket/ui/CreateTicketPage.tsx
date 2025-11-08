@@ -1,12 +1,5 @@
 import { useState, type FC } from 'react';
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Form,
-} from '@heroui/react';
+import { Card, CardBody, CardFooter, CardHeader, Form } from '@heroui/react';
 
 import { DefaultForm } from './DefaultForm';
 import { RelocationForm } from './RelocationForm';
@@ -16,6 +9,7 @@ import { usePriorities } from '@/features/priorities';
 import { useOffices } from '@/features/offices';
 
 import createTicketFile from '@/assets/img/create-ticket.svg';
+import { Button } from '@/shared/ui';
 
 export const CreateTicketPage: FC = () => {
   const { data: categories } = useCategories();
@@ -57,7 +51,7 @@ export const CreateTicketPage: FC = () => {
             />
           )}
         </CardBody>
-        <CardFooter className="flex gap-4 self-end p-0 w-fit">
+        <CardFooter className="flex gap-4 self-end p-0 rounded-none w-fit">
           <Button variant="ghost" radius="full">
             Отмена
           </Button>
