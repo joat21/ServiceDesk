@@ -16,7 +16,7 @@ type OptionLike = {
 
 export interface SelectProps<T extends OptionLike>
   extends Omit<HeroSelectProps<T>, 'children'> {
-  items: T[];
+  items?: T[];
   getKey?: (item: T) => OptionKey;
   getLabel?: (item: T) => OptionLabel;
 }
