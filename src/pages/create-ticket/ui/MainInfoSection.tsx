@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { CreateTicketInput } from './CreateTicketInput';
 import { CreateTicketTextarea } from './CreateTicketTextarea';
-import type { TicketFormState } from '../model/types';
+import type { TicketFormState } from '@/features/create-ticket';
 
 interface MainInfoSectionProps {
   formState: TicketFormState;

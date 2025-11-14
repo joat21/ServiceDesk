@@ -5,7 +5,7 @@ import {
   type SharedSelection,
 } from '@heroui/react';
 import { parseDate } from '@internationalized/date';
-import type { TicketFormState } from '../model/types';
+import type { TicketFormState } from '@/features/create-ticket';
 import type { Category } from '@/entities/category';
 import type { Priority } from '@/entities/priority';
 import { Select } from '@/shared/ui';

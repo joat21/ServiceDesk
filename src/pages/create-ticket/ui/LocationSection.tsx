@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { CreateTicketAutocomplete } from './CreateTicketAutocomplete';
 import { CreateTicketTextarea } from './CreateTicketTextarea';
-import type { TicketFormState } from '../model/types';
+import type { TicketFormState } from '@/features/create-ticket';
 import type { Office } from '@/entities/office';
 
 interface LocationSectionProps {

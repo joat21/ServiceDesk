@@ -5,18 +5,26 @@ import { MainInfoSection } from './MainInfoSection';
 import { AttachmentsSection } from './AttachmentsSection';
 import { ClassificationSection } from './ClassificationSection';
 import { LocationSection } from './LocationSection';
-import type { TicketFormState, UploadedFile } from '../model/types';
+import type { UploadedFile } from '../model/types';
 
 import { useCategories } from '@/features/categories';
 import { usePriorities } from '@/features/priorities';
 import { useOffices } from '@/features/offices';
+import {
+  type TicketFormState,
+  useCreateTicket,
+} from '@/features/create-ticket';
 import { Button } from '@/shared/ui';
 import createTicketFile from '@/assets/img/create-ticket.svg';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateTicketPage: FC = () => {
+  const navigate = useNavigate();
   const { data: categories } = useCategories();
   const { data: priorities } = usePriorities();
   const { data: offices } = useOffices();
+
+  const createTicket = useCreateTicket();
 
   const [files, setFiles] = useState<UploadedFile[]>([]);
 
@@ -50,6 +58,17 @@ export const CreateTicketPage: FC = () => {
       ...formState,
       photo: files.map((file) => file.url),
     });
+    createTicket.mutate(
+      {
+        ...formState,
+        photo: files.map((file) => file.url ?? ''),
+      },
+      {
+        onSuccess: () => {
+          navigate('/');
+        },
+      }
+    );
   };
 
   return (
