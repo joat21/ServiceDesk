@@ -25,7 +25,7 @@ export const NotificationsDropdown: FC = () => {
     >
       <DropdownTrigger>
         <Button
-          className="p-0 rounded-full w-[60px] h-[60px] min-w-0 bg-[#fafafa]"
+          className="p-0 border border-black rounded-full w-[40px] h-[40px] min-w-0 bg-[#fafafa]"
           variant="light"
         >
           <NotificationIcon />

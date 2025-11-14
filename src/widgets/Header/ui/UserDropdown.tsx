@@ -5,13 +5,9 @@ import {
   DropdownTrigger,
   DropdownItem,
   DropdownSection,
+  Avatar,
 } from '@heroui/react';
-import {
-  DropdownArrowIcon,
-  LogoutIcon,
-  UserHeaderAvatarIcon,
-  UserIcon,
-} from '@/shared/ui/icons';
+import { DropdownArrowIcon, LogoutIcon, UserIcon } from '@/shared/ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/ui';
 
@@ -44,10 +40,16 @@ export const UserDropdown: FC<UserDropdownProps> = ({
           variant="light"
         >
           <div className="flex flex-col items-end">
-            <span className="text-xl font-medium">{fullName}</span>
-            <span className="text-[#666]">{department}</span>
+            <span className="font-medium">{fullName}</span>
+            <span className="text-[14px] text-[#666]">{department}</span>
           </div>
-          <UserHeaderAvatarIcon className="max-w-none!" />
+          <Avatar
+            classNames={{
+              base: 'border border-black w-[50px] h-[50px] bg-[#FCD9D9]',
+              name: 'text-xl text-primary font-medium',
+            }}
+            name={fullName}
+          />
           <DropdownArrowIcon />
         </Button>
       </DropdownTrigger>
