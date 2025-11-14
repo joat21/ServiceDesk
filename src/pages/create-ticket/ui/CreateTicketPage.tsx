@@ -69,7 +69,11 @@ export const CreateTicketPage: FC = () => {
             handleFieldChange={handleFieldChange}
           />
 
-          <AttachmentsSection setFiles={setFiles} isRelocation={isRelocation} />
+          <AttachmentsSection
+            files={files}
+            setFiles={setFiles}
+            isRelocation={isRelocation}
+          />
 
           <ClassificationSection
             categories={categories}
