@@ -1,3 +1,6 @@
+// TODO: оформить как кросс импорт
+import type { Role } from '@/entities/user';
+
 export interface Ticket {
   id: number;
   theme: string;
@@ -18,4 +21,19 @@ export interface TicketsFilter {
   priorityId?: number | null;
   statusId?: number | null;
   deadline?: string | null;
+}
+
+export interface TicketHistoryItem {
+  id: string;
+  ticketId: string | number;
+  actor: {
+    id: string | number;
+    name: string;
+    role: Role | null;
+  };
+  theme: string;
+  message: string;
+  photo: string[] | null;
+  rating: number | null;
+  createdAt: string;
 }

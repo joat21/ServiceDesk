@@ -1,4 +1,4 @@
-import type { Ticket, TicketsFilter } from '../model/types';
+import type { Ticket, TicketHistoryItem, TicketsFilter } from '../model/types';
 import { api } from '@/shared/api/base';
 
 export const getTickets = async (filters?: TicketsFilter) => {
@@ -17,3 +17,8 @@ export const getTickets = async (filters?: TicketsFilter) => {
 // id временно number
 export const getTicket = (id: number) =>
   api.get<Ticket>(`/tickets/${id}`).then((r) => r.data);
+
+export const getTicketHistory = (id: string | number) =>
+  api
+    .get<TicketHistoryItem[]>(`/ticket-history?ticketId=${id}`)
+    .then((r) => r.data);

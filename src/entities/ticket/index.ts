@@ -1,2 +1,3 @@
 export { getTickets, getTicket } from './api/ticket.api';
-export type { Ticket, TicketsFilter } from './model/types';
+export { useTicketHistory } from './model/query';
+export type { Ticket, TicketsFilter, TicketHistoryItem } from './model/types';

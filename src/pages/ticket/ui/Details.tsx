@@ -18,11 +18,13 @@ export const Details: FC<DetailsProps> = ({ ticket }) => {
         <DetailsItem label="Подробное описание">
           {ticket?.description}
         </DetailsItem>
-        <DetailsItem label="Фото">
-          {ticket?.photo.length
-            ? ticket?.photo.map((item, i) => <img key={i} src={item} alt="" />)
-            : 'Нет фото'}
-        </DetailsItem>
+        {ticket?.photo && ticket.photo.length > 0 && (
+          <DetailsItem label="Фото">
+            {ticket.photo.map((item, i) => (
+              <img key={i} src={item} alt="" />
+            ))}
+          </DetailsItem>
+        )}
 
         <DetailsItem label="Офис">{ticket?.office}</DetailsItem>
 
