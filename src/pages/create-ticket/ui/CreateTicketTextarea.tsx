@@ -1,18 +1,9 @@
 import type { FC } from 'react';
-import { Textarea, type TextAreaProps } from '@heroui/react';
+import type { TextAreaProps } from '@heroui/react';
+import { Textarea } from '@/shared/ui';
 
 export const CreateTicketTextarea: FC<TextAreaProps> = (props) => {
   return (
-    <Textarea
-      isRequired
-      labelPlacement="outside"
-      variant="bordered"
-      classNames={{
-        label: 'text-xl font-medium',
-        inputWrapper: 'rounded-2xl border-1 border-[#bfbfbf] bg-[#EDEDED]',
-        input: 'placeholder:text-[#666]',
-      }}
-      {...props}
-    />
+    <Textarea labelPlacement="outside" variant="faded" isRequired {...props} />
   );
 };
