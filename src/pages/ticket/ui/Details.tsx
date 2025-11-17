@@ -1,7 +1,8 @@
 import type { FC } from 'react';
-import { Card, CardBody, CardHeader } from '@heroui/react';
+import { CardBody, CardHeader } from '@heroui/react';
 import { DetailsItem } from './DetailsItem';
 import type { Ticket } from '@/entities/ticket';
+import { Card } from '@/shared/ui';
 
 interface DetailsProps {
   ticket?: Ticket;

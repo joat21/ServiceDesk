@@ -1,7 +1,8 @@
 import type { FC } from 'react';
-import { Card, Divider } from '@heroui/react';
+import { Divider } from '@heroui/react';
 import { PersonalInfoItem } from './PersonalInfoItem';
 import { RoleLabel, useUser } from '@/entities/user';
+import { Card } from '@/shared/ui';
 import {
   DepartmentIcon,
   EmailIcon,

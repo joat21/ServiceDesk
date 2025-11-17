@@ -1,6 +1,6 @@
 import { useState, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, CardBody, CardFooter, CardHeader, Form } from '@heroui/react';
+import { CardBody, CardFooter, CardHeader, Form } from '@heroui/react';
 
 import { MainInfoSection } from './MainInfoSection';
 import { AttachmentsSection } from './AttachmentsSection';
@@ -15,7 +15,7 @@ import {
   type TicketFormState,
   useCreateTicket,
 } from '@/features/create-ticket';
-import { Button } from '@/shared/ui';
+import { Button, Card } from '@/shared/ui';
 import createTicketFile from '@/assets/img/create-ticket.svg';
 
 export const CreateTicketPage: FC = () => {

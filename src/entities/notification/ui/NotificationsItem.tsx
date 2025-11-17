@@ -1,5 +1,5 @@
+import { Card } from '@/shared/ui';
 import type { FC } from 'react';
-import { Card } from '@heroui/react';
 
 type NotificationsItemProps = {
   title: string;
@@ -13,7 +13,7 @@ export const NotificationsItem: FC<NotificationsItemProps> = ({
   isReaded,
 }) => {
   return (
-    <Card className="relative px-2.5 py-2 text-secondary-foreground bg-secondary shadow-none">
+    <Card className="relative px-2.5 py-2 rounded-lg border-none text-secondary-foreground bg-secondary shadow-none">
       <span className="text-lg">{title}</span>
       <span className="font-light">{text}</span>
       {!isReaded && (

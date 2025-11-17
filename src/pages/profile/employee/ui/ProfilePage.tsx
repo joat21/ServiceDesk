@@ -1,6 +1,7 @@
-import { Card, CardBody, CardFooter, CardHeader, Divider } from '@heroui/react';
+import { CardBody, CardFooter, CardHeader, Divider } from '@heroui/react';
 import { PersonalInfoItem } from './PersonalInfoItem';
 import { RoleLabel, useUser } from '@/entities/user';
+import { Card } from '@/shared/ui';
 import {
   UserIcon,
   EmailIcon,

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Card, CardBody, CardHeader, Form } from '@heroui/react';
+import { CardBody, CardHeader, Form } from '@heroui/react';
 import { SignInInput } from './SignInInput';
 import { useLogin, type LoginRequest } from '@/features/auth';
+import { Button, Card } from '@/shared/ui';
 import loginHouse from '@/assets/img/login-house.svg';
-import { Button } from '@/shared/ui';
 
 export const SignInPage = () => {
   const navigate = useNavigate();

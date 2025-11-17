@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { Card } from '@heroui/react';
 import { HistoryItem } from './HistoryItem';
 import type { TicketHistoryItem } from '@/entities/ticket';
+import { Card } from '@/shared/ui';
 
 interface HistoryProps {
   history: TicketHistoryItem[];

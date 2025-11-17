@@ -1,12 +1,12 @@
 import { useState, type FC } from 'react';
-import { Card, Link } from '@heroui/react';
+import { Link } from '@heroui/react';
+import { TicketsFilters } from './TicketsFilters';
 import { TicketsTable } from './TicketsTable';
 import { useTickets } from '@/features/tickets';
 import { usePriorities } from '@/features/priorities';
 import type { TicketsFilter } from '@/entities/ticket';
 import { useUser } from '@/entities/user';
-import { Button } from '@/shared/ui';
-import { TicketsFilters } from './TicketsFilters';
+import { Button, Card } from '@/shared/ui';
 
 export const TicketsPage: FC = () => {
   const [filters, setFilters] = useState<TicketsFilter>({
