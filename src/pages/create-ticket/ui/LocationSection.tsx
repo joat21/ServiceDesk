@@ -1,9 +1,8 @@
 import type { FC } from 'react';
 import { AutocompleteItem } from '@heroui/react';
-import { CreateTicketTextarea } from './CreateTicketTextarea';
 import type { TicketFormState } from '@/features/create-ticket';
 import type { Office } from '@/entities/office';
-import { Autocomplete } from '@/shared/ui';
+import { Autocomplete, Textarea } from '@/shared/ui';
 
 interface LocationSectionProps {
   offices: Office[] | undefined;
@@ -65,7 +64,7 @@ export const LocationSection: FC<LocationSectionProps> = ({
         )}
       </div>
 
-      <CreateTicketTextarea
+      <Textarea
         name="additionalLocation"
         label="Дополнительная локация"
         labelPlacement="outside"

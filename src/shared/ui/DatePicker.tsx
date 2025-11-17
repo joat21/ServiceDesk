@@ -10,7 +10,8 @@ export const DatePicker: FC<DatePickerProps> = ({ classNames, ...props }) => {
   const mergedClassNames = mergeClasses(
     {
       label: 'text-xl font-medium',
-      inputWrapper: 'border-1 border-[#c3c0c0] rounded-lg bg-[#f8f8f8]',
+      inputWrapper:
+        'border-1 border-[#c3c0c0] rounded-lg bg-[#f8f8f8] data-[hover=true]:bg-[#ededed]',
       popoverContent: 'rounded-lg',
     },
     classNames

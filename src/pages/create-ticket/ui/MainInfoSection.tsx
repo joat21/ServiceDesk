@@ -1,7 +1,6 @@
 import type { FC } from 'react';
-import { CreateTicketInput } from './CreateTicketInput';
-import { CreateTicketTextarea } from './CreateTicketTextarea';
 import type { TicketFormState } from '@/features/create-ticket';
+import { Input, Textarea } from '@/shared/ui';
 
 interface MainInfoSectionProps {
   formState: TicketFormState;
@@ -17,7 +16,7 @@ export const MainInfoSection: FC<MainInfoSectionProps> = ({
 }) => {
   return (
     <>
-      <CreateTicketInput
+      <Input
         name="theme"
         label="Тема заявки"
         labelPlacement="outside"
@@ -26,7 +25,7 @@ export const MainInfoSection: FC<MainInfoSectionProps> = ({
         value={formState.theme}
         onChange={(e) => handleFieldChange('theme', e.target.value)}
       />
-      <CreateTicketTextarea
+      <Textarea
         name="description"
         label="Подробное описание"
         labelPlacement="outside"

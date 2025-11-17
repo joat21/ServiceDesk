@@ -1,5 +1,9 @@
 import type { FC } from 'react';
-import { type DateValue, type SharedSelection } from '@heroui/react';
+import {
+  SelectItem,
+  type DateValue,
+  type SharedSelection,
+} from '@heroui/react';
 import { getLocalTimeZone, parseDate, today } from '@internationalized/date';
 import type { TicketFormState } from '@/features/create-ticket';
 import type { Category } from '@/entities/category';
@@ -47,24 +51,30 @@ export const ClassificationSection: FC<ClassificationSectionProps> = ({
           name="category"
           label="Категория"
           placeholder="Выберите категорию"
-          labelPlacement="outside"
           isRequired
           items={categories ?? []}
           selectedKeys={[formState.categoryId]}
           onSelectionChange={handleCategoryChange}
-        />
+        >
+          {(category) => (
+            <SelectItem key={category.id}>{category.name}</SelectItem>
+          )}
+        </Select>
 
         <div className="flex gap-3">
           <Select
             name="priority"
             label="Приоритет"
             placeholder="Выберите приоритет"
-            labelPlacement="outside"
             isRequired
             items={priorities ?? []}
             selectedKeys={[formState.priorityId]}
             onChange={handlePriorityChange}
-          />
+          >
+            {(priority) => (
+              <SelectItem key={priority.id}>{priority.name}</SelectItem>
+            )}
+          </Select>
           <DatePicker
             name="date"
             label="Дата переезда"
@@ -87,23 +97,29 @@ export const ClassificationSection: FC<ClassificationSectionProps> = ({
         name="category"
         label="Категория"
         placeholder="Выберите категорию"
-        labelPlacement="outside"
         isRequired
         items={categories ?? []}
         selectedKeys={[formState.categoryId]}
         onSelectionChange={handleCategoryChange}
-      />
+      >
+        {(category) => (
+          <SelectItem key={category.id}>{category.name}</SelectItem>
+        )}
+      </Select>
 
       <Select
         name="priority"
         label="Приоритет"
         placeholder="Выберите приоритет"
-        labelPlacement="outside"
         isRequired
         items={priorities ?? []}
         selectedKeys={[formState.priorityId]}
         onChange={handlePriorityChange}
-      />
+      >
+        {(priority) => (
+          <SelectItem key={priority.id}>{priority.name}</SelectItem>
+        )}
+      </Select>
     </div>
   );
 };

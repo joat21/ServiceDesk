@@ -8,9 +8,10 @@ const variantClassMap: Partial<
     NonNullable<InputProps['classNames']>
   >
 > = {
-  faded: {
+  flat: {
     label: 'text-xl font-medium',
-    inputWrapper: 'border border-[#c3c0c0] bg-[#f8f8f8]',
+    inputWrapper:
+      'border border-[#c3c0c0] bg-[#f8f8f8] data-[hover=true]:bg-[#ededed]',
   },
   bordered: {
     inputWrapper: 'border border-[#bfbfbf] bg-transparent',
@@ -19,7 +20,7 @@ const variantClassMap: Partial<
 
 export const Input: FC<InputProps> = ({
   classNames,
-  variant = 'faded',
+  variant = 'flat',
   ...props
 }) => {
   const mergedClassNames = mergeSlotClasses(
@@ -33,6 +34,11 @@ export const Input: FC<InputProps> = ({
   );
 
   return (
-    <HeroInput variant={variant} classNames={mergedClassNames} {...props} />
+    <HeroInput
+      variant={variant}
+      classNames={mergedClassNames}
+      labelPlacement="outside"
+      {...props}
+    />
   );
 };

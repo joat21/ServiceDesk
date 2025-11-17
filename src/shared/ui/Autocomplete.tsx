@@ -27,7 +27,7 @@ export const Autocomplete = <T extends object>({
         classNames: {
           label: 'text-xl font-medium',
           inputWrapper:
-            'border border-[#c3c0c0] rounded-lg text-base bg-[#f8f8f8]',
+            'border border-[#c3c0c0] rounded-lg text-base bg-[#f8f8f8] data-[hover=true]:bg-[#ededed]',
         },
       }}
       {...props}
