@@ -17,3 +17,5 @@ export { default as PlusIcon } from './plus.svg?react';
 export { default as ViewIcon } from './view.svg?react';
 export { default as FilterIcon } from './filter.svg?react';
 export { default as SearchIcon } from './search.svg?react';
+export { default as MapPinIcon } from './map-pin.svg?react';
+export { default as ArrowLeftIcon } from './arrow-left.svg?react';

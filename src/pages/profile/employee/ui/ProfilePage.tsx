@@ -1,4 +1,4 @@
-import { CardBody, CardFooter, CardHeader, Divider } from '@heroui/react';
+import { Divider } from '@heroui/react';
 import { PersonalInfoItem } from './PersonalInfoItem';
 import { RoleLabel, useUser } from '@/entities/user';
 import { Card } from '@/shared/ui';
@@ -8,6 +8,7 @@ import {
   LocationIcon,
   DepartmentIcon,
   UserProfileAvatarIcon,
+  MapPinIcon,
 } from '@/shared/ui/icons';
 
 export const ProfilePage = () => {
@@ -15,56 +16,62 @@ export const ProfilePage = () => {
 
   if (!user || isLoading) return 'Загрузка...';
 
-  const { name, surname, systemId, email, department, office, role } = user;
+  const { name, surname, systemId, email, department, office, role, region } =
+    user;
 
   return (
-    <div className="flex justify-between items-center gap-20 max-w-[1050px] w-full">
-      <Card className="gap-10 px-5 py-10 rounded-4xl max-w-[330px] w-full">
-        <CardBody className="items-center gap-10 p-0">
-          <UserProfileAvatarIcon />
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-xl font-semibold">{`${name} ${surname}`}</span>
-            <span>{RoleLabel[role]}</span>
+    <div className="flex justify-center items-center w-full">
+      <div className="flex justify-center items-stretch gap-20 max-w-[1050px] w-full">
+        <h1 className="sr-only">Профиль</h1>
+        <Card className="gap-10 px-5 py-10 rounded-xl max-w-[330px] w-full flex-1">
+          <div className="flex flex-col items-center gap-10">
+            <UserProfileAvatarIcon />
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-xl font-semibold">{`${name} ${surname}`}</span>
+              <span>{RoleLabel[role]}</span>
+            </div>
           </div>
-        </CardBody>
-        <Divider />
-        <CardFooter className="p-0">
-          <div className="flex justify-between w-full">
-            <span>ID сотрудника</span>
-            <span>{systemId}</span>
+          <Divider className="bg-[#DDE1E8]" />
+          <div>
+            <div className="flex justify-between w-full">
+              <span>ID сотрудника</span>
+              <span>{systemId}</span>
+            </div>
           </div>
-        </CardFooter>
-      </Card>
-      <Card className="px-6 py-7 rounded-4xl w-full max-h-fit">
-        <CardHeader className="mb-7 p-0">
-          <div className="flex items-center gap-5">
+        </Card>
+        <Card className="px-4 py-7 rounded-xl max-w-[330px] w-full flex-1">
+          <div className="flex items-center gap-7 mb-7">
             <UserIcon />
-            <span className="text-xl font-medium">Личная информация</span>
+            <h2 className="text-xl font-medium">Личная информация</h2>
           </div>
-        </CardHeader>
-        <CardBody as="ul" className="grid grid-cols-2 gap-x-3 gap-y-8 p-0">
-          <li>
-            <PersonalInfoItem label="Email" value={email} icon={EmailIcon} />
-          </li>
-          <li>
-            <PersonalInfoItem
-              label="Местоположение"
-              value={office[0]}
-              icon={LocationIcon}
-            />
-          </li>
-          <li>
-            <PersonalInfoItem
-              label="Отдел"
-              value={department}
-              icon={DepartmentIcon}
-            />
-          </li>
-          <li>
-            <PersonalInfoItem label="Роль" value="Сотрудник" icon={UserIcon} />
-          </li>
-        </CardBody>
-      </Card>
+          <ul className="flex flex-col gap-6">
+            <li>
+              <PersonalInfoItem label="Email" value={email} icon={EmailIcon} />
+            </li>
+            <li>
+              <PersonalInfoItem
+                label="Местоположение"
+                value={office[0]}
+                icon={LocationIcon}
+              />
+            </li>
+            <li>
+              <PersonalInfoItem
+                label="Отдел"
+                value={department}
+                icon={DepartmentIcon}
+              />
+            </li>
+            <li>
+              <PersonalInfoItem
+                label="Регион"
+                value={region}
+                icon={MapPinIcon}
+              />
+            </li>
+          </ul>
+        </Card>
+      </div>
     </div>
   );
 };
