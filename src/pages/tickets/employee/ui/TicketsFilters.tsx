@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { SelectItem } from '@heroui/react';
 import type { Priority } from '@/entities/priority';
 import type { TicketsFilter } from '@/entities/ticket';
 import { Input, Select } from '@/shared/ui';
@@ -62,7 +63,11 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
             priorityId: Number.isNaN(id) ? null : id,
           }));
         }}
-      />
+      >
+        {(priority) => (
+          <SelectItem key={priority.id}>{priority.name}</SelectItem>
+        )}
+      </Select>
       <Select
         aria-label="Статус"
         placeholder="Все статусы"
@@ -81,7 +86,9 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
             statusId: Number.isNaN(id) ? null : id,
           }));
         }}
-      />
+      >
+        {(status) => <SelectItem key={status.id}>{status.name}</SelectItem>}
+      </Select>
       <Select
         aria-label="Дедлайн"
         placeholder="Дедлайн"
@@ -97,7 +104,11 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
           const value = Array.from(keys)[0] as string;
           setFilters((prev) => ({ ...prev, deadline: value ?? null }));
         }}
-      />
+      >
+        {(deadlineOption) => (
+          <SelectItem key={deadlineOption.id}>{deadlineOption.name}</SelectItem>
+        )}
+      </Select>
     </div>
   );
 };
