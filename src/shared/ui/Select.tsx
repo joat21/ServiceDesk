@@ -13,7 +13,7 @@ export const Select = <T extends object>({
     {
       label: 'text-xl font-medium',
       trigger:
-        'border border-[#c3c0c0] rounded-lg text-base bg-[#f8f8f8] data-[hover=true]:bg-[#ededed]',
+        'border border-[#c3c0c0] rounded-lg min-h-8 h-8 text-base text-[#666] bg-[#f8f8f8] data-[hover=true]:bg-[#ededed]',
       popoverContent: 'rounded-lg',
     },
     classNames

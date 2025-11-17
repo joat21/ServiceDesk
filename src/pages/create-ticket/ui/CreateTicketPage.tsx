@@ -1,6 +1,6 @@
 import { useState, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardBody, CardFooter, CardHeader, Form } from '@heroui/react';
+import { Form, Link } from '@heroui/react';
 
 import { MainInfoSection } from './MainInfoSection';
 import { AttachmentsSection } from './AttachmentsSection';
@@ -44,10 +44,12 @@ export const CreateTicketPage: FC = () => {
     (c) => String(c.id) === formState.categoryId
   );
   const isRelocation = selectedCategory?.name === 'Переезд';
+  const maxCardWidth = isRelocation ? 850 : 725;
+  const maxCardWidthClass = `max-w-[${maxCardWidth}px]`;
 
   const handleFieldChange = (
     field: keyof TicketFormState,
-    value?: string | null
+    value?: string | number | null
   ) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
   };
@@ -74,15 +76,15 @@ export const CreateTicketPage: FC = () => {
   return (
     <div className="flex justify-center items-start py-8 w-full">
       <Card
-        className="px-5 py-6 rounded-xl max-w-[725px] w-full"
+        className={`px-5 py-6 rounded-xl ${maxCardWidthClass} w-full`}
         as={Form}
         onSubmit={handleSubmit}
       >
-        <CardHeader className="flex gap-5 mb-5 p-0">
+        <div className="flex items-center gap-5 mb-5">
           <img src={createTicketFile} alt="" />
-          <h1 className="text-xl font-medium">Подать новую заявку</h1>
-        </CardHeader>
-        <CardBody className="flex flex-col gap-6 mb-8 p-0 overflow-visible">
+          <h1 className="text-2xl font-semibold">Создать заявку</h1>
+        </div>
+        <div className="flex flex-col gap-7 mb-8 w-full overflow-visible">
           <MainInfoSection
             formState={formState}
             handleFieldChange={handleFieldChange}
@@ -108,15 +110,13 @@ export const CreateTicketPage: FC = () => {
             handleFieldChange={handleFieldChange}
             isRelocation={isRelocation}
           />
-        </CardBody>
-        <CardFooter className="flex gap-4 self-end p-0 rounded-none w-fit">
-          <Button variant="ghost" radius="full">
+        </div>
+        <div className="flex gap-6 self-end">
+          <Button variant="ghost" as={Link} href="/">
             Отмена
           </Button>
-          <Button type="submit" color="primary" radius="full">
-            Отправить заявку
-          </Button>
-        </CardFooter>
+          <Button type="submit">Отправить заявку</Button>
+        </div>
       </Card>
     </div>
   );

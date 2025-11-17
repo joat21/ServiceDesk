@@ -9,7 +9,7 @@ interface LocationSectionProps {
   formState: TicketFormState;
   handleFieldChange: (
     field: keyof TicketFormState,
-    value: string | null
+    value: string | number | null
   ) => void;
   isRelocation: boolean;
 }
@@ -29,9 +29,7 @@ export const LocationSection: FC<LocationSectionProps> = ({
           placeholder="Выберите офис"
           defaultItems={offices ?? []}
           selectedKey={formState.officeId}
-          onSelectionChange={(value) =>
-            handleFieldChange('officeId', String(value))
-          }
+          onSelectionChange={(value) => handleFieldChange('officeId', value)}
           isRequired
         >
           {(office) => (

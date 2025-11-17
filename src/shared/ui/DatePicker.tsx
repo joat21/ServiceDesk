@@ -11,7 +11,7 @@ export const DatePicker: FC<DatePickerProps> = ({ classNames, ...props }) => {
     {
       label: 'text-xl font-medium',
       inputWrapper:
-        'border-1 border-[#c3c0c0] rounded-lg bg-[#f8f8f8] data-[hover=true]:bg-[#ededed]',
+        'border-1 border-[#c3c0c0] rounded-lg min-h-8 h-8 bg-[#f8f8f8] data-[hover=true]:bg-[#ededed]',
       popoverContent: 'rounded-lg',
     },
     classNames

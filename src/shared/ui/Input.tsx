@@ -26,7 +26,7 @@ export const Input: FC<InputProps> = ({
   const mergedClassNames = mergeSlotClasses(
     {
       base: 'text-black',
-      inputWrapper: 'px-2.5 py-1 rounded-lg',
+      inputWrapper: 'px-2.5 py-1 rounded-lg min-h-8 h-8',
       input: 'text-base placeholder:text-[#666]',
     },
     variantClassMap[variant],
