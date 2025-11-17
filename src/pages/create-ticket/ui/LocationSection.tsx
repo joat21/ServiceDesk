@@ -1,8 +1,9 @@
 import type { FC } from 'react';
-import { CreateTicketAutocomplete } from './CreateTicketAutocomplete';
+import { AutocompleteItem } from '@heroui/react';
 import { CreateTicketTextarea } from './CreateTicketTextarea';
 import type { TicketFormState } from '@/features/create-ticket';
 import type { Office } from '@/entities/office';
+import { Autocomplete } from '@/shared/ui';
 
 interface LocationSectionProps {
   offices: Office[] | undefined;
@@ -23,30 +24,44 @@ export const LocationSection: FC<LocationSectionProps> = ({
   return (
     <>
       <div className="flex gap-3">
-        <CreateTicketAutocomplete
+        <Autocomplete
           name="office"
           label="Офис"
           placeholder="Выберите офис"
-          options={offices ?? []}
-          getLabel={(o) => o.fullAddress}
+          defaultItems={offices ?? []}
           selectedKey={formState.officeId}
           onSelectionChange={(value) =>
             handleFieldChange('officeId', String(value))
           }
-        />
+          isRequired
+        >
+          {(office) => (
+            <AutocompleteItem key={office.id}>
+              {office.fullAddress}
+            </AutocompleteItem>
+          )}
+        </Autocomplete>
 
         {isRelocation && (
-          <CreateTicketAutocomplete
-            name="office"
-            label="Новый офис"
-            placeholder="Выберите офис"
-            options={offices ?? []}
-            getLabel={(o) => o.fullAddress}
-            selectedKey={formState.relocationOfficeId}
-            onSelectionChange={(value) =>
-              handleFieldChange('relocationOfficeId', String(value))
-            }
-          />
+          <>
+            <Autocomplete
+              name="newOffice"
+              label="Новый офис"
+              placeholder="Выберите офис"
+              defaultItems={offices ?? []}
+              selectedKey={formState.relocationOfficeId}
+              onSelectionChange={(value) =>
+                handleFieldChange('relocationOfficeId', String(value))
+              }
+              isRequired
+            >
+              {(office) => (
+                <AutocompleteItem key={office.id}>
+                  {office.fullAddress}
+                </AutocompleteItem>
+              )}
+            </Autocomplete>
+          </>
         )}
       </div>
 
