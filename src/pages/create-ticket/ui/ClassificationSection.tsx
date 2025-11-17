@@ -1,14 +1,10 @@
 import type { FC } from 'react';
-import {
-  DatePicker,
-  type DateValue,
-  type SharedSelection,
-} from '@heroui/react';
-import { parseDate } from '@internationalized/date';
+import { type DateValue, type SharedSelection } from '@heroui/react';
+import { getLocalTimeZone, parseDate, today } from '@internationalized/date';
 import type { TicketFormState } from '@/features/create-ticket';
 import type { Category } from '@/entities/category';
 import type { Priority } from '@/entities/priority';
-import { Select } from '@/shared/ui';
+import { DatePicker, Select } from '@/shared/ui';
 
 interface ClassificationSectionProps {
   categories: Category[] | undefined;
@@ -69,21 +65,16 @@ export const ClassificationSection: FC<ClassificationSectionProps> = ({
             selectedKeys={[formState.priorityId]}
             onChange={handlePriorityChange}
           />
-
           <DatePicker
             name="date"
             label="Дата переезда"
-            labelPlacement="outside"
-            variant="bordered"
-            radius="full"
-            classNames={{
-              label: 'text-xl font-medium',
-              inputWrapper: 'border-1 border-[#bfbfbf] bg-[#EDEDED]',
-            }}
-            selectorButtonPlacement="start"
-            isRequired
             value={relocationDateValue}
             onChange={handleDateChange}
+            isDateUnavailable={(date) => {
+              const now = today(getLocalTimeZone());
+              return date < now;
+            }}
+            isRequired
           />
         </div>
       </>

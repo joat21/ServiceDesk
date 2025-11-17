@@ -28,7 +28,7 @@ function App() {
   }
 
   return (
-    <HeroUIProvider navigate={navigate} useHref={useHref}>
+    <HeroUIProvider locale={'ru-RU'} navigate={navigate} useHref={useHref}>
       <Routes>
         <Route path="/sign-in" element={<SignInPage />} />
 
