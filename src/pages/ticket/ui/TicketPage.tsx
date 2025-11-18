@@ -8,11 +8,13 @@ import { useTicketHistory } from '@/entities/ticket';
 export const TicketPage: FC = () => {
   const { id = '' } = useParams();
 
-  const { data: ticket } = useTicket(Number(id));
+  const { data: ticket, isLoading: isTicketLoading } = useTicket(Number(id));
   const { data: history } = useTicketHistory(id);
 
+  if (!ticket || isTicketLoading) return 'Загрузка...';
+
   return (
-    <div className="flex items-start gap-5 pt-14 w-full">
+    <div className="relative flex items-start gap-5 py-14 w-full">
       <Details ticket={ticket} />
       <History history={history ?? []} />
     </div>

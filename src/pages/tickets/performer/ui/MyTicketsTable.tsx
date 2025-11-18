@@ -12,6 +12,7 @@ import {
 } from '@heroui/react';
 import type { Ticket } from '@/entities/ticket';
 import { ViewIcon } from '@/shared/ui/icons';
+import { formatDate } from '@/shared/lib/dateTime';
 
 const columns = [
   { key: 'number', label: 'Номер' },
@@ -53,7 +54,7 @@ export const MyTicketsTable: FC<MyTicketsTableProps> = ({ tickets }) => {
           <TableRow key={item.key} className="border-t border-[#c3c0c0]">
             {(columnKey) => (
               <TableCell className="px-4 py-2 text-base">
-                {columnKey === 'actions' ? (
+                {columnKey === 'actions' && (
                   <Button
                     variant="light"
                     as={Link}
@@ -62,9 +63,11 @@ export const MyTicketsTable: FC<MyTicketsTableProps> = ({ tickets }) => {
                   >
                     <ViewIcon />
                   </Button>
-                ) : (
-                  getKeyValue(item, columnKey)
                 )}
+                {/* TODO: стремно выглядит, переписать */}
+                {columnKey === 'deadline'
+                  ? formatDate(getKeyValue(item, columnKey))
+                  : getKeyValue(item, columnKey)}
               </TableCell>
             )}
           </TableRow>

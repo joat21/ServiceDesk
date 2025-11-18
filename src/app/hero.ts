@@ -3,7 +3,7 @@ export default heroui({
   themes: {
     light: {
       colors: {
-        background: '#f3f0f0',
+        background: '#fafafa',
         foreground: '#060923',
         divider: '#c3c0c0',
 

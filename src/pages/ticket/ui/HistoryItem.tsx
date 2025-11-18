@@ -1,5 +1,7 @@
 import type { FC } from 'react';
 import type { TicketHistoryItem } from '@/entities/ticket';
+import { StarIcon } from '@/shared/ui/icons';
+import { formatDateTime } from '@/shared/lib/dateTime';
 
 interface HistoryItemProps {
   item: TicketHistoryItem;
@@ -11,11 +13,11 @@ export const HistoryItem: FC<HistoryItemProps> = ({ item }) => {
       <div className="flex justify-between items-center">
         <span className="text-xl font-medium">{item.theme}</span>
         <span className="text-lg text-[#666]">
-          {new Date(item.createdAt).toLocaleString()}
+          {formatDateTime(item.createdAt, 'numeric')}
         </span>
       </div>
       <span className="mb-4 text-lg text-[#666]">{item.actor.name}</span>
-      <span className="mb-3 px-4 py-3 border border-[#c3c0c0] rounded-lg text-lg text-[#666] bg-[#f8f8f8]">
+      <span className="mb-3 px-3 py-2 border border-[#c3c0c0] rounded-lg text-lg text-[#666] bg-[#f8f8f8]">
         {item.message}
       </span>
       {item.photo && item.photo.length > 0 && (
@@ -30,9 +32,12 @@ export const HistoryItem: FC<HistoryItemProps> = ({ item }) => {
           ))}
         </ul>
       )}
-      {item.rating && <span>Оценка: {item.rating}</span>}
-
-      {/* TODO: фото, оценка от заявителя */}
+      {item.rating && (
+        <span className="flex gap-1 text-lg font-medium">
+          Оценка:<span> {item.rating}</span>
+          <StarIcon />
+        </span>
+      )}
     </div>
   );
 };

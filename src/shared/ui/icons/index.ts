@@ -21,3 +21,5 @@ export { default as MapPinIcon } from './map-pin.svg?react';
 export { default as ArrowLeftIcon } from './arrow-left.svg?react';
 export { default as CheckMarkIcon } from './check-mark.svg?react';
 export { default as CrossIcon } from './cross.svg?react';
+export { default as TicketHistoryIcon } from './ticket-history.svg?react';
+export { default as StarIcon } from './star.svg?react';

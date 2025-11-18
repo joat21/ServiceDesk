@@ -1,52 +1,67 @@
 import type { FC } from 'react';
-import { CardBody, CardHeader } from '@heroui/react';
 import { DetailsItem } from './DetailsItem';
 import type { Ticket } from '@/entities/ticket';
 import { Card } from '@/shared/ui';
+import { MapPinIcon } from '@/shared/ui/icons';
+import { formatDateTime } from '@/shared/lib/dateTime';
 
 interface DetailsProps {
-  ticket?: Ticket;
+  ticket: Ticket;
 }
 
 export const Details: FC<DetailsProps> = ({ ticket }) => {
   return (
-    <Card className="px-7 py-5 rounded-xl max-w-2xl w-full">
-      <CardHeader className="mb-4 p-0">
-        <h1 className="text-2xl font-semibold">Детали заявки</h1>
-      </CardHeader>
-      <CardBody className="flex flex-col gap-4 p-0">
-        <DetailsItem label="Тема заявки">{ticket?.theme}</DetailsItem>
+    <Card className="sticky top-5 px-7 py-5 rounded-xl w-full">
+      <h1 className="mb-4 text-2xl font-semibold">Детали заявки</h1>
+      <div className="flex flex-col gap-4 p-0">
+        <DetailsItem label="Тема заявки">{ticket.theme}</DetailsItem>
         <DetailsItem label="Подробное описание">
-          {ticket?.description}
+          {ticket.description}
         </DetailsItem>
-        {ticket?.photo && ticket.photo.length > 0 && (
+        <DetailsItem label="Офис">{ticket.office}</DetailsItem>
+        <DetailsItem label="Дополнительная локация">
+          <div className="flex gap-2.5">
+            <MapPinIcon width={23} height={23} />
+            {ticket.location}
+          </div>
+        </DetailsItem>
+
+        {ticket.photo.length > 0 && (
           <DetailsItem label="Фото">
-            {ticket.photo.map((item, i) => (
-              <img key={i} src={item} alt="" />
-            ))}
+            <ul className="flex flex-wrap gap-2">
+              {ticket.photo.map((url) => (
+                <li
+                  key={url}
+                  className="flex items-center justify-center border border-[#c3c0c0] rounded-lg w-40 h-40 bg-[#f8f8f8] overflow-hidden"
+                >
+                  <img
+                    className="w-full h-full object-cover"
+                    src={url}
+                    alt=""
+                  />
+                </li>
+              ))}
+            </ul>
           </DetailsItem>
         )}
 
-        <DetailsItem label="Офис">{ticket?.office}</DetailsItem>
-
-        <div className="flex justify-between">
-          <DetailsItem label="Статус">{ticket?.status}</DetailsItem>
-          <DetailsItem label="Приоритет">{ticket?.priority}</DetailsItem>
+        <div className="flex justify-between gap-5 pr-5">
+          <div className="flex flex-col gap-3">
+            <DetailsItem label="Статус">{ticket.status}</DetailsItem>
+            <DetailsItem label="Исполнитель">{ticket.performer}</DetailsItem>
+            <DetailsItem label="Создано">
+              {formatDateTime(ticket.createdAt)}
+            </DetailsItem>
+          </div>
+          <div className="flex flex-col gap-3">
+            <DetailsItem label="Приоритет">{ticket.priority}</DetailsItem>
+            <DetailsItem label="Категория">{ticket.category}</DetailsItem>
+            <DetailsItem label="Дедлайн">
+              {formatDateTime(ticket.deadline)}
+            </DetailsItem>
+          </div>
         </div>
-
-        <div className="flex justify-between">
-          <DetailsItem label="Исполнитель">{ticket?.performer}</DetailsItem>
-          <DetailsItem label="Категория">{ticket?.category}</DetailsItem>
-        </div>
-
-        <div className="flex justify-between">
-          <DetailsItem label="Создано">
-            {new Date(ticket?.createdAt ?? '').toLocaleDateString()}{' '}
-            {new Date(ticket?.createdAt ?? '').toLocaleTimeString()}
-          </DetailsItem>
-          <DetailsItem label="Дедлайн">{ticket?.deadline}</DetailsItem>
-        </div>
-      </CardBody>
+      </div>
     </Card>
   );
 };

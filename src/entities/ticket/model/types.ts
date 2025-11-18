@@ -14,6 +14,7 @@ export interface Ticket {
   createdAt: string;
   photo: string[];
   office: string;
+  location: string;
 }
 
 export interface TicketsFilter {

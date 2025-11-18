@@ -6,7 +6,7 @@ interface DetailsItemProps extends PropsWithChildren {
 
 export const DetailsItem: FC<DetailsItemProps> = ({ label, children }) => {
   return (
-    <div className="flex flex-col gap-x-1.5">
+    <div className="flex flex-col gap-2">
       <span className="text-[#666]">{label}</span>
       <div className="text-lg">{children}</div>
     </div>

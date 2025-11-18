@@ -12,6 +12,7 @@ import {
 } from '@heroui/react';
 import type { Ticket } from '@/entities/ticket';
 import { CheckMarkIcon, CrossIcon, ViewIcon } from '@/shared/ui/icons';
+import { formatDate } from '@/shared/lib/dateTime';
 
 const columns = [
   { key: 'number', label: 'Номер' },
@@ -88,7 +89,10 @@ export const AvailableTicketsTable: FC<AvailableTicketsTableProps> = ({
                     </Button>
                   </div>
                 )}
-                {getKeyValue(item, columnKey)}
+                {/* TODO: стремно выглядит, переписать */}
+                {columnKey === 'deadline'
+                  ? formatDate(getKeyValue(item, columnKey))
+                  : getKeyValue(item, columnKey)}
               </TableCell>
             )}
           </TableRow>
