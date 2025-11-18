@@ -5,8 +5,8 @@ import { MainLayout } from './layouts/MainLayout';
 import { SignInPage } from '@/pages/sign-in';
 import { ProfilePage } from '@/pages/profile';
 import { CreateTicketPage } from '@/pages/create-ticket';
-import { EmployeeTicketsPage } from '@/pages/tickets/employee';
 import { TicketPage } from '@/pages/ticket';
+import { TicketsPage } from '@/pages/tickets';
 import { useUser } from '@/entities/user';
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
 
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<EmployeeTicketsPage />} />
+          <Route index element={<TicketsPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="create-ticket" element={<CreateTicketPage />} />
           <Route path="tickets/:id" element={<TicketPage />} />

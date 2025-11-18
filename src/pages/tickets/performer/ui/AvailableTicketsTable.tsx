@@ -1,0 +1,99 @@
+import type { FC } from 'react';
+import {
+  Button,
+  getKeyValue,
+  Link,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@heroui/react';
+import type { Ticket } from '@/entities/ticket';
+import { CheckMarkIcon, CrossIcon, ViewIcon } from '@/shared/ui/icons';
+
+const columns = [
+  { key: 'number', label: 'Номер' },
+  { key: 'theme', label: 'Заявка' },
+
+  { key: 'view', label: '' },
+
+  { key: 'priority', label: 'Приоритет' },
+  { key: 'acceptTime', label: 'Время на принятие' },
+  { key: 'deadline', label: 'Дедлайн' },
+
+  { key: 'actions', label: 'Действия' },
+];
+
+interface AvailableTicketsTableProps {
+  tickets: Ticket[];
+}
+
+export const AvailableTicketsTable: FC<AvailableTicketsTableProps> = ({
+  tickets,
+}) => {
+  const rows = tickets.map((ticket) => ({ key: ticket.id, ...ticket }));
+
+  return (
+    <Table
+      classNames={{
+        wrapper: 'p-0 border border-[#c3c0c0] rounded-xl',
+      }}
+      aria-label="Мои заявки"
+    >
+      <TableHeader columns={columns} className="">
+        {(column) => (
+          <TableColumn
+            key={column.key}
+            className="py-3 text-lg font-medium bg-transparent"
+          >
+            {column.label}
+          </TableColumn>
+        )}
+      </TableHeader>
+      <TableBody items={rows} emptyContent={'Заявки не найдены'}>
+        {(item) => (
+          <TableRow key={item.key} className="border-t border-[#c3c0c0]">
+            {(columnKey) => (
+              <TableCell className="px-4 py-2 text-base">
+                {columnKey === 'view' && (
+                  <Button
+                    variant="light"
+                    as={Link}
+                    href={`/tickets/${item.key}`}
+                    className="p-2 rounded-lg min-w-0 w-fit"
+                  >
+                    <ViewIcon />
+                  </Button>
+                )}
+                {columnKey === 'acceptTime' && '02:00'}
+                {columnKey === 'actions' && (
+                  <div className="flex gap-5">
+                    <Button
+                      variant="light"
+                      as={Link}
+                      href={`/tickets/${item.key}`}
+                      className="p-2 rounded-lg min-w-0 w-fit"
+                    >
+                      <CheckMarkIcon />
+                    </Button>
+                    <Button
+                      variant="light"
+                      as={Link}
+                      href={`/tickets/${item.key}`}
+                      className="p-2 rounded-lg min-w-0 w-fit"
+                    >
+                      <CrossIcon />
+                    </Button>
+                  </div>
+                )}
+                {getKeyValue(item, columnKey)}
+              </TableCell>
+            )}
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+  );
+};

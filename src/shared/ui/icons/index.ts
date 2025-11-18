@@ -19,3 +19,5 @@ export { default as FilterIcon } from './filter.svg?react';
 export { default as SearchIcon } from './search.svg?react';
 export { default as MapPinIcon } from './map-pin.svg?react';
 export { default as ArrowLeftIcon } from './arrow-left.svg?react';
+export { default as CheckMarkIcon } from './check-mark.svg?react';
+export { default as CrossIcon } from './cross.svg?react';
