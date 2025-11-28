@@ -14,9 +14,9 @@ export const PersonalInfoItem: FC<PersonalInfoItemProps> = ({
   return (
     <div className="flex gap-7 items-center">
       <Icon width={28} height={28} />
-      <div className="flex flex-col gap-1.5">
-        <span className="font-bold">{label}</span>
-        <span>{value}</span>
+      <div className="flex flex-col gap-1">
+        <span className="text-xl font-medium">{label}</span>
+        <span className="text-[#666]">{value}</span>
       </div>
     </div>
   );
