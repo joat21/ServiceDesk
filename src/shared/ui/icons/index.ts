@@ -23,3 +23,7 @@ export { default as CheckMarkIcon } from './check-mark.svg?react';
 export { default as CrossIcon } from './cross.svg?react';
 export { default as TicketHistoryIcon } from './ticket-history.svg?react';
 export { default as StarIcon } from './star.svg?react';
+export { default as AlertTriangleIcon } from './alert-triangle.svg?react';
+export { default as ClockIcon } from './clock.svg?react';
+export { default as CheckCircleIcon } from './check-circle.svg?react';
+export { default as UserFilledIcon } from './user-filled.svg?react';

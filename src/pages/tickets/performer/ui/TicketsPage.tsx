@@ -30,7 +30,16 @@ export const TicketsPage = () => {
       <h1 className="sr-only">Заявки</h1>
       <Statistics stats={stats} />
       <div className="flex w-full flex-col">
-        <Tabs aria-label="Заявки">
+        <Tabs
+          aria-label="Заявки"
+          classNames={{
+            tabList: 'border-1 border-[#c3c0c0] bg-white',
+            tab: 'text-base font-medium data-[selected=false]:opacity-1',
+            cursor: 'w-full bg-[#c3c0c0]',
+            panel: 'px-0',
+          }}
+          variant="bordered"
+        >
           <Tab
             key="my-tickets"
             title={tickets ? `Мои заявки (${tickets.length})` : 'Мои заявки'}
