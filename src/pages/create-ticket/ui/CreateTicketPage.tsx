@@ -45,7 +45,6 @@ export const CreateTicketPage: FC = () => {
   );
   const isRelocation = selectedCategory?.name === 'Переезд';
   const maxCardWidth = isRelocation ? 850 : 725;
-  const maxCardWidthClass = `max-w-[${maxCardWidth}px]`;
 
   const handleFieldChange = (
     field: keyof TicketFormState,
@@ -64,6 +63,27 @@ export const CreateTicketPage: FC = () => {
       {
         ...formState,
         photo: files.map((file) => file.url ?? ''),
+
+        // Поля ниже заполняются на фронте только пока используется моковый API,
+        // так как моковый API не может по categoryId мне вернуть название этой категории
+        // а эти данные о заявках мне нужно отображать в истории заявок
+        category:
+          categories?.find((c) => String(c.id) === formState.categoryId)
+            ?.name ?? 'Прочее',
+        priority:
+          priorities?.find((p) => String(p.id) === formState.priorityId)
+            ?.name ?? 'Низкий',
+        office:
+          offices?.find((o) => String(o.id) === formState.officeId)
+            ?.fullAddress ?? 'Екатеринбург, ул. Генеральская, 8',
+        relocationOffice:
+          offices?.find((o) => String(o.id) === formState.relocationOfficeId)
+            ?.fullAddress ?? 'Екатеринбург, ул. Генеральская, 8',
+        performer: 'Иванов И.И',
+        status: 'На рассмотрении',
+        createdAt: new Date().toISOString(),
+        deadline: new Date().toISOString(),
+        number: 'TK-0004',
       },
       {
         onSuccess: () => {
@@ -76,7 +96,10 @@ export const CreateTicketPage: FC = () => {
   return (
     <div className="flex justify-center items-start py-8 w-full">
       <Card
-        className={`px-5 py-6 rounded-xl ${maxCardWidthClass} w-full`}
+        className={'px-5 py-6 rounded-xl w-full'}
+        style={{
+          maxWidth: maxCardWidth,
+        }}
         as={Form}
         onSubmit={handleSubmit}
       >
