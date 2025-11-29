@@ -9,6 +9,7 @@ import { CreateTicketPage } from '@/pages/create-ticket';
 import { TicketPage } from '@/pages/ticket';
 import { TicketsPage } from '@/pages/tickets';
 import { useUser } from '@/entities/user';
+import { PerformersPage } from '@/pages/performers';
 
 function App() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function App() {
 
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="tickets" element={<TicketsPage />} />
-          <Route path="performers" element={<h1>Исполнители</h1>} />
+          <Route path="performers" element={<PerformersPage />} />
           <Route path="offices" element={<h1>Офисы</h1>} />
         </Route>
 

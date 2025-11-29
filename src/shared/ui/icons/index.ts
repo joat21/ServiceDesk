@@ -33,3 +33,4 @@ export { default as UsersIcon } from './users.svg?react';
 export { default as ShieldIcon } from './shield.svg?react';
 export { default as TagIcon } from './tag.svg?react';
 export { default as AlertCircleIcon } from './alert-circle.svg?react';
+export { default as EditIcon } from './edit.svg?react';

@@ -1,6 +1,5 @@
-import { Card } from '@/shared/ui';
-import { StarIcon } from '@/shared/ui/icons';
 import type { FC } from 'react';
+import { Card, Rating as RatingIdicator } from '@/shared/ui';
 
 interface RatingProps {
   rating: number;
@@ -11,10 +10,7 @@ export const Rating: FC<RatingProps> = ({ rating }) => {
     <Card className="p-4 rounded-xl">
       <div className="flex justify-center gap-6 text-xl font-medium text-center">
         <h2>Рейтинг</h2>
-        <span className="flex gap-1">
-          <StarIcon />
-          <span>{rating}</span>
-        </span>
+        <RatingIdicator value={rating} />
       </div>
     </Card>
   );

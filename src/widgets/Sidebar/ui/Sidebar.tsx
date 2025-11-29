@@ -46,7 +46,7 @@ export const Sidebar: FC<SidebarProps> = ({
 
       <nav className="flex flex-col flex-1">
         {items.map((item) => (
-          <MenuItem item={item} collapsed={collapsed} />
+          <MenuItem key={item.label} item={item} collapsed={collapsed} />
         ))}
       </nav>
 
