@@ -8,8 +8,8 @@ export const Header = () => {
   const { data: user } = useUser();
 
   return (
-    <header className="flex justify-center px-6 w-full bg-white border-b border-[#c3c0c0]">
-      <div className="flex justify-between items-center gap-10 max-w-[1280px] w-full">
+    <header className="flex justify-center w-full bg-white border-b border-[#c3c0c0]">
+      <div className="flex justify-between items-center gap-10 max-w-[1920px] w-full">
         <Link to="/" className="flex gap-5 items-center">
           <AlfaLogo />
           <div className="flex flex-col">
