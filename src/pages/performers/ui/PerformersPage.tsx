@@ -52,7 +52,7 @@ export const PerformersPage: FC = () => {
           <li key={performer.id}>
             <PerformerCard
               performer={performer}
-              handleEditPerformer={handleEditPerformer}
+              onEditPerformer={handleEditPerformer}
             />
           </li>
         ))}

@@ -6,12 +6,12 @@ import { EditIcon } from '@/shared/ui/icons';
 
 interface PerformerCardProps {
   performer: Performer;
-  handleEditPerformer: (performerId: string | number) => void;
+  onEditPerformer: (performerId: string | number) => void;
 }
 
 export const PerformerCard: FC<PerformerCardProps> = ({
   performer,
-  handleEditPerformer,
+  onEditPerformer,
 }) => {
   return (
     <Card className="gap-8 px-4 py-6 w-full h-full">
@@ -22,7 +22,7 @@ export const PerformerCard: FC<PerformerCardProps> = ({
             <Button
               size="sm"
               variant="light"
-              onPress={() => handleEditPerformer(performer.id)}
+              onPress={() => onEditPerformer(performer.id)}
               isIconOnly
             >
               <EditIcon />
