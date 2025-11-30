@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getOffices, type Office } from '@/entities/office';
+import type { Office } from './types';
+import { getOffices } from '../api/office.api';
 
 const officesKey = ['offices'];
 

@@ -8,13 +8,15 @@ import { ClassificationSection } from './ClassificationSection';
 import { LocationSection } from './LocationSection';
 import type { UploadedFile } from '../model/types';
 
-import { useCategories } from '@/features/categories';
-import { usePriorities } from '@/features/priorities';
-import { useOffices } from '@/features/offices';
 import {
   type TicketFormState,
   useCreateTicket,
 } from '@/features/create-ticket';
+
+import { useCategories } from '@/entities/category';
+import { useOffices } from '@/entities/office';
+import { usePriorities } from '@/entities/priority';
+
 import { Button, Card } from '@/shared/ui';
 import createTicketFile from '@/assets/img/create-ticket.svg';
 

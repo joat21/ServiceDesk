@@ -5,4 +5,6 @@ export { Textarea } from './Textarea';
 export { Autocomplete } from './Autocomplete';
 export { Card } from './Card';
 export { DatePicker } from './DatePicker';
+export { Modal } from './Modal';
+export { type ModalProps } from './Modal';
 export { Rating } from './Rating';

@@ -6,16 +6,25 @@ import { EditIcon } from '@/shared/ui/icons';
 
 interface PerformerCardProps {
   performer: Performer;
+  handleEditPerformer: (performerId: string | number) => void;
 }
 
-export const PerformerCard: FC<PerformerCardProps> = ({ performer }) => {
+export const PerformerCard: FC<PerformerCardProps> = ({
+  performer,
+  handleEditPerformer,
+}) => {
   return (
     <Card className="gap-8 px-4 py-6 w-full h-full">
       <div className="flex flex-col gap-1.5">
         <div className="flex justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <h2 className="text-2xl font-medium">{performer.fullName}</h2>
-            <Button size="sm" variant="light" isIconOnly>
+            <Button
+              size="sm"
+              variant="light"
+              onPress={() => handleEditPerformer(performer.id)}
+              isIconOnly
+            >
               <EditIcon />
             </Button>
           </div>
