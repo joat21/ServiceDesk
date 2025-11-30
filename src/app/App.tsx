@@ -3,14 +3,17 @@ import { HeroUIProvider } from '@heroui/react';
 
 import { AdminLayout } from './layouts/AdminLayout';
 import { MainLayout } from './layouts/MainLayout';
+
 import { SignInPage } from '@/pages/sign-in';
 import { ProfilePage } from '@/pages/profile';
 import { CreateTicketPage } from '@/pages/create-ticket';
 import { TicketPage } from '@/pages/ticket';
 import { TicketsPage } from '@/pages/tickets';
-import { useUser } from '@/entities/user';
 import { PerformersPage } from '@/pages/performers';
 import { OfficesPage } from '@/pages/offices';
+import { PrioritiesPage } from '@/pages/priorities';
+
+import { useUser } from '@/entities/user';
 
 function App() {
   const navigate = useNavigate();
@@ -49,7 +52,7 @@ function App() {
         </Route>
 
         <Route path="/superadmin" element={<AdminLayout />}>
-          <Route path="priorities" element={<h1>Приоритеты</h1>} />
+          <Route path="priorities" element={<PrioritiesPage />} />
           <Route path="categories" element={<h1>Категории</h1>} />
           <Route path="admins" element={<h1>Администраторы</h1>} />
           <Route path="analysts" element={<h1>Аналитики</h1>} />
