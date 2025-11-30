@@ -17,6 +17,7 @@ export const Modal: FC<ModalProps> = ({
   title,
   action,
   isOpen,
+  onClose,
   onOpenChange,
   children,
   ...props
@@ -31,22 +32,16 @@ export const Modal: FC<ModalProps> = ({
       {...props}
     >
       <ModalContent>
-        {(onClose) => (
-          <>
-            {title && (
-              <ModalHeader className="text-2xl font-semibold">
-                {title}
-              </ModalHeader>
-            )}
-            {children}
-            <ModalFooter>
-              <Button variant="ghost" onPress={onClose}>
-                Отмена
-              </Button>
-              {action}
-            </ModalFooter>
-          </>
+        {title && (
+          <ModalHeader className="text-2xl font-semibold">{title}</ModalHeader>
         )}
+        {children}
+        <ModalFooter>
+          <Button variant="ghost" onPress={onClose}>
+            Отмена
+          </Button>
+          {action}
+        </ModalFooter>
       </ModalContent>
       Modal
     </HeroModal>
