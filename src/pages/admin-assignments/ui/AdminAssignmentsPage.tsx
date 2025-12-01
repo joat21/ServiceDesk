@@ -1,21 +1,21 @@
 import { useState, type FC } from 'react';
 import { useDisclosure } from '@heroui/react';
-import { useAnalystAssignments } from '@/entities/analyst-assignment';
-import { EditAnalystAssignmentModal } from '@/features/edit-analyst-assignment';
+import { AdminAssignmentCard } from './AdminAssignmentCard';
+import { EditAdminAssignmentModal } from '@/features/edit-admin-assignment';
+import { useAdminAssignments } from '@/entities/admin-assignment';
 import { Button } from '@/shared/ui';
-import { AnalystAssignmentCard } from './AnalystAssignmentCard';
 
-export const AnalystsPage: FC = () => {
+export const AdminAssignmentsPage: FC = () => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
   const [selectedAssignmentId, setSelectedAssignmentId] = useState<
     string | number | null
   >(null);
-  const { data: analystAssignments, isLoading } = useAnalystAssignments();
+  const { data: adminAssignments, isLoading } = useAdminAssignments();
 
   if (isLoading) return 'Загрузка...';
-  if (!analystAssignments) return <p>Аналитики не найдены</p>;
+  if (!adminAssignments) return <p>Администраторы не найдены</p>;
 
-  const selectedAssignment = analystAssignments.find(
+  const selectedAssignment = adminAssignments.find(
     (p) => p.id === selectedAssignmentId
   );
 
@@ -32,14 +32,14 @@ export const AnalystsPage: FC = () => {
   return (
     <div className="flex flex-col items-center gap-11 pt-11 w-full">
       <div className="self-start">
-        <h1 className="mb-2 text-2xl font-semibold">Аналитики</h1>
-        <p className="text-[#666]">Управление аналитиками по филиалам</p>
+        <h1 className="mb-2 text-2xl font-semibold">Администраторы</h1>
+        <p className="text-[#666]">Управление администраторами по регионам</p>
       </div>
 
       <ul className="grid grid-cols-2 gap-8 w-full">
-        {analystAssignments.map((assignment) => (
+        {adminAssignments.map((assignment) => (
           <li key={assignment.id} className="w-full">
-            <AnalystAssignmentCard
+            <AdminAssignmentCard
               assignment={assignment}
               onEditAssignment={handleEditAssignment}
             />
@@ -47,11 +47,11 @@ export const AnalystsPage: FC = () => {
         ))}
       </ul>
 
-      <EditAnalystAssignmentModal
+      <EditAdminAssignmentModal
         isOpen={isOpen}
         onClose={onClose}
         onOpenChange={onOpenChange}
-        analystAssignment={selectedAssignment ?? analystAssignments[0]}
+        adminAssignment={selectedAssignment ?? adminAssignments[0]}
         action={<Button onPress={handleEditAssignmentSubmit}>Назначить</Button>}
       />
     </div>
