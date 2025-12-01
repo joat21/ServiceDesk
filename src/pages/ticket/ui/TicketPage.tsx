@@ -4,6 +4,7 @@ import { Details } from './Details';
 import { History } from './History';
 import { useTicket } from '@/features/tickets';
 import { useTicketHistory } from '@/entities/ticket';
+import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
 
 export const TicketPage: FC = () => {
   const { id = '' } = useParams();
@@ -14,9 +15,13 @@ export const TicketPage: FC = () => {
   if (!ticket || isTicketLoading) return 'Загрузка...';
 
   return (
-    <div className="relative flex items-start gap-5 py-14 w-full">
-      <Details ticket={ticket} />
-      <History history={history ?? []} />
+    <div className="relative flex flex-col gap-6 py-11 w-full">
+      {/* TODO: в зависимости от роли менять роут, на который делать редирект */}
+      <BackToHomeButton />
+      <div className="flex gap-5 items-start">
+        <Details ticket={ticket} />
+        <History history={history ?? []} />
+      </div>
     </div>
   );
 };

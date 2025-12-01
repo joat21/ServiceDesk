@@ -10,6 +10,7 @@ import {
   UserProfileAvatarIcon,
   MapPinIcon,
 } from '@/shared/ui/icons';
+import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
 
 export const ProfilePage = () => {
   const { data: user, isLoading } = useUser();
@@ -20,9 +21,10 @@ export const ProfilePage = () => {
     user;
 
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className="flex flex-col items-center gap-16 pt-16 max-w-5xl w-full">
+      <h1 className="sr-only">Профиль</h1>
+      <BackToHomeButton />
       <div className="flex justify-center items-stretch gap-20 max-w-[1050px] w-full">
-        <h1 className="sr-only">Профиль</h1>
         <Card className="gap-10 px-5 py-10 rounded-xl max-w-[330px] w-full flex-1">
           <div className="flex flex-col items-center gap-10">
             <UserProfileAvatarIcon />
