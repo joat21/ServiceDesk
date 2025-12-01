@@ -12,6 +12,7 @@ import { TicketsPage } from '@/pages/tickets';
 import { PerformersPage } from '@/pages/performers';
 import { OfficesPage } from '@/pages/offices';
 import { PrioritiesPage } from '@/pages/priorities';
+import { AnalystsPage } from '@/pages/analysts';
 
 import { useUser } from '@/entities/user';
 
@@ -55,7 +56,7 @@ function App() {
           <Route path="priorities" element={<PrioritiesPage />} />
           <Route path="categories" element={<h1>Категории</h1>} />
           <Route path="admins" element={<h1>Администраторы</h1>} />
-          <Route path="analysts" element={<h1>Аналитики</h1>} />
+          <Route path="analysts" element={<AnalystsPage />} />
         </Route>
       </Routes>
     </HeroUIProvider>

@@ -33,7 +33,7 @@ export const Modal: FC<ModalProps> = ({
     >
       <ModalContent>
         {title && (
-          <ModalHeader className="text-2xl font-semibold">{title}</ModalHeader>
+          <ModalHeader className="text-2xl font-medium">{title}</ModalHeader>
         )}
         {children}
         <ModalFooter>
