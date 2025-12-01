@@ -14,6 +14,7 @@ import { OfficesPage } from '@/pages/offices';
 import { PrioritiesPage } from '@/pages/priorities';
 import { AnalystAssignmentsPage } from '@/pages/analyst-assignments';
 import { AdminAssignmentsPage } from '@/pages/admin-assignments';
+import { CategoriesPage } from '@/pages/categories';
 
 import { useUser } from '@/entities/user';
 
@@ -55,7 +56,7 @@ function App() {
 
         <Route path="/superadmin" element={<AdminLayout />}>
           <Route path="priorities" element={<PrioritiesPage />} />
-          <Route path="categories" element={<h1>Категории</h1>} />
+          <Route path="categories" element={<CategoriesPage />} />
           <Route path="admins" element={<AdminAssignmentsPage />} />
           <Route path="analysts" element={<AnalystAssignmentsPage />} />
         </Route>

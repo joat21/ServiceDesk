@@ -1,5 +1,5 @@
 export interface Category {
-  // id временно number
-  id: number;
+  id: string | number;
   name: string;
+  sla: number;
 }
