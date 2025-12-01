@@ -1,6 +1,7 @@
+export type PriorityName = 'low' | 'medium' | 'high' | 'express';
+
 export interface Priority {
-  // id временно number
-  id: number;
-  name: string;
+  id: string | number;
+  name: PriorityName;
   slaFactor: number;
 }

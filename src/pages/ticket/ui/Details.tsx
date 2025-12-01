@@ -1,9 +1,11 @@
 import type { FC } from 'react';
 import { DetailsItem } from './DetailsItem';
+import { PRIORITY_LABELS } from '@/entities/priority';
 import type { Ticket } from '@/entities/ticket';
 import { Card } from '@/shared/ui';
 import { MapPinIcon } from '@/shared/ui/icons';
 import { formatDateTime } from '@/shared/lib/dateTime';
+import { STATUS_LABELS } from '@/entities/status';
 
 interface DetailsProps {
   ticket: Ticket;
@@ -47,14 +49,18 @@ export const Details: FC<DetailsProps> = ({ ticket }) => {
 
         <div className="flex justify-between gap-5 pr-5">
           <div className="flex flex-col gap-3">
-            <DetailsItem label="Статус">{ticket.status}</DetailsItem>
+            <DetailsItem label="Статус">
+              {STATUS_LABELS[ticket.status]}
+            </DetailsItem>
             <DetailsItem label="Исполнитель">{ticket.performer}</DetailsItem>
             <DetailsItem label="Создано">
               {formatDateTime(ticket.createdAt)}
             </DetailsItem>
           </div>
           <div className="flex flex-col gap-3">
-            <DetailsItem label="Приоритет">{ticket.priority}</DetailsItem>
+            <DetailsItem label="Приоритет">
+              {PRIORITY_LABELS[ticket.priority]}
+            </DetailsItem>
             <DetailsItem label="Категория">{ticket.category}</DetailsItem>
             <DetailsItem label="Дедлайн">
               {formatDateTime(ticket.deadline)}

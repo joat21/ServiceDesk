@@ -16,6 +16,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@theme {
+  --color-priority-low: #95ee7f;
+  --color-priority-medium: #f7ffb1;
+  --color-priority-high: #f8d1b0;
+  --color-priority-express: #fc8383;
+
+  --color-status-pending: #e3b0ff;
+  --color-status-assigned: #a5c4fd;
+  --color-status-in_progress: #fff19f;
+  --color-status-outsourced: #f6b088;
+  --color-status-completed: #b1f999;
+  --color-status-rejected: #ff7676;
+}
+
 @font-face {
   font-family: 'Poppins';
   src: url('../assets/fonts/Poppins-Light.woff2') format('woff2');

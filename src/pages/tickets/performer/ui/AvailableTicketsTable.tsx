@@ -10,8 +10,12 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/react';
+
 import { TicketInfoCell } from './TicketInfoCell';
+
+import { PrioirityChip } from '@/entities/priority';
 import type { Ticket } from '@/entities/ticket';
+
 import { CheckMarkIcon, CrossIcon, ViewIcon } from '@/shared/ui/icons';
 import { formatDate } from '@/shared/lib/dateTime';
 
@@ -25,7 +29,11 @@ const columns = [
 
   { key: 'view', label: '' },
 
-  { key: 'priority', label: 'Приоритет' },
+  {
+    key: 'priority',
+    label: 'Приоритет',
+    render: (ticket: Ticket) => <PrioirityChip value={ticket.priority} />,
+  },
   { key: 'acceptTime', label: 'Время на принятие' },
   { key: 'deadline', label: 'Дедлайн' },
 

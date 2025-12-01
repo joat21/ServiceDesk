@@ -1,12 +1,14 @@
-// TODO: оформить как кросс импорт
+// TODO: оформить как кросс импорты
+import type { PriorityName } from '@/entities/priority/model/types';
+import type { StatusName } from '@/entities/status/model/types';
 import type { Role } from '@/entities/user';
 
 export interface Ticket {
   id: number;
   theme: string;
   description: string;
-  status: string;
-  priority: string;
+  status: StatusName;
+  priority: PriorityName;
   category: string;
   deadline: string;
   performer: string;

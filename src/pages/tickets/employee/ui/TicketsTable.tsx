@@ -10,7 +10,11 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/react';
+
+import { PrioirityChip } from '@/entities/priority';
+import { StatusChip } from '@/entities/status';
 import type { Ticket } from '@/entities/ticket';
+
 import { ViewIcon } from '@/shared/ui/icons';
 import { formatDate } from '@/shared/lib/dateTime';
 
@@ -20,10 +24,20 @@ const columns = [
 
   { key: 'actions', label: '' },
 
-  { key: 'priority', label: 'Приоритет' },
-  { key: 'status', label: 'Статус' },
+  {
+    key: 'priority',
+    label: 'Приоритет',
+    render: (ticket: Ticket) => <PrioirityChip value={ticket.priority} />,
+  },
+  {
+    key: 'status',
+    label: 'Статус',
+    render: (ticket: Ticket) => <StatusChip value={ticket.status} />,
+  },
   { key: 'deadline', label: 'Дедлайн' },
 ];
+
+const columnsMap = Object.fromEntries(columns.map((c) => [c.key, c]));
 
 interface TicketsTableProps {
   tickets: Ticket[];
@@ -52,24 +66,29 @@ export const TicketsTable: FC<TicketsTableProps> = ({ tickets }) => {
       <TableBody items={rows} emptyContent={'Заявки не найдены'}>
         {(item) => (
           <TableRow key={item.key} className="border-t border-[#c3c0c0]">
-            {(columnKey) => (
-              <TableCell className="px-4 py-2 text-base">
-                {columnKey === 'actions' && (
-                  <Button
-                    variant="light"
-                    as={Link}
-                    href={`/tickets/${item.key}`}
-                    className="p-2 rounded-lg min-w-0 w-fit"
-                  >
-                    <ViewIcon />
-                  </Button>
-                )}
-                {/* TODO: стремно выглядит, переписать */}
-                {columnKey === 'deadline'
-                  ? formatDate(getKeyValue(item, columnKey))
-                  : getKeyValue(item, columnKey)}
-              </TableCell>
-            )}
+            {/* TODO: стремно выглядит, переписать */}
+            {(columnKey) => {
+              const column = columnsMap[columnKey];
+              return (
+                <TableCell className="px-4 py-2 text-base">
+                  {columnKey === 'actions' && (
+                    <Button
+                      variant="light"
+                      as={Link}
+                      href={`/tickets/${item.key}`}
+                      className="p-2 rounded-lg min-w-0 w-fit"
+                    >
+                      <ViewIcon />
+                    </Button>
+                  )}
+                  {columnKey === 'deadline'
+                    ? formatDate(getKeyValue(item, columnKey))
+                    : column.render
+                      ? column.render(item)
+                      : getKeyValue(item, columnKey)}
+                </TableCell>
+              );
+            }}
           </TableRow>
         )}
       </TableBody>
