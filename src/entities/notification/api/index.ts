@@ -4,8 +4,7 @@ import type { Notification } from '../model/types';
 export const getNotifications = () =>
   api.get<Notification[]>('/notifications').then((r) => r.data);
 
-// id временно тип number
-export const markAsRead = (id: number) =>
+export const markAsRead = (id: string | number) =>
   api.patch<Notification>(`/notifications/${id}`, {
-    isReaded: true,
+    isRead: true,
   });

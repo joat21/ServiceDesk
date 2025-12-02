@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  type UseQueryOptions,
+} from '@tanstack/react-query';
 import {
   getNotifications,
   markAsRead,
@@ -7,19 +12,21 @@ import {
 
 const notificationsKey = ['notifications'];
 
-export const useNotifications = () =>
+export const useNotifications = (
+  options?: Partial<UseQueryOptions<Notification[]>>
+) =>
   useQuery<Notification[]>({
     queryKey: notificationsKey,
     queryFn: getNotifications,
     refetchInterval: 1000 * 60,
+    ...options,
   });
 
 export const useMarkAsRead = () => {
   const qc = useQueryClient();
 
   return useMutation({
-    // id временно тип number
-    mutationFn: (id: number) => markAsRead(id),
+    mutationFn: (id: string | number) => markAsRead(id),
     onSuccess: () => qc.invalidateQueries({ queryKey: notificationsKey }),
   });
 };

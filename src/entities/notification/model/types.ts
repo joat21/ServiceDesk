@@ -1,8 +1,8 @@
 export interface Notification {
-  id: number; // временно меняю на number из за ограничений mokky.dev
+  id: string | number;
   title: string;
   text: string;
-  createdAt: Date;
+  createdAt: string;
   ticketId: string;
-  isReaded: boolean;
+  isRead: boolean;
 }

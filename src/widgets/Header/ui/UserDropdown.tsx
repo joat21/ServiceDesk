@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Dropdown,
   DropdownMenu,
@@ -7,9 +8,8 @@ import {
   DropdownSection,
   Avatar,
 } from '@heroui/react';
-import { DropdownArrowIcon, LogoutIcon, UserIcon } from '@/shared/ui/icons';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/ui';
+import { DropdownArrowIcon, LogoutIcon, UserIcon } from '@/shared/ui/icons';
 
 interface UserDropdownProps {
   fullName: string;
@@ -29,9 +29,10 @@ export const UserDropdown: FC<UserDropdownProps> = ({
   return (
     <Dropdown
       placement="bottom-end"
-      offset={25}
+      offset={15}
       classNames={{
-        content: 'rounded-2xl min-w-44 text-base -translate-x-7',
+        content:
+          'rounded-xl border border-[#c3c0c0] min-w-44 text-base -translate-x-7',
       }}
     >
       <DropdownTrigger>
@@ -53,8 +54,18 @@ export const UserDropdown: FC<UserDropdownProps> = ({
           <DropdownArrowIcon />
         </Button>
       </DropdownTrigger>
-      <DropdownMenu>
-        <DropdownSection showDivider>
+      <DropdownMenu
+        classNames={{
+          list: 'gap-2',
+        }}
+      >
+        <DropdownSection
+          classNames={{
+            divider: 'bg-[#DDE1E8]',
+          }}
+          className="mb-0"
+          showDivider
+        >
           <DropdownItem
             key="profile"
             href="/profile"

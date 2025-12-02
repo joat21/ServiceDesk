@@ -12,7 +12,8 @@ export const TicketPage: FC = () => {
   const { data: ticket, isLoading: isTicketLoading } = useTicket(Number(id));
   const { data: history } = useTicketHistory(id);
 
-  if (!ticket || isTicketLoading) return 'Загрузка...';
+  if (isTicketLoading) return 'Загрузка...';
+  if (!ticket) return <p>Заявка не найдена</p>;
 
   return (
     <div className="relative flex flex-col gap-6 py-11 w-full">
