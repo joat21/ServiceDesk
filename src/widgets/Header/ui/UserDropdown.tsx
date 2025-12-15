@@ -8,6 +8,7 @@ import {
   DropdownSection,
   Avatar,
 } from '@heroui/react';
+import { Role, useUser } from '@/entities/user';
 import { Button } from '@/shared/ui';
 import { DropdownArrowIcon, LogoutIcon, UserIcon } from '@/shared/ui/icons';
 
@@ -21,10 +22,57 @@ export const UserDropdown: FC<UserDropdownProps> = ({
   department,
 }) => {
   const navigate = useNavigate();
+  const { data: user } = useUser();
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/sign-in', { replace: true });
   };
+
+  const menuItems = [];
+
+  if (user?.role === Role.Employee || user?.role === Role.Performer) {
+    menuItems.push(
+      <DropdownSection
+        key="profile-section"
+        classNames={{
+          divider: 'bg-[#DDE1E8]',
+        }}
+        className="mb-0"
+        showDivider
+      >
+        <DropdownItem
+          key="profile"
+          href="/profile"
+          startContent={<UserIcon width={24} height={24} />}
+          classNames={{
+            base: 'py-1',
+            title: 'text-secondary-foreground text-base',
+          }}
+        >
+          Профиль
+        </DropdownItem>
+      </DropdownSection>
+    );
+  }
+
+  menuItems.push(
+    <DropdownSection key="logout-section" className="mb-0">
+      <DropdownItem
+        key="logout"
+        classNames={{
+          base: 'py-1',
+          title: 'text-base',
+        }}
+        className="text-[#e24444]"
+        color="danger"
+        startContent={<LogoutIcon />}
+        onClick={handleLogout}
+      >
+        Выйти
+      </DropdownItem>
+    </DropdownSection>
+  );
 
   return (
     <Dropdown
@@ -59,40 +107,7 @@ export const UserDropdown: FC<UserDropdownProps> = ({
           list: 'gap-2',
         }}
       >
-        <DropdownSection
-          classNames={{
-            divider: 'bg-[#DDE1E8]',
-          }}
-          className="mb-0"
-          showDivider
-        >
-          <DropdownItem
-            key="profile"
-            href="/profile"
-            startContent={<UserIcon width={24} height={24} />}
-            classNames={{
-              base: 'py-1',
-              title: 'text-secondary-foreground text-base',
-            }}
-          >
-            Профиль
-          </DropdownItem>
-        </DropdownSection>
-        <DropdownSection className="mb-0">
-          <DropdownItem
-            key="logout"
-            classNames={{
-              base: 'py-1',
-              title: 'text-base',
-            }}
-            className="text-[#e24444]"
-            color="danger"
-            startContent={<LogoutIcon />}
-            onClick={handleLogout}
-          >
-            Выйти
-          </DropdownItem>
-        </DropdownSection>
+        {menuItems}
       </DropdownMenu>
     </Dropdown>
   );

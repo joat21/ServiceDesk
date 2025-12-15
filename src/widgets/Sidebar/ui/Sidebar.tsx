@@ -1,8 +1,8 @@
 import { type FC } from 'react';
 import { Button, cn } from '@heroui/react';
-import type { SidebarMenuItem } from '../model/types';
-import { LogoutIcon, MenuIcon } from '@/shared/ui/icons';
 import { MenuItem } from './MenuItem';
+import type { SidebarMenuItem } from '../model/types';
+import { MenuIcon } from '@/shared/ui/icons';
 
 interface SidebarProps {
   items: SidebarMenuItem[];
@@ -49,17 +49,6 @@ export const Sidebar: FC<SidebarProps> = ({
           <MenuItem key={item.label} item={item} collapsed={collapsed} />
         ))}
       </nav>
-
-      <div className="self-end px-4 pb-5">
-        <Button
-          className="text-[#e24444] data-[hover=true]:bg-[#FFD7D7]"
-          variant="light"
-          size="sm"
-          isIconOnly
-        >
-          <LogoutIcon />
-        </Button>
-      </div>
     </aside>
   );
 };

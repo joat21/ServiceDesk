@@ -14,5 +14,9 @@ export const TicketsPage: FC = () => {
     return <PerformerTicketsPage />;
   }
 
+  if (user?.role === Role.Admin) {
+    return <h1>Управление заявками у админа</h1>;
+  }
+
   return null;
 };

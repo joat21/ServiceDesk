@@ -3,6 +3,8 @@ import { HeroUIProvider } from '@heroui/react';
 
 import { AdminLayout } from './layouts/AdminLayout';
 import { MainLayout } from './layouts/MainLayout';
+import { RequireRole } from './router/RequireRole';
+import { RedirectByRole } from './router/RedirectByRole';
 
 import { SignInPage } from '@/pages/sign-in';
 import { ProfilePage } from '@/pages/profile';
@@ -16,7 +18,7 @@ import { AnalystAssignmentsPage } from '@/pages/analyst-assignments';
 import { AdminAssignmentsPage } from '@/pages/admin-assignments';
 import { CategoriesPage } from '@/pages/categories';
 
-import { useUser } from '@/entities/user';
+import { Role, useUser } from '@/entities/user';
 
 function App() {
   const navigate = useNavigate();
@@ -42,24 +44,41 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
 
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<TicketsPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="create-ticket" element={<CreateTicketPage />} />
+          <Route index element={<RedirectByRole />} />
+
+          <Route
+            element={<RequireRole roles={[Role.Employee, Role.Performer]} />}
+          >
+            <Route path="tickets" element={<TicketsPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+          </Route>
+
+          <Route element={<RequireRole roles={[Role.Employee]} />}>
+            <Route path="create-ticket" element={<CreateTicketPage />} />
+          </Route>
+
           <Route path="tickets/:id" element={<TicketPage />} />
         </Route>
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="tickets" element={<TicketsPage />} />
-          <Route path="performers" element={<PerformersPage />} />
-          <Route path="offices" element={<OfficesPage />} />
+        <Route element={<RequireRole roles={[Role.Admin]} />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="tickets" element={<TicketsPage />} />
+            <Route path="performers" element={<PerformersPage />} />
+            <Route path="offices" element={<OfficesPage />} />
+          </Route>
         </Route>
 
-        <Route path="/superadmin" element={<AdminLayout />}>
-          <Route path="priorities" element={<PrioritiesPage />} />
-          <Route path="categories" element={<CategoriesPage />} />
-          <Route path="admins" element={<AdminAssignmentsPage />} />
-          <Route path="analysts" element={<AnalystAssignmentsPage />} />
+        <Route element={<RequireRole roles={[Role.SuperAdmin]} />}>
+          <Route path="/superadmin" element={<AdminLayout />}>
+            <Route path="priorities" element={<PrioritiesPage />} />
+            <Route path="categories" element={<CategoriesPage />} />
+            <Route path="admins" element={<AdminAssignmentsPage />} />
+            <Route path="analysts" element={<AnalystAssignmentsPage />} />
+          </Route>
         </Route>
+
+        <Route path="/403" element={<h1>403</h1>} />
+        <Route path="*" element={<h1>404</h1>} />
       </Routes>
     </HeroUIProvider>
   );
