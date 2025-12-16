@@ -17,6 +17,7 @@ import { PrioritiesPage } from '@/pages/priorities';
 import { AnalystAssignmentsPage } from '@/pages/analyst-assignments';
 import { AdminAssignmentsPage } from '@/pages/admin-assignments';
 import { CategoriesPage } from '@/pages/categories';
+import { OnboardingPage } from '@/pages/onboardnig';
 
 import { Role, useUser } from '@/entities/user';
 
@@ -42,6 +43,7 @@ function App() {
     <HeroUIProvider locale={'ru-RU'} navigate={navigate} useHref={useHref}>
       <Routes>
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
 
         <Route path="/" element={<MainLayout />}>
           <Route index element={<RedirectByRole />} />
