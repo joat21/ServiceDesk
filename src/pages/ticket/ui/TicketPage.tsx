@@ -5,6 +5,7 @@ import { History } from './History';
 import { useTicket } from '@/features/tickets';
 import { useTicketHistory } from '@/entities/ticket';
 import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
+import { CreateTicketComment } from '@/features/create-ticket-comment';
 
 export const TicketPage: FC = () => {
   const { id = '' } = useParams();
@@ -17,11 +18,13 @@ export const TicketPage: FC = () => {
 
   return (
     <div className="relative flex flex-col gap-6 py-11 w-full">
-      {/* TODO: в зависимости от роли менять роут, на который делать редирект */}
       <BackToHomeButton />
       <div className="flex gap-5 items-start">
         <Details ticket={ticket} />
-        <History history={history ?? []} />
+        <div className="flex flex-col gap-10 w-full">
+          <History history={history ?? []} />
+          <CreateTicketComment ticketId={ticket.id} />
+        </div>
       </div>
     </div>
   );

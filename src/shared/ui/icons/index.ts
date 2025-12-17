@@ -35,3 +35,6 @@ export { default as TagIcon } from './tag.svg?react';
 export { default as AlertCircleIcon } from './alert-circle.svg?react';
 export { default as EditIcon } from './edit.svg?react';
 export { default as AddUserIcon } from './add-user.svg?react';
+export { default as SendIcon } from './send.svg?react';
+export { default as CrossCircleIcon } from './cross-circle.svg?react';
+export { default as CheckCircleOutlinedIcon } from './check-circle-outlined.svg?react';
