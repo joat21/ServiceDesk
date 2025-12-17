@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Divider } from '@heroui/react';
 import { PersonalInfoItem } from './PersonalInfoItem';
-import { RoleLabel, type User } from '@/entities/user';
+import { ROLE_LABEl, type User } from '@/entities/user';
 import { Card } from '@/shared/ui';
 import {
   DepartmentIcon,
@@ -22,7 +22,7 @@ export const PersonalInfo: FC<PersonalInfoProps> = ({ user }) => {
         <UserProfileAvatarIcon width={105} height={105} />
         <div className="flex flex-col items-center gap-1">
           <span className="text-xl font-semibold">{`${user.name} ${user.surname}`}</span>
-          <span>{RoleLabel[user.role]}</span>
+          <span>{ROLE_LABEl[user.role]}</span>
         </div>
         <Divider />
         <div className="flex justify-between w-full">

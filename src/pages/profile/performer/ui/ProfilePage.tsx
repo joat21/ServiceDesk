@@ -3,14 +3,14 @@ import { PersonalInfo } from './PersonalInfo';
 import { Offices } from './Offices';
 import { Categories } from './Categories';
 import { Rating } from './Rating';
-import { useUser } from '@/entities/user';
+import { type User } from '@/entities/user';
 import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
 
-export const ProfilePage: FC = () => {
-  const { data: user, isLoading } = useUser();
+interface ProfilePageProps {
+  user: User;
+}
 
-  if (!user || isLoading) return 'Загрузка...';
-
+export const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
   return (
     <div className="flex flex-col gap-14 pt-12 w-full">
       <h1 className="sr-only">Профиль</h1>

@@ -1,17 +1,21 @@
 import type { FC } from 'react';
-import { Role, useUser } from '@/entities/user';
+import { Role, useAuthUser, useUser } from '@/entities/user';
 import { EmployeeProfilePage } from './employee';
 import { PerformerProfilePage } from './performer';
 
 export const ProfilePage: FC = () => {
-  const { data: user } = useUser();
+  const { userId, roleName } = useAuthUser();
+  const { data: user, isLoading } = useUser(userId);
 
-  if (user?.role === Role.Employee) {
-    return <EmployeeProfilePage />;
+  if (isLoading) return 'Загрузка...';
+  if (!user || !user[0]) return 'Пользователь не найден';
+
+  if (roleName === Role.Employee) {
+    return <EmployeeProfilePage user={user[0]} />;
   }
 
-  if (user?.role === Role.Performer) {
-    return <PerformerProfilePage />;
+  if (roleName === Role.Performer) {
+    return <PerformerProfilePage user={user[0]} />;
   }
 
   return null;

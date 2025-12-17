@@ -1,25 +1,22 @@
+import type { FC } from 'react';
 import { Divider } from '@heroui/react';
 import { PersonalInfoItem } from './PersonalInfoItem';
-import { RoleLabel, useUser } from '@/entities/user';
+import { ROLE_LABEl, type User } from '@/entities/user';
 import { Card } from '@/shared/ui';
 import {
   UserIcon,
   EmailIcon,
   LocationIcon,
-  DepartmentIcon,
   UserProfileAvatarIcon,
   MapPinIcon,
 } from '@/shared/ui/icons';
 import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
 
-export const ProfilePage = () => {
-  const { data: user, isLoading } = useUser();
+interface ProfilePageProps {
+  user: User;
+}
 
-  if (!user || isLoading) return 'Загрузка...';
-
-  const { name, surname, systemId, email, department, office, role, region } =
-    user;
-
+export const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
   return (
     <div className="flex flex-col items-center gap-16 pt-16 max-w-5xl w-full">
       <h1 className="sr-only">Профиль</h1>
@@ -29,15 +26,15 @@ export const ProfilePage = () => {
           <div className="flex flex-col items-center gap-10">
             <UserProfileAvatarIcon />
             <div className="flex flex-col items-center gap-1">
-              <span className="text-xl font-semibold">{`${name} ${surname}`}</span>
-              <span>{RoleLabel[role]}</span>
+              <span className="text-xl font-semibold">{`${user.name} ${user.surname}`}</span>
+              <span>{ROLE_LABEl[user.role]}</span>
             </div>
           </div>
           <Divider className="bg-[#DDE1E8]" />
           <div>
             <div className="flex justify-between w-full">
               <span>ID сотрудника</span>
-              <span>{systemId}</span>
+              <span>{user.systemId}</span>
             </div>
           </div>
         </Card>
@@ -48,26 +45,23 @@ export const ProfilePage = () => {
           </div>
           <ul className="flex flex-col gap-6">
             <li>
-              <PersonalInfoItem label="Email" value={email} icon={EmailIcon} />
+              <PersonalInfoItem
+                label="Email"
+                value={user.email}
+                icon={EmailIcon}
+              />
             </li>
             <li>
               <PersonalInfoItem
                 label="Местоположение"
-                value={office[0]}
+                value={user.office[0]}
                 icon={LocationIcon}
               />
             </li>
             <li>
               <PersonalInfoItem
-                label="Отдел"
-                value={department}
-                icon={DepartmentIcon}
-              />
-            </li>
-            <li>
-              <PersonalInfoItem
                 label="Регион"
-                value={region}
+                value={user.region}
                 icon={MapPinIcon}
               />
             </li>

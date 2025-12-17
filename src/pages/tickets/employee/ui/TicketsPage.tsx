@@ -8,7 +8,7 @@ import { useTickets } from '@/features/tickets';
 
 import { usePriorities } from '@/entities/priority';
 import type { TicketsFilter } from '@/entities/ticket';
-import { useUser } from '@/entities/user';
+import { useAuthUser } from '@/entities/user';
 
 import { Button, Card } from '@/shared/ui';
 
@@ -20,7 +20,7 @@ export const TicketsPage: FC = () => {
     deadline: null,
   });
 
-  const { data: user } = useUser();
+  const user = useAuthUser();
   const { data: tickets } = useTickets(filters);
   const { data: priorities } = usePriorities();
 
@@ -28,7 +28,7 @@ export const TicketsPage: FC = () => {
     <div className="flex flex-col items-center gap-11 pt-11 w-full">
       <div className="flex justify-between items-center w-full">
         <p className="text-2xl font-semibold">
-          Добро пожаловать, {user?.name} {user?.surname}
+          Добро пожаловать, {user.name} {user.surname}
         </p>
         <Button className="h-8" as={Link} href="/create-ticket">
           + Создать заявку

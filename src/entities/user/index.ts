@@ -1,3 +1,3 @@
 export { type User, Role } from './model/types';
-export { RoleLabel } from './model/types';
-export { useUser } from './model/query';
+export { ROLE_LABEl } from './model/types';
+export { useUser, useAuthQuery, useAuthUser } from './model/query';

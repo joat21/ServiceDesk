@@ -1,5 +1,5 @@
 export interface User {
-  id: string | number;
+  userId: string | number;
   systemId: string;
   name: string;
   surname: string;
@@ -12,6 +12,15 @@ export interface User {
   rating?: number;
 }
 
+export interface AuthUser {
+  userId: string;
+  name: string;
+  surname: string;
+  patronymic: string;
+  roleName: Role;
+  avatar: string;
+}
+
 export const Role = {
   Employee: 'employee',
   Performer: 'performer',
@@ -22,7 +31,7 @@ export const Role = {
 
 export type Role = (typeof Role)[keyof typeof Role];
 
-export const RoleLabel: Record<Role, string> = {
+export const ROLE_LABEl: Record<Role, string> = {
   employee: 'Сотрудник',
   performer: 'Исполнитель',
   admin: 'Администратор',

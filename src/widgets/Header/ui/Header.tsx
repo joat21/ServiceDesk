@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { UserDropdown } from './UserDropdown';
 import { NotificationsDropdown } from './NotificationsDropdown';
-import { useUser } from '@/entities/user';
+import { ROLE_LABEl, useAuthUser } from '@/entities/user';
 import { AlfaLogo } from '@/shared/ui/icons';
 
 export const Header = () => {
-  const { data: user } = useUser();
+  const user = useAuthUser();
 
   return (
     <header className="flex justify-center w-full bg-white border-b border-[#c3c0c0]">
@@ -30,8 +30,8 @@ export const Header = () => {
         >
           <NotificationsDropdown />
           <UserDropdown
-            fullName={`${user?.name} ${user?.surname}`}
-            department={user?.department ?? ''}
+            fullName={`${user.name} ${user.surname}`}
+            department={ROLE_LABEl[user.roleName]}
           />
         </div>
       </div>

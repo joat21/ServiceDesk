@@ -4,31 +4,24 @@ import { MyTicketsTable } from './MyTicketsTable';
 import { AvailableTicketsTable } from './AvailableTicketsTable';
 import { useTickets } from '@/features/tickets';
 import { usePerformerStatistics } from '@/entities/statistics';
-import { useUser } from '@/entities/user';
+import { useAuthUser } from '@/entities/user';
 import { Card } from '@/shared/ui';
 
 export const TicketsPage = () => {
-  const { data: user, isLoading: isUserLoading } = useUser();
+  const { userId } = useAuthUser();
 
-  const { data: stats, isLoading: isStatsLoading } = usePerformerStatistics(
-    user?.id,
-    {
-      enabled: !!user,
-    }
-  );
-
+  const { data: stats, isLoading: isStatsLoading } =
+    usePerformerStatistics(userId);
   const { data: tickets, isLoading: isTicketsLoading } = useTickets();
 
-  if (isUserLoading || isStatsLoading || isTicketsLoading) {
+  if (isStatsLoading || isTicketsLoading) {
     return 'Загрузка...';
   }
-
-  if (!stats) return 'Нет данных';
 
   return (
     <div className="flex flex-col items-center gap-11 pt-11 w-full">
       <h1 className="sr-only">Заявки</h1>
-      <Statistics stats={stats} />
+      {stats && <Statistics stats={stats[0]} />}
       <div className="flex w-full flex-col">
         <Tabs
           aria-label="Заявки"

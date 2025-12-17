@@ -1,5 +1,4 @@
 import type { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Dropdown,
   DropdownMenu,
@@ -8,7 +7,7 @@ import {
   DropdownSection,
   Avatar,
 } from '@heroui/react';
-import { Role, useUser } from '@/entities/user';
+import { Role, useAuthUser } from '@/entities/user';
 import { Button } from '@/shared/ui';
 import { DropdownArrowIcon, LogoutIcon, UserIcon } from '@/shared/ui/icons';
 
@@ -21,17 +20,17 @@ export const UserDropdown: FC<UserDropdownProps> = ({
   fullName,
   department,
 }) => {
-  const navigate = useNavigate();
-  const { data: user } = useUser();
+  const user = useAuthUser();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/sign-in', { replace: true });
+    window.location.replace(
+      'https://socially-advantaged-moth.cloudpub.ru/gateway/logout'
+    );
   };
 
   const menuItems = [];
 
-  if (user?.role === Role.Employee || user?.role === Role.Performer) {
+  if (user.roleName === Role.Employee || user.roleName === Role.Performer) {
     menuItems.push(
       <DropdownSection
         key="profile-section"

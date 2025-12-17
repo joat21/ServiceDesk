@@ -1,13 +1,10 @@
 import { Navigate } from 'react-router-dom';
-import { useUser } from '@/entities/user';
+import { useAuthUser } from '@/entities/user';
 import { START_ROUTE_BY_ROLE } from './startRoutes';
 
 export const RedirectByRole = () => {
-  const { data: user } = useUser();
-
-  if (!user) return <Navigate to="/sign-in" replace />;
-
-  const target = START_ROUTE_BY_ROLE[user.role];
+  const user = useAuthUser();
+  const target = START_ROUTE_BY_ROLE[user.roleName];
 
   return <Navigate to={target} replace />;
 };
