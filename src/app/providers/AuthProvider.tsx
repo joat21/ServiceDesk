@@ -5,10 +5,19 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { isLoading, isError } = useAuthQuery();
 
   if (isLoading) return 'Загрузка...';
+
   if (isError) {
-    window.location.replace(
-      'https://socially-advantaged-moth.cloudpub.ru/gateway/login?returnUrl=http://localhost:5173'
-    );
+    const baseLoginUrl =
+      'https://socially-advantaged-moth.cloudpub.ru/gateway/login';
+
+    const redirectUrl = import.meta.env.DEV
+      ? `${baseLoginUrl}?returnUrl=${encodeURIComponent(
+          window.location.origin
+        )}`
+      : baseLoginUrl;
+
+    window.location.replace(redirectUrl);
+
     return null;
   }
 
