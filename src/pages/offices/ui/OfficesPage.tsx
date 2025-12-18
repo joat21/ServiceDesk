@@ -1,10 +1,10 @@
 import { useState, type FC } from 'react';
 import { useDisclosure } from '@heroui/react';
 import { OfficeCard } from './OfficeCard';
-import { useOffices, type Office } from '@/entities/office';
-import { Button } from '@/shared/ui';
 import { CreateOfficeModal } from '@/features/create-office';
 import { EditOfficeModal } from '@/features/edit-office';
+import { useOffices, type Office } from '@/entities/office';
+import { Button } from '@/shared/ui';
 
 export const OfficesPage: FC = () => {
   const createModal = useDisclosure();
@@ -22,16 +22,6 @@ export const OfficesPage: FC = () => {
   const handleEditOffice = (office: Office) => {
     setSelectedOffice(office);
     editModal.onOpen();
-  };
-
-  const handleCreateOfficeSubmit = () => {
-    console.log('Офис добавлен');
-    createModal.onClose();
-  };
-
-  const handleEditOfficeSubmit = () => {
-    console.log('Данные сохранены', selectedOffice);
-    editModal.onClose();
   };
 
   return (
@@ -52,13 +42,14 @@ export const OfficesPage: FC = () => {
       <CreateOfficeModal
         isOpen={createModal.isOpen}
         onOpenChange={createModal.onOpenChange}
-        action={<Button onPress={handleCreateOfficeSubmit}>Добавить</Button>}
+        onClose={createModal.onClose}
       />
 
       <EditOfficeModal
         isOpen={editModal.isOpen}
         onOpenChange={editModal.onOpenChange}
-        action={<Button onPress={handleEditOfficeSubmit}>Сохранить</Button>}
+        onClose={editModal.onClose}
+        office={selectedOffice}
       />
     </div>
   );

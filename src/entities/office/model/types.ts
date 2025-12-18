@@ -1,5 +1,5 @@
 export interface Office {
-  // id временно number
-  id: string | number;
+  id: string;
   fullAddress: string;
+  regionId: number;
 }

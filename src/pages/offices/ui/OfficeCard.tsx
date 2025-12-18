@@ -1,7 +1,7 @@
+import type { FC } from 'react';
 import type { Office } from '@/entities/office';
 import { Button, Card } from '@/shared/ui';
 import { EditIcon } from '@/shared/ui/icons';
-import type { FC } from 'react';
 
 interface OfficeCardProps {
   office: Office;
