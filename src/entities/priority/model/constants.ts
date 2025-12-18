@@ -7,6 +7,13 @@ export const PRIORITY_LABELS: Record<PriorityName, string> = {
   express: 'Срочный',
 };
 
+export const PRIORITY_KEYS: Record<string, PriorityName> = {
+  Низкий: 'low',
+  Средний: 'medium',
+  Высокий: 'high',
+  Срочный: 'express',
+};
+
 export const PRIORITY_MAP: Record<
   PriorityName,
   { label: string; color: string }
