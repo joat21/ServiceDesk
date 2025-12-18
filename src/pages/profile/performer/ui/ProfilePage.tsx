@@ -18,7 +18,7 @@ export const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
       <div className="grid grid-cols-[650px_375px] gap-10 items-start mx-auto">
         <PersonalInfo user={user} />
         <Offices offices={user.office} />
-        <Categories categories={user.categories ?? []} />
+        <Categories categories={user.category ?? []} />
         <Rating rating={user.rating ?? 0} />
       </div>
     </div>

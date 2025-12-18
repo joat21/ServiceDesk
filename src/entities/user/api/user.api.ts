@@ -1,9 +1,10 @@
 import type { AuthUser, User } from '../model/types';
 import { api } from '@/shared/api/base';
 
-export const getMe = (userId: string) =>
-  // TODO: возвращается массив, потом удалить
-  api.get<User[]>(`/users?id=${userId}`).then((r) => r.data);
+export const getMe = () =>
+  api
+    .get<User>('https://socially-advantaged-moth.cloudpub.ru/user/getUserInfo')
+    .then((r) => r.data);
 
 export const authMe = () =>
   api

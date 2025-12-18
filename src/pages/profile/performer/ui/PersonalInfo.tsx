@@ -22,7 +22,7 @@ export const PersonalInfo: FC<PersonalInfoProps> = ({ user }) => {
         <UserProfileAvatarIcon width={105} height={105} />
         <div className="flex flex-col items-center gap-1">
           <span className="text-xl font-semibold">{`${user.name} ${user.surname}`}</span>
-          <span>{ROLE_LABEl[user.role]}</span>
+          <span>{ROLE_LABEl[user.roleName]}</span>
         </div>
         <Divider />
         <div className="flex justify-between w-full">
@@ -34,7 +34,7 @@ export const PersonalInfo: FC<PersonalInfoProps> = ({ user }) => {
         <li>
           <PersonalInfoItem
             label="Отдел"
-            value={user.department}
+            value="Отдел АХО"
             icon={DepartmentIcon}
           />
         </li>

@@ -18,16 +18,16 @@ interface ProfilePageProps {
 
 export const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
   return (
-    <div className="flex flex-col items-center gap-16 pt-16 max-w-5xl w-full">
+    <div className="flex flex-col gap-16 pt-16 max-w-5xl w-full">
       <h1 className="sr-only">Профиль</h1>
       <BackToHomeButton />
-      <div className="flex justify-center items-stretch gap-20 max-w-[1050px] w-full">
-        <Card className="gap-10 px-5 py-10 rounded-xl max-w-[330px] w-full flex-1">
-          <div className="flex flex-col items-center gap-10">
-            <UserProfileAvatarIcon />
+      <div className="flex justify-center gap-20 max-w-[1050px] w-full">
+        <Card className="gap-6 px-5 py-6 rounded-xl max-w-[330px] w-full">
+          <div className="flex flex-col items-center gap-4">
+            <UserProfileAvatarIcon width={150} height={150} />
             <div className="flex flex-col items-center gap-1">
               <span className="text-xl font-semibold">{`${user.name} ${user.surname}`}</span>
-              <span>{ROLE_LABEl[user.role]}</span>
+              <span>{ROLE_LABEl[user.roleName]}</span>
             </div>
           </div>
           <Divider className="bg-[#DDE1E8]" />
@@ -38,7 +38,7 @@ export const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
             </div>
           </div>
         </Card>
-        <Card className="px-4 py-7 rounded-xl max-w-[330px] w-full flex-1">
+        <Card className="px-4 py-7 rounded-xl max-w-[330px] w-full">
           <div className="flex items-center gap-7 mb-7">
             <UserIcon />
             <h2 className="text-xl font-medium">Личная информация</h2>

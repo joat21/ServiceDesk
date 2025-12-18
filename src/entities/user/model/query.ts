@@ -2,11 +2,10 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import type { AuthUser, User } from './types';
 import { authMe, getMe } from '../api/user.api';
 
-export const useUser = (userId: string) =>
-  // TODO: возвращается массив, потом удалить
-  useQuery<User[]>({
-    queryKey: ['user', userId],
-    queryFn: () => getMe(userId),
+export const useUser = () =>
+  useQuery<User>({
+    queryKey: ['user'],
+    queryFn: getMe,
   });
 
 export const useAuthQuery = () =>
