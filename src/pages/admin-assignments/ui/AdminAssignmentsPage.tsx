@@ -3,7 +3,6 @@ import { useDisclosure } from '@heroui/react';
 import { AdminAssignmentCard } from './AdminAssignmentCard';
 import { EditAdminAssignmentModal } from '@/features/edit-admin-assignment';
 import { useAdminAssignments } from '@/entities/admin-assignment';
-import { Button } from '@/shared/ui';
 
 export const AdminAssignmentsPage: FC = () => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -16,17 +15,12 @@ export const AdminAssignmentsPage: FC = () => {
   if (!adminAssignments) return <p>Администраторы не найдены</p>;
 
   const selectedAssignment = adminAssignments.find(
-    (p) => p.id === selectedAssignmentId
+    (p) => p.regionId === selectedAssignmentId
   );
 
   const handleEditAssignment = (assignmentId: string | number) => {
     setSelectedAssignmentId(assignmentId);
     onOpen();
-  };
-
-  const handleEditAssignmentSubmit = () => {
-    console.log('Данные сохранены');
-    onClose();
   };
 
   return (
@@ -38,7 +32,7 @@ export const AdminAssignmentsPage: FC = () => {
 
       <ul className="grid grid-cols-2 gap-8 w-full">
         {adminAssignments.map((assignment) => (
-          <li key={assignment.id} className="w-full">
+          <li key={assignment.regionId} className="w-full">
             <AdminAssignmentCard
               assignment={assignment}
               onEditAssignment={handleEditAssignment}
@@ -52,7 +46,6 @@ export const AdminAssignmentsPage: FC = () => {
         onClose={onClose}
         onOpenChange={onOpenChange}
         adminAssignment={selectedAssignment ?? adminAssignments[0]}
-        action={<Button onPress={handleEditAssignmentSubmit}>Назначить</Button>}
       />
     </div>
   );

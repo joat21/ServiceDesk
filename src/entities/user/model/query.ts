@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import type { AuthUser, User } from './types';
-import { authMe, getMe } from '../api/user.api';
+import type { AuthUser, SearchUserParams, User } from './types';
+import { authMe, getMe, searchUsers } from '../api/user.api';
 
 export const useUser = () =>
   useQuery<User>({
@@ -26,3 +26,19 @@ export const useAuthUser = () => {
 
   return user;
 };
+
+export const useSearchUser = (params?: SearchUserParams) =>
+  useQuery({
+    queryKey: [
+      'users',
+      'search',
+      params?.regionId,
+      params?.filialId,
+      params?.fullname,
+    ],
+    queryFn: () => searchUsers(params),
+    enabled:
+      Boolean(params?.regionId) ||
+      Boolean(params?.filialId) ||
+      Boolean(params?.fullname),
+  });

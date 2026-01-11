@@ -1,14 +1,9 @@
-import type { FC } from 'react';
-import { AutocompleteItem, ModalBody } from '@heroui/react';
+import { useState, type FC, type Key } from 'react';
+import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
 import type { AdminAssignment } from '@/entities/admin-assignment';
-import { Autocomplete, Modal, type ModalProps } from '@/shared/ui';
-
-const employees = [
-  { id: 1, fullName: 'Иванов И.И.' },
-  { id: 2, fullName: 'Иванов И.И.' },
-  { id: 3, fullName: 'Иванов И.И.' },
-  { id: 4, fullName: 'Иванов И.И.' },
-];
+import { useSearchUser } from '@/entities/user';
+import { Autocomplete, Button, Modal, type ModalProps } from '@/shared/ui';
+import { useEditAdminAssignment } from '../model/useEditAdminAssignment';
 
 interface EditAdminAssignmentModalProps extends Omit<ModalProps, 'children'> {
   adminAssignment: AdminAssignment;
@@ -16,28 +11,106 @@ interface EditAdminAssignmentModalProps extends Omit<ModalProps, 'children'> {
 
 export const EditAdminAssignmentModal: FC<EditAdminAssignmentModalProps> = ({
   adminAssignment,
+  onClose,
   ...props
 }) => {
+  const [inputValue, setInputValue] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+
+  const { data: users = [], isLoading } = useSearchUser({
+    regionId: adminAssignment.regionId,
+    fullname: inputValue,
+  });
+
+  const editAdminAssignment = useEditAdminAssignment();
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+    setSelectedUserId(null);
+  };
+
+  const handleSelectionChange = (key: Key | null) => {
+    if (!key) {
+      setSelectedUserId(null);
+      return;
+    }
+
+    const selectedUser = users.find(
+      (user) => String(user.userId) === String(key)
+    );
+
+    setSelectedUserId(String(key));
+    setInputValue(
+      selectedUser
+        ? `${selectedUser.surname} ${selectedUser.name} ${selectedUser.patronymic}`
+        : ''
+    );
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!selectedUserId) {
+      console.log('выбери юзера');
+      return;
+    }
+
+    console.log(selectedUserId);
+    editAdminAssignment.mutate(
+      {
+        userId: selectedUserId,
+        regionId: adminAssignment.regionId,
+      },
+      {
+        onSuccess: () => {
+          alert('Изменения сохранены');
+          onClose?.();
+        },
+        onError: () => alert('Произошла ошибка'),
+      }
+    );
+  };
+
   return (
-    <Modal title="Назначение администратора" {...props}>
+    <Modal
+      title="Назначение администратора"
+      action={
+        <Button form="admin-assignment" type="submit">
+          Сохранить
+        </Button>
+      }
+      {...props}
+    >
       <ModalBody>
-        <div className="flex flex-col gap-2">
-          <span className="text-[#666]">Регион</span>
-          <span>{adminAssignment.region}</span>
-        </div>
-        <Autocomplete
-          name="name"
-          label="Администратор"
-          placeholder="Выберите администратора"
-          items={employees}
-          isRequired
-        >
-          {(employee) => (
-            <AutocompleteItem key={employee.id}>
-              {employee.fullName}
-            </AutocompleteItem>
-          )}
-        </Autocomplete>
+        <Form id="admin-assignment" onSubmit={handleSubmit} className="gap-6">
+          <div className="flex flex-col gap-1">
+            <span className="text-[#666]">Регион</span>
+            <span>{adminAssignment.regionName}</span>
+          </div>
+          <Autocomplete
+            name="name"
+            label="Выберите администратора"
+            placeholder="Выберите администратора"
+            inputValue={inputValue}
+            onInputChange={handleInputChange}
+            selectedKey={selectedUserId}
+            onSelectionChange={handleSelectionChange}
+            items={users}
+            isLoading={isLoading}
+            isRequired
+            inputProps={{
+              classNames: {
+                label: 'text-base font-normal',
+              },
+            }}
+          >
+            {(user) => (
+              <AutocompleteItem key={user.userId}>
+                {user.surname} {user.name} {user.patronymic}
+              </AutocompleteItem>
+            )}
+          </Autocomplete>
+        </Form>
       </ModalBody>
     </Modal>
   );

@@ -40,3 +40,17 @@ export const ROLE_LABEl: Record<Role, string> = {
   analyst: 'Аналитик',
   superadmin: 'Главный администратор',
 };
+
+export interface SearchUserParams {
+  regionId?: number;
+  filialId?: number;
+  fullname?: string;
+}
+
+export interface SearchedUser {
+  userId: string;
+  name: string;
+  surname: string;
+  patronymic: string;
+  email: string;
+}

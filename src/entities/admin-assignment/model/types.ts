@@ -1,5 +1,7 @@
 export interface AdminAssignment {
-  id: string | number;
-  region: string;
-  adminName: string;
+  regionId: number;
+  regionName: string;
+  name?: string;
+  surname?: string;
+  patronymic?: string;
 }
