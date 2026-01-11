@@ -38,3 +38,5 @@ export { default as AddUserIcon } from './add-user.svg?react';
 export { default as SendIcon } from './send.svg?react';
 export { default as CrossCircleIcon } from './cross-circle.svg?react';
 export { default as CheckCircleOutlinedIcon } from './check-circle-outlined.svg?react';
+export { default as AlertCircleBigIcon } from './alert-circle-big.svg?react';
+export { default as WarnShieldIcon } from './warn-shield.svg?react';

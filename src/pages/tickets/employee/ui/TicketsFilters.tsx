@@ -65,7 +65,7 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
         }}
       >
         {(priority) => (
-          <SelectItem key={priority.id}>{priority.name}</SelectItem>
+          <SelectItem key={priority.priorityId}>{priority.name}</SelectItem>
         )}
       </Select>
       <Select

@@ -17,6 +17,8 @@ import { AnalystAssignmentsPage } from '@/pages/analyst-assignments';
 import { AdminAssignmentsPage } from '@/pages/admin-assignments';
 import { CategoriesPage } from '@/pages/categories';
 import { OnboardingPage } from '@/pages/onboardnig';
+import { NotFoundPage } from '@/pages/not-found';
+import { NoAccessPage } from '@/pages/no-access';
 
 import { Role } from '@/entities/user';
 
@@ -62,8 +64,8 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="/403" element={<h1>403</h1>} />
-        <Route path="*" element={<h1>404</h1>} />
+        <Route path="/403" element={<NoAccessPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </HeroUIProvider>
   );

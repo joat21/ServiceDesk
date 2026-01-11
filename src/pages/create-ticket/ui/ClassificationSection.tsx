@@ -72,7 +72,7 @@ export const ClassificationSection: FC<ClassificationSectionProps> = ({
             onChange={handlePriorityChange}
           >
             {(priority) => (
-              <SelectItem key={priority.id}>{priority.name}</SelectItem>
+              <SelectItem key={priority.priorityId}>{priority.name}</SelectItem>
             )}
           </Select>
           <DatePicker
@@ -117,7 +117,7 @@ export const ClassificationSection: FC<ClassificationSectionProps> = ({
         onChange={handlePriorityChange}
       >
         {(priority) => (
-          <SelectItem key={priority.id}>{priority.name}</SelectItem>
+          <SelectItem key={priority.priorityId}>{priority.name}</SelectItem>
         )}
       </Select>
     </div>

@@ -13,7 +13,7 @@ import {
   useCreateTicket,
 } from '@/features/create-ticket';
 
-import { useCategories } from '@/entities/category';
+// import { useCategories } from '@/entities/category';
 import { useOffices } from '@/entities/office';
 import { usePriorities } from '@/entities/priority';
 
@@ -21,9 +21,55 @@ import { Button, Card } from '@/shared/ui';
 import createTicketFile from '@/assets/img/create-ticket.svg';
 import { PRIORITY_KEYS } from '@/entities/priority';
 
+const categories = [
+  {
+    id: 1,
+    name: 'Транспорт',
+    sla: 12,
+    description: '',
+  },
+  {
+    id: 2,
+    name: 'Офисные услуги',
+    sla: 72,
+    description: '',
+  },
+  {
+    id: 3,
+    name: 'Переезд',
+    sla: 72,
+    description: '',
+  },
+  {
+    id: 5,
+    name: 'Сантехника',
+    sla: 24,
+    description: '',
+  },
+  {
+    id: 4,
+    name: 'Техническое обслуживание',
+    sla: 24,
+    description: '',
+  },
+  {
+    id: 6,
+    name: 'Электрика',
+    sla: 12,
+    description: '',
+  },
+  {
+    id: 7,
+    name: 'Прочее',
+    sla: 24,
+    description: '',
+  },
+];
+
 export const CreateTicketPage: FC = () => {
   const navigate = useNavigate();
-  const { data: categories } = useCategories();
+  // TODO: починить использование хука
+  // const { data: categories } = useCategories();
   const { data: priorities } = usePriorities();
   const { data: offices } = useOffices();
 
