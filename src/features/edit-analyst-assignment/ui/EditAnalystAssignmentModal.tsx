@@ -1,14 +1,9 @@
-import type { FC } from 'react';
-import { AutocompleteItem, ModalBody } from '@heroui/react';
+import { useState, type FC, type Key } from 'react';
+import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
+import { useEditAnalystAssignment } from '../model/useEditAnalystAssignment';
 import type { AnalystAssignment } from '@/entities/analyst-assignment';
-import { Autocomplete, Modal, type ModalProps } from '@/shared/ui';
-
-const employees = [
-  { id: 1, fullName: 'Иванов И.И.' },
-  { id: 2, fullName: 'Иванов И.И.' },
-  { id: 3, fullName: 'Иванов И.И.' },
-  { id: 4, fullName: 'Иванов И.И.' },
-];
+import { useSearchUser } from '@/entities/user';
+import { Autocomplete, Button, Modal, type ModalProps } from '@/shared/ui';
 
 interface EditAnalystAssignmentModalProps extends Omit<ModalProps, 'children'> {
   analystAssignment: AnalystAssignment;
@@ -16,24 +11,105 @@ interface EditAnalystAssignmentModalProps extends Omit<ModalProps, 'children'> {
 
 export const EditAnalystAssignmentModal: FC<
   EditAnalystAssignmentModalProps
-> = ({ analystAssignment, ...props }) => {
+> = ({ analystAssignment, onClose, ...props }) => {
+  const [inputValue, setInputValue] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+
+  const { data: users = [], isLoading } = useSearchUser({
+    filialId: analystAssignment.filialId,
+    fullname: inputValue,
+  });
+
+  const editAnalystAssignment = useEditAnalystAssignment();
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+    setSelectedUserId(null);
+  };
+
+  const handleSelectionChange = (key: Key | null) => {
+    if (!key) {
+      setSelectedUserId(null);
+      return;
+    }
+
+    const selectedUser = users.find(
+      (user) => String(user.userId) === String(key)
+    );
+
+    setSelectedUserId(String(key));
+    setInputValue(
+      selectedUser
+        ? `${selectedUser.surname} ${selectedUser.name} ${selectedUser.patronymic}`
+        : ''
+    );
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!selectedUserId) {
+      console.log('выбери юзера');
+      return;
+    }
+
+    console.log(selectedUserId);
+    editAnalystAssignment.mutate(
+      {
+        userId: selectedUserId,
+        filialId: analystAssignment.filialId,
+      },
+      {
+        onSuccess: () => {
+          alert('Изменения сохранены');
+          onClose?.();
+        },
+        onError: () => alert('Произошла ошибка'),
+      }
+    );
+  };
+
   return (
-    <Modal title="Назначение аналитика" {...props}>
+    <Modal
+      title="Назначение аналитика"
+      action={
+        <Button
+          form="analyst-assignment"
+          type="submit"
+          disabled={editAnalystAssignment.isPending}
+        >
+          Назначить
+        </Button>
+      }
+      {...props}
+    >
       <ModalBody>
-        <div className="flex flex-col gap-2">
-          <span className="text-[#666]">Филиал</span>
-          <span>{analystAssignment.filial}</span>
-        </div>
+        <Form id="analyst-assignment" onSubmit={handleSubmit} className="gap-6">
+          <div className="flex flex-col gap-2">
+            <span className="text-[#666]">Филиал</span>
+            <span>{analystAssignment.filialName}</span>
+          </div>
+        </Form>
         <Autocomplete
           name="name"
-          label="Аналитик"
+          label="Выберите аналитика"
           placeholder="Выберите аналитика"
-          items={employees}
+          inputValue={inputValue}
+          onInputChange={handleInputChange}
+          selectedKey={selectedUserId}
+          onSelectionChange={handleSelectionChange}
+          items={users}
+          isLoading={isLoading}
           isRequired
+          inputProps={{
+            classNames: {
+              label: 'text-base font-normal',
+            },
+          }}
         >
-          {(employee) => (
-            <AutocompleteItem key={employee.id}>
-              {employee.fullName}
+          {(user) => (
+            <AutocompleteItem key={user.userId}>
+              {user.surname} {user.name} {user.patronymic}
             </AutocompleteItem>
           )}
         </Autocomplete>

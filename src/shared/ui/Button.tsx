@@ -13,6 +13,7 @@ export const Button: FC<ButtonProps> = ({
   className,
   variant = 'solid',
   children,
+  disabled,
   ...props
 }) => {
   return (
@@ -21,8 +22,10 @@ export const Button: FC<ButtonProps> = ({
       className={cn(
         'px-5 py-1 rounded-lg min-h-8 h-8 text-base data-[hover=true]:opacity-100 hover:opacity-100',
         variantClassMap[variant],
-        className
+        className,
+        disabled && 'cursor-not-allowed'
       )}
+      disabled={disabled}
       {...props}
     >
       {children}

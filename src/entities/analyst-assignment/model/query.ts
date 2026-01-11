@@ -3,6 +3,6 @@ import { getAnalystAssignments } from '../api/analyst-assignment.api';
 
 export const useAnalystAssignments = () =>
   useQuery({
-    queryKey: ['analyst-assignment'],
+    queryKey: ['analyst-assignments'],
     queryFn: getAnalystAssignments,
   });

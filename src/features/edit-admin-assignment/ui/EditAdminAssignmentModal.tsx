@@ -75,8 +75,12 @@ export const EditAdminAssignmentModal: FC<EditAdminAssignmentModalProps> = ({
     <Modal
       title="Назначение администратора"
       action={
-        <Button form="admin-assignment" type="submit">
-          Сохранить
+        <Button
+          form="admin-assignment"
+          type="submit"
+          disabled={editAdminAssignment.isPending}
+        >
+          Назначить
         </Button>
       }
       {...props}

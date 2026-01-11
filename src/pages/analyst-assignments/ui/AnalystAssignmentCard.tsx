@@ -16,16 +16,26 @@ export const AnalystAssignmentCard: FC<AnalystAssignmentCardProps> = ({
     <Card className="gap-5 px-4 py-6 w-full">
       <div className="flex justify-between items-center gap-2 pl-4 pb-2.5 border-b border-[#c3c0c0]">
         <div className="flex flex-col">
-          <span>{assignment.filial}</span>
+          <span>{assignment.filialName}</span>
           <span className="text-[#666]">Филиал</span>
         </div>
         <UsersIcon />
       </div>
       <div className="flex flex-col pl-4">
         <span className="text-[#666]">Аналитик</span>
-        <span>{assignment.fullName}</span>
+        <span>
+          {assignment.name ? (
+            <span>
+              {assignment.surname} {assignment.name} {assignment.patronymic}
+            </span>
+          ) : (
+            <span>Не назначен</span>
+          )}
+        </span>
       </div>
-      <Button onPress={() => onEditAssignment(assignment.id)}>Изменить</Button>
+      <Button onPress={() => onEditAssignment(assignment.filialId)}>
+        Изменить
+      </Button>
     </Card>
   );
 };

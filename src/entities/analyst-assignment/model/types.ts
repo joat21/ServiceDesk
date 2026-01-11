@@ -1,5 +1,7 @@
 export interface AnalystAssignment {
-  id: string | number;
-  fullName: string;
-  filial: string;
+  filialId: number;
+  filialName: string;
+  surname: string;
+  name: string;
+  patronymic: string;
 }

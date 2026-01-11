@@ -3,7 +3,6 @@ import { useDisclosure } from '@heroui/react';
 import { AnalystAssignmentCard } from './AnalystAssignmentCard';
 import { EditAnalystAssignmentModal } from '@/features/edit-analyst-assignment';
 import { useAnalystAssignments } from '@/entities/analyst-assignment';
-import { Button } from '@/shared/ui';
 
 export const AnalystAssignmentsPage: FC = () => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -16,17 +15,12 @@ export const AnalystAssignmentsPage: FC = () => {
   if (!analystAssignments) return <p>Аналитики не найдены</p>;
 
   const selectedAssignment = analystAssignments.find(
-    (p) => p.id === selectedAssignmentId
+    (asssignment) => asssignment.filialId === selectedAssignmentId
   );
 
   const handleEditAssignment = (assignmentId: string | number) => {
     setSelectedAssignmentId(assignmentId);
     onOpen();
-  };
-
-  const handleEditAssignmentSubmit = () => {
-    console.log('Данные сохранены');
-    onClose();
   };
 
   return (
@@ -38,7 +32,7 @@ export const AnalystAssignmentsPage: FC = () => {
 
       <ul className="grid grid-cols-2 gap-8 w-full">
         {analystAssignments.map((assignment) => (
-          <li key={assignment.id} className="w-full">
+          <li key={assignment.filialId} className="w-full">
             <AnalystAssignmentCard
               assignment={assignment}
               onEditAssignment={handleEditAssignment}
@@ -52,7 +46,6 @@ export const AnalystAssignmentsPage: FC = () => {
         onClose={onClose}
         onOpenChange={onOpenChange}
         analystAssignment={selectedAssignment ?? analystAssignments[0]}
-        action={<Button onPress={handleEditAssignmentSubmit}>Назначить</Button>}
       />
     </div>
   );
