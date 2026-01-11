@@ -1,21 +1,23 @@
 import { useState, type FC } from 'react';
 import { useDisclosure } from '@heroui/react';
 import { CategoryCard } from './CategoryCard';
-import { useCategories } from '@/entities/category';
-import { Button } from '@/shared/ui';
 import { CreateCategoryModal } from '@/features/create-category';
 import { EditCategoryModal } from '@/features/edit-category';
+import { useCategories } from '@/entities/category';
+import { Button } from '@/shared/ui';
 
 export const CategoriesPage: FC = () => {
   const createModal = useDisclosure();
   const editModal = useDisclosure();
-  const { data: categories, isLoading } = useCategories();
+  const { data, isLoading } = useCategories();
   const [selectedCategoryId, setSelectedCategoryId] = useState<
     string | number | null
   >(null);
 
   if (isLoading) return 'Загрузка...';
-  if (!categories) return <p>Категории не найдены</p>;
+  if (!data) return <p>Категории не найдены</p>;
+
+  const { content: categories } = data;
 
   const selectedCategory = categories.find((p) => p.id === selectedCategoryId);
 
@@ -23,19 +25,9 @@ export const CategoriesPage: FC = () => {
     createModal.onOpen();
   };
 
-  const handleCreateCategorySubmit = () => {
-    alert('Категория создана');
-    createModal.onClose();
-  };
-
   const handleEditCategory = (categoryId: string | number) => {
     setSelectedCategoryId(categoryId);
     editModal.onOpen();
-  };
-
-  const handleEditCategorySubmit = () => {
-    alert('Данные сохранены');
-    editModal.onClose();
   };
 
   return (
@@ -52,7 +44,7 @@ export const CategoriesPage: FC = () => {
 
       <ul className="flex flex-wrap gap-8 w-full">
         {categories.map((category) => (
-          <li key={category.id} className="max-w-72 w-full">
+          <li key={category.id} className="max-w-[290px] w-full">
             <CategoryCard
               category={category}
               onEditCategory={handleEditCategory}
@@ -65,7 +57,6 @@ export const CategoriesPage: FC = () => {
         isOpen={createModal.isOpen}
         onClose={createModal.onClose}
         onOpenChange={createModal.onOpenChange}
-        action={<Button onPress={handleCreateCategorySubmit}>Создать</Button>}
       />
 
       <EditCategoryModal
@@ -73,7 +64,6 @@ export const CategoriesPage: FC = () => {
         onClose={editModal.onClose}
         onOpenChange={editModal.onOpenChange}
         category={selectedCategory ?? categories[0]}
-        action={<Button onPress={handleEditCategorySubmit}>Сохранить</Button>}
       />
     </div>
   );

@@ -81,6 +81,7 @@ export const EditAnalystAssignmentModal: FC<
           Назначить
         </Button>
       }
+      onClose={onClose}
       {...props}
     >
       <ModalBody>

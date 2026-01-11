@@ -83,6 +83,7 @@ export const EditAdminAssignmentModal: FC<EditAdminAssignmentModalProps> = ({
           Назначить
         </Button>
       }
+      onClose={onClose}
       {...props}
     >
       <ModalBody>
