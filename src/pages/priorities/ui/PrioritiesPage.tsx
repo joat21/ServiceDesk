@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useDisclosure } from '@heroui/react';
 import { PriorityCard } from './PriorityCard';
-import { EditPriorityFactorsModal } from '@/features/edit-priority-factors';
+import { EditPrioritiesModal } from '@/features/edit-priorities';
 import { usePriorities } from '@/entities/priority';
 import { Button } from '@/shared/ui';
 import { EditIcon } from '@/shared/ui/icons';
@@ -17,11 +17,6 @@ export const PrioritiesPage: FC = () => {
     onOpen();
   };
 
-  const handleEditFactorsSubmit = () => {
-    console.log('Данные сохранены');
-    onClose();
-  };
-
   return (
     <div className="flex flex-col items-center gap-11 pt-11 w-full">
       <div className="flex justify-between w-full">
@@ -33,16 +28,17 @@ export const PrioritiesPage: FC = () => {
 
       <ul className="flex gap-8 w-full">
         {priorities.map((priority) => (
-          <li key={priority.id} className="w-full">
+          <li key={priority.priorityId} className="w-full">
             <PriorityCard {...priority} />
           </li>
         ))}
       </ul>
 
-      <EditPriorityFactorsModal
+      <EditPrioritiesModal
+        priorities={priorities}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        action={<Button onPress={handleEditFactorsSubmit}>Сохранить</Button>}
+        onClose={onClose}
       />
     </div>
   );

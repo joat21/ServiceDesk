@@ -14,12 +14,25 @@ export const PRIORITY_KEYS: Record<string, PriorityName> = {
   Срочный: 'express',
 };
 
-export const PRIORITY_MAP: Record<
+export const PRIORITY_CHIP_MAP: Record<
   PriorityName,
-  { label: string; color: string }
+  { label: string; className: string }
 > = {
-  low: { label: PRIORITY_LABELS['low'], color: 'bg-priority-low' },
-  medium: { label: PRIORITY_LABELS['medium'], color: 'bg-priority-medium' },
-  high: { label: PRIORITY_LABELS['high'], color: 'bg-priority-high' },
-  express: { label: PRIORITY_LABELS['express'], color: 'bg-priority-express' },
+  low: { label: PRIORITY_LABELS.low, className: 'bg-priority-chip-low' },
+  medium: {
+    label: PRIORITY_LABELS.medium,
+    className: 'bg-priority-chip-medium',
+  },
+  high: { label: PRIORITY_LABELS.high, className: 'bg-priority-chip-high' },
+  express: {
+    label: PRIORITY_LABELS.express,
+    className: 'bg-priority-chip-express',
+  },
+};
+
+export const PRIORITY_INDICATOR_COLOR: Record<PriorityName, string> = {
+  low: 'text-priority-indicator-low',
+  medium: 'text-priority-indicator-medium',
+  high: 'text-priority-indicator-high',
+  express: 'text-priority-indicator-express',
 };

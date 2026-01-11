@@ -19,7 +19,7 @@ import { usePriorities } from '@/entities/priority';
 
 import { Button, Card } from '@/shared/ui';
 import createTicketFile from '@/assets/img/create-ticket.svg';
-import { PRIORITY_KEYS } from '@/entities/priority/model/constants';
+import { PRIORITY_KEYS } from '@/entities/priority';
 
 export const CreateTicketPage: FC = () => {
   const navigate = useNavigate();
@@ -75,8 +75,9 @@ export const CreateTicketPage: FC = () => {
             ?.name ?? 'Прочее',
         priority:
           PRIORITY_KEYS[
-            priorities?.find((p) => String(p.id) === formState.priorityId)
-              ?.name ?? 'Низкий'
+            priorities?.find(
+              (p) => String(p.priorityId) === formState.priorityId
+            )?.name ?? 'Низкий'
           ],
         office:
           offices?.find((o) => String(o.id) === formState.officeId)

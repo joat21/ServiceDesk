@@ -85,34 +85,34 @@ export const EditAnalystAssignmentModal: FC<
     >
       <ModalBody>
         <Form id="analyst-assignment" onSubmit={handleSubmit} className="gap-6">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             <span className="text-[#666]">Филиал</span>
             <span>{analystAssignment.filialName}</span>
           </div>
+          <Autocomplete
+            name="name"
+            label="Выберите аналитика"
+            placeholder="Выберите аналитика"
+            inputValue={inputValue}
+            onInputChange={handleInputChange}
+            selectedKey={selectedUserId}
+            onSelectionChange={handleSelectionChange}
+            items={users}
+            isLoading={isLoading}
+            isRequired
+            inputProps={{
+              classNames: {
+                label: 'text-base font-normal',
+              },
+            }}
+          >
+            {(user) => (
+              <AutocompleteItem key={user.userId}>
+                {user.surname} {user.name} {user.patronymic}
+              </AutocompleteItem>
+            )}
+          </Autocomplete>
         </Form>
-        <Autocomplete
-          name="name"
-          label="Выберите аналитика"
-          placeholder="Выберите аналитика"
-          inputValue={inputValue}
-          onInputChange={handleInputChange}
-          selectedKey={selectedUserId}
-          onSelectionChange={handleSelectionChange}
-          items={users}
-          isLoading={isLoading}
-          isRequired
-          inputProps={{
-            classNames: {
-              label: 'text-base font-normal',
-            },
-          }}
-        >
-          {(user) => (
-            <AutocompleteItem key={user.userId}>
-              {user.surname} {user.name} {user.patronymic}
-            </AutocompleteItem>
-          )}
-        </Autocomplete>
       </ModalBody>
     </Modal>
   );

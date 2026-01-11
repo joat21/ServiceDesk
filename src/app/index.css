@@ -17,10 +17,17 @@
 }
 
 @theme {
-  --color-priority-low: #95ee7f;
-  --color-priority-medium: #f7ffb1;
-  --color-priority-high: #f8d1b0;
-  --color-priority-express: #fc8383;
+  /* chips */
+  --color-priority-chip-low: #95ee7f;
+  --color-priority-chip-medium: #f7ffb1;
+  --color-priority-chip-high: #f8d1b0;
+  --color-priority-chip-express: #fc8383;
+
+  /* indicators / icons */
+  --color-priority-indicator-low: #4caf50;
+  --color-priority-indicator-medium: #c9a800;
+  --color-priority-indicator-high: #e67e22;
+  --color-priority-indicator-express: #e53935;
 
   --color-status-pending: #e3b0ff;
   --color-status-assigned: #a5c4fd;

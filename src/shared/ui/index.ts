@@ -8,3 +8,4 @@ export { DatePicker } from './DatePicker';
 export { Modal } from './Modal';
 export { type ModalProps } from './Modal';
 export { Rating } from './Rating';
+export { NumberInput } from './NumberInput';

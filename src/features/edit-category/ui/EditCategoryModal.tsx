@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { ModalBody, NumberInput } from '@heroui/react';
+import { ModalBody } from '@heroui/react';
 import type { Category } from '@/entities/category';
-import { Input, Modal, type ModalProps } from '@/shared/ui';
+import { Input, Modal, NumberInput, type ModalProps } from '@/shared/ui';
 
 interface EditCategoryModalProps extends Omit<ModalProps, 'children'> {
   category: Category;
@@ -19,11 +19,7 @@ export const EditCategoryModal: FC<EditCategoryModalProps> = ({
           placeholder="Введите название"
           defaultValue={category.name}
         />
-        <NumberInput
-          label="SLA (часы)"
-          labelPlacement="outside"
-          defaultValue={category.sla}
-        />
+        <NumberInput label="SLA (часы)" defaultValue={category.sla} />
       </ModalBody>
     </Modal>
   );
