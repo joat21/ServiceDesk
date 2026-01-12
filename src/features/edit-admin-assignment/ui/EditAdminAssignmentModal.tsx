@@ -35,9 +35,7 @@ export const EditAdminAssignmentModal: FC<EditAdminAssignmentModalProps> = ({
       return;
     }
 
-    const selectedUser = users.find(
-      (user) => String(user.userId) === String(key)
-    );
+    const selectedUser = users.find((user) => user.userId === String(key));
 
     setSelectedUserId(String(key));
     setInputValue(

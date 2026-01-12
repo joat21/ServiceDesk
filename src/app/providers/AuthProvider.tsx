@@ -1,8 +1,10 @@
 import type { FC, PropsWithChildren } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuthQuery } from '@/entities/user';
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { isLoading, isError } = useAuthQuery();
+  const { data: user, isLoading, isError } = useAuthQuery();
+  const location = useLocation();
 
   if (isLoading) return 'Загрузка...';
 
@@ -19,6 +21,10 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     window.location.replace(redirectUrl);
 
     return null;
+  }
+
+  if (!user?.isExist && location.pathname !== '/onboarding') {
+    return <Navigate to="/onboarding" replace />;
   }
 
   return <>{children}</>;

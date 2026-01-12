@@ -21,6 +21,8 @@ export interface AuthUser {
   patronymic: string;
   roleName: Role;
   avatar: string;
+  isExist: boolean;
+  email?: string;
 }
 
 export const Role = {
@@ -53,4 +55,9 @@ export interface SearchedUser {
   surname: string;
   patronymic: string;
   email: string;
+}
+
+export interface RegisterRequest {
+  regionId: number;
+  officeId: string;
 }

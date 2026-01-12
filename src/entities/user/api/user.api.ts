@@ -1,5 +1,6 @@
 import type {
   AuthUser,
+  RegisterRequest,
   SearchedUser,
   SearchUserParams,
   User,
@@ -24,3 +25,9 @@ export const searchUsers = async (params?: SearchUserParams) => {
 
   return data;
 };
+
+export const register = (payload: RegisterRequest) =>
+  api.post(
+    'https://socially-advantaged-moth.cloudpub.ru/auth/registration',
+    payload
+  );

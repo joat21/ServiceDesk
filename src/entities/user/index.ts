@@ -5,4 +5,5 @@ export {
   useAuthQuery,
   useAuthUser,
   useSearchUser,
+  useRegisterUser,
 } from './model/query';

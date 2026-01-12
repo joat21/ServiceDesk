@@ -3,3 +3,8 @@ export interface Office {
   fullAddress: string;
   regionId: number;
 }
+
+export type GetOfficesArgs = {
+  regionId?: number | null;
+  filialId?: number | null;
+};

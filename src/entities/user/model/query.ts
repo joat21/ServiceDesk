@@ -1,6 +1,11 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import type { AuthUser, SearchUserParams, User } from './types';
-import { authMe, getMe, searchUsers } from '../api/user.api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import type {
+  AuthUser,
+  RegisterRequest,
+  SearchUserParams,
+  User,
+} from './types';
+import { authMe, getMe, register, searchUsers } from '../api/user.api';
 
 export const useUser = () =>
   useQuery<User>({
@@ -42,3 +47,12 @@ export const useSearchUser = (params?: SearchUserParams) =>
       Boolean(params?.filialId) ||
       Boolean(params?.fullname),
   });
+
+export const useRegisterUser = () => {
+  const qc = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: RegisterRequest) => register(payload),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['auth', 'me'] }),
+  });
+};
