@@ -1,11 +1,11 @@
-import { AutocompleteItem, Form } from '@heroui/react';
-import { useNavigate } from 'react-router-dom';
-import { useOffices } from '@/entities/office';
-import { Autocomplete, Button, Card, Input } from '@/shared/ui';
-import { AddUserIcon } from '@/shared/ui/icons';
-import { useRegions } from '@/entities/region';
 import { useState, type Key } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AutocompleteItem, Form } from '@heroui/react';
+import { useOffices } from '@/entities/office';
+import { useRegions } from '@/entities/region';
 import { useAuthUser, useRegisterUser } from '@/entities/user';
+import { Autocomplete, Button, Card, Input, PageLoader } from '@/shared/ui';
+import { AddUserIcon } from '@/shared/ui/icons';
 
 export const OnboardingPage = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export const OnboardingPage = () => {
     { enabled: !!selectedRegionId }
   );
 
-  if (isRegionsLoading) return 'Загрузка...';
+  if (isRegionsLoading) return <PageLoader />;
 
   const handleRegionSelectionChange = (key: Key | null) => {
     console.log(key);

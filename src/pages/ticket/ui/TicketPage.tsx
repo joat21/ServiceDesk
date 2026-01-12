@@ -2,9 +2,10 @@ import type { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { Details } from './Details';
 import { History } from './History';
+import { CreateTicketComment } from '@/features/create-ticket-comment';
 import { useTicketHistory, useTicket } from '@/entities/ticket';
 import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
-import { CreateTicketComment } from '@/features/create-ticket-comment';
+import { PageLoader } from '@/shared/ui';
 
 export const TicketPage: FC = () => {
   const { id = '' } = useParams();
@@ -12,7 +13,7 @@ export const TicketPage: FC = () => {
   const { data: ticket, isLoading: isTicketLoading } = useTicket(Number(id));
   const { data: history } = useTicketHistory(id);
 
-  if (isTicketLoading) return 'Загрузка...';
+  if (isTicketLoading) return <PageLoader />;
   if (!ticket) return <p>Заявка не найдена</p>;
 
   return (

@@ -9,3 +9,4 @@ export { Modal } from './Modal';
 export { type ModalProps } from './Modal';
 export { Rating } from './Rating';
 export { NumberInput } from './NumberInput';
+export { PageLoader } from './PageLoader';

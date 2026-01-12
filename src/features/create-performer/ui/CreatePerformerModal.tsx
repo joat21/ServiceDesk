@@ -2,7 +2,13 @@ import type { FC } from 'react';
 import { AutocompleteItem, ModalBody, SelectItem } from '@heroui/react';
 import { useCategories } from '@/entities/category';
 import { useOffices } from '@/entities/office';
-import { Autocomplete, Modal, Select, type ModalProps } from '@/shared/ui';
+import {
+  Autocomplete,
+  Modal,
+  PageLoader,
+  Select,
+  type ModalProps,
+} from '@/shared/ui';
 
 const employees = [
   { id: 1, fullName: 'Иванов И.И.' },
@@ -17,7 +23,7 @@ export const CreatePerformerModal: FC<Omit<ModalProps, 'children'>> = ({
   const { data: categories, isLoading: isCategoriesLoading } = useCategories();
   const { data: offices, isLoading: isOfficesLoading } = useOffices();
 
-  if (isCategoriesLoading || isOfficesLoading) return 'Загрузка...';
+  if (isCategoriesLoading || isOfficesLoading) return <PageLoader />;
 
   return (
     <Modal title="Создание исполнителя" {...props}>

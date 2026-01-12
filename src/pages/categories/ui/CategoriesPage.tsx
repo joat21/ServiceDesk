@@ -4,7 +4,7 @@ import { CategoryCard } from './CategoryCard';
 import { CreateCategoryModal } from '@/features/create-category';
 import { EditCategoryModal } from '@/features/edit-category';
 import { useCategories } from '@/entities/category';
-import { Button } from '@/shared/ui';
+import { Button, PageLoader } from '@/shared/ui';
 
 export const CategoriesPage: FC = () => {
   const createModal = useDisclosure();
@@ -14,7 +14,7 @@ export const CategoriesPage: FC = () => {
     string | number | null
   >(null);
 
-  if (isLoading) return 'Загрузка...';
+  if (isLoading) return <PageLoader />;
   if (!data) return <p>Категории не найдены</p>;
 
   const { content: categories } = data;

@@ -4,7 +4,7 @@ import { OfficeCard } from './OfficeCard';
 import { CreateOfficeModal } from '@/features/create-office';
 import { EditOfficeModal } from '@/features/edit-office';
 import { useOffices, type Office } from '@/entities/office';
-import { Button } from '@/shared/ui';
+import { Button, PageLoader } from '@/shared/ui';
 
 export const OfficesPage: FC = () => {
   const createModal = useDisclosure();
@@ -12,7 +12,7 @@ export const OfficesPage: FC = () => {
   const { data: offices, isLoading } = useOffices();
   const [selectedOffice, setSelectedOffice] = useState<Office | null>(null);
 
-  if (isLoading) return 'Загрузка...';
+  if (isLoading) return <PageLoader />;
   if (!offices) return <p>Офисы не найдены</p>;
 
   const handleCreateOffice = () => {

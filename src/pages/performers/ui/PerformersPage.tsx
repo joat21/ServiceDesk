@@ -4,7 +4,7 @@ import { PerformerCard } from './PerformerCard';
 import { CreatePerformerModal } from '@/features/create-performer';
 import { EditPerformerModal } from '@/features/edit-performer';
 import { usePerformers } from '@/entities/performer';
-import { Button } from '@/shared/ui';
+import { Button, PageLoader } from '@/shared/ui';
 
 export const PerformersPage: FC = () => {
   const createModal = useDisclosure();
@@ -14,7 +14,7 @@ export const PerformersPage: FC = () => {
   >(null);
   const { data: performers, isLoading } = usePerformers();
 
-  if (isLoading) return 'Загрузка...';
+  if (isLoading) return <PageLoader />;
   if (!performers) return <p>Исполнители не найдены</p>;
 
   const selectedPerformer = performers.find(

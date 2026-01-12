@@ -3,7 +3,7 @@ import { useDisclosure } from '@heroui/react';
 import { TicketsTable } from './TicketsTable';
 import { AssignPerformerModal } from '@/features/assign-performer';
 import { useTickets } from '@/entities/ticket';
-import { Card } from '@/shared/ui';
+import { Card, PageLoader } from '@/shared/ui';
 
 export const TicketsPage = () => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -12,9 +12,7 @@ export const TicketsPage = () => {
   );
   const { data: tickets, isLoading: isTicketsLoading } = useTickets();
 
-  if (isTicketsLoading) {
-    return 'Загрузка...';
-  }
+  if (isTicketsLoading) return <PageLoader />;
 
   const handleAssignPerformer = (ticketId: string | number) => {
     setAssignTicketId(ticketId);

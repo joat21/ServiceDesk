@@ -3,6 +3,7 @@ import { useDisclosure } from '@heroui/react';
 import { AnalystAssignmentCard } from './AnalystAssignmentCard';
 import { EditAnalystAssignmentModal } from '@/features/edit-analyst-assignment';
 import { useAnalystAssignments } from '@/entities/analyst-assignment';
+import { PageLoader } from '@/shared/ui';
 
 export const AnalystAssignmentsPage: FC = () => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -11,7 +12,7 @@ export const AnalystAssignmentsPage: FC = () => {
   >(null);
   const { data: analystAssignments, isLoading } = useAnalystAssignments();
 
-  if (isLoading) return 'Загрузка...';
+  if (isLoading) return <PageLoader />;
   if (!analystAssignments) return <p>Аналитики не найдены</p>;
 
   const selectedAssignment = analystAssignments.find(

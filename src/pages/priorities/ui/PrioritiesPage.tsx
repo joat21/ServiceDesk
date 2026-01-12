@@ -3,14 +3,14 @@ import { useDisclosure } from '@heroui/react';
 import { PriorityCard } from './PriorityCard';
 import { EditPrioritiesModal } from '@/features/edit-priorities';
 import { usePriorities } from '@/entities/priority';
-import { Button } from '@/shared/ui';
+import { Button, PageLoader } from '@/shared/ui';
 import { EditIcon } from '@/shared/ui/icons';
 
 export const PrioritiesPage: FC = () => {
   const { isOpen, onOpenChange, onOpen, onClose } = useDisclosure();
   const { data: priorities, isLoading } = usePriorities();
 
-  if (isLoading) return 'Загрузка...';
+  if (isLoading) return <PageLoader />;
   if (!priorities) return <p>Приоритеты не найдены</p>;
 
   const handleEditFactors = () => {

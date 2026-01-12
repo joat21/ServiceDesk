@@ -3,7 +3,7 @@ import { MyTicketsTable } from './MyTicketsTable';
 import { usePerformerStatistics } from '@/entities/statistics';
 import { useTickets } from '@/entities/ticket';
 import { useAuthUser } from '@/entities/user';
-import { Card } from '@/shared/ui';
+import { Card, PageLoader } from '@/shared/ui';
 
 export const TicketsPage = () => {
   const { userId } = useAuthUser();
@@ -13,7 +13,7 @@ export const TicketsPage = () => {
   const { data: tickets, isLoading: isTicketsLoading } = useTickets();
 
   if (isStatsLoading || isTicketsLoading) {
-    return 'Загрузка...';
+    return <PageLoader />;
   }
 
   return (

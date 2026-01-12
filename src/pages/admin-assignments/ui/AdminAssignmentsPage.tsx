@@ -3,6 +3,7 @@ import { useDisclosure } from '@heroui/react';
 import { AdminAssignmentCard } from './AdminAssignmentCard';
 import { EditAdminAssignmentModal } from '@/features/edit-admin-assignment';
 import { useAdminAssignments } from '@/entities/admin-assignment';
+import { PageLoader } from '@/shared/ui';
 
 export const AdminAssignmentsPage: FC = () => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -11,7 +12,7 @@ export const AdminAssignmentsPage: FC = () => {
   >(null);
   const { data: adminAssignments, isLoading } = useAdminAssignments();
 
-  if (isLoading) return 'Загрузка...';
+  if (isLoading) return <PageLoader />;
   if (!adminAssignments) return <p>Администраторы не найдены</p>;
 
   const selectedAssignment = adminAssignments.find(

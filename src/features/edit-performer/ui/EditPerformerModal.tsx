@@ -3,7 +3,7 @@ import { ModalBody, SelectItem } from '@heroui/react';
 import { useCategories } from '@/entities/category';
 import { useOffices } from '@/entities/office';
 import type { Performer } from '@/entities/performer';
-import { Modal, Select, type ModalProps } from '@/shared/ui';
+import { Modal, PageLoader, Select, type ModalProps } from '@/shared/ui';
 
 interface EditPerformerModalProps extends Omit<ModalProps, 'children'> {
   performer: Performer;
@@ -16,7 +16,7 @@ export const EditPerformerModal: FC<EditPerformerModalProps> = ({
   const { data: categories, isLoading: isCategoriesLoading } = useCategories();
   const { data: offices, isLoading: isOfficesLoading } = useOffices();
 
-  if (isCategoriesLoading || isOfficesLoading) return 'Загрузка...';
+  if (isCategoriesLoading || isOfficesLoading) return <PageLoader />;
 
   return (
     <Modal title="Редактирование исполнителя" {...props}>
