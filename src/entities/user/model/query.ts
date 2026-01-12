@@ -32,7 +32,10 @@ export const useAuthUser = () => {
   return user;
 };
 
-export const useSearchUser = (params?: SearchUserParams) =>
+export const useSearchUser = (
+  params?: SearchUserParams,
+  enabled: boolean = false
+) =>
   useQuery({
     queryKey: [
       'users',
@@ -43,6 +46,7 @@ export const useSearchUser = (params?: SearchUserParams) =>
     ],
     queryFn: () => searchUsers(params),
     enabled:
+      enabled ||
       Boolean(params?.regionId) ||
       Boolean(params?.filialId) ||
       Boolean(params?.fullname),

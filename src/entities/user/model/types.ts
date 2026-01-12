@@ -8,7 +8,6 @@ export interface User {
   category?: string[];
   rating?: number;
   office: string[];
-  // regiodId?
   region: string;
   systemId: string;
   avatar: string;

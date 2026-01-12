@@ -3,7 +3,13 @@ import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
 import { useEditAnalystAssignment } from '../model/useEditAnalystAssignment';
 import type { AnalystAssignment } from '@/entities/analyst-assignment';
 import { useSearchUser } from '@/entities/user';
-import { Autocomplete, Button, Modal, type ModalProps } from '@/shared/ui';
+import {
+  Autocomplete,
+  Button,
+  Modal,
+  SearchedUserItem,
+  type ModalProps,
+} from '@/shared/ui';
 
 interface EditAnalystAssignmentModalProps extends Omit<ModalProps, 'children'> {
   analystAssignment: AnalystAssignment;
@@ -49,7 +55,6 @@ export const EditAnalystAssignmentModal: FC<
     e.preventDefault();
 
     if (!selectedUserId) {
-      console.log('выбери юзера');
       return;
     }
 
@@ -109,7 +114,7 @@ export const EditAnalystAssignmentModal: FC<
           >
             {(user) => (
               <AutocompleteItem key={user.userId}>
-                {user.surname} {user.name} {user.patronymic}
+                <SearchedUserItem {...user} />
               </AutocompleteItem>
             )}
           </Autocomplete>

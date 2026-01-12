@@ -2,7 +2,13 @@ import { useState, type FC, type Key } from 'react';
 import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
 import type { AdminAssignment } from '@/entities/admin-assignment';
 import { useSearchUser } from '@/entities/user';
-import { Autocomplete, Button, Modal, type ModalProps } from '@/shared/ui';
+import {
+  Autocomplete,
+  Button,
+  Modal,
+  SearchedUserItem,
+  type ModalProps,
+} from '@/shared/ui';
 import { useEditAdminAssignment } from '../model/useEditAdminAssignment';
 
 interface EditAdminAssignmentModalProps extends Omit<ModalProps, 'children'> {
@@ -109,7 +115,7 @@ export const EditAdminAssignmentModal: FC<EditAdminAssignmentModalProps> = ({
           >
             {(user) => (
               <AutocompleteItem key={user.userId}>
-                {user.surname} {user.name} {user.patronymic}
+                <SearchedUserItem {...user} />
               </AutocompleteItem>
             )}
           </Autocomplete>

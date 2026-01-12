@@ -1,44 +1,36 @@
-import { useState, type FC } from 'react';
+import { type FC } from 'react';
 import { useDisclosure } from '@heroui/react';
 import { PerformerCard } from './PerformerCard';
 import { CreatePerformerModal } from '@/features/create-performer';
-import { EditPerformerModal } from '@/features/edit-performer';
+// import { EditPerformerModal } from '@/features/edit-performer';
 import { usePerformers } from '@/entities/performer';
 import { Button, PageLoader } from '@/shared/ui';
 
 export const PerformersPage: FC = () => {
   const createModal = useDisclosure();
-  const editModal = useDisclosure();
-  const [selectedPerformerId, setSelectedPerformerId] = useState<
-    string | number | null
-  >(null);
-  const { data: performers, isLoading } = usePerformers();
+  // const editModal = useDisclosure();
+  // const [selectedPerformerId, setSelectedPerformerId] = useState<
+  //   string | number | null
+  // >(null);
+  const { data: performersData, isLoading } = usePerformers();
 
   if (isLoading) return <PageLoader />;
-  if (!performers) return <p>Исполнители не найдены</p>;
+  if (!performersData) return <p>Исполнители не найдены</p>;
 
-  const selectedPerformer = performers.find(
-    (p) => p.id === selectedPerformerId
-  );
+  const { content: performers } = performersData;
+
+  // const selectedPerformer = performers.find(
+  //   (p) => p.id === selectedPerformerId
+  // );
 
   const handleCreatePerformer = () => {
     createModal.onOpen();
   };
 
-  const handleEditPerformer = (performerId: string | number) => {
-    setSelectedPerformerId(performerId);
-    editModal.onOpen();
-  };
-
-  const handleCreatePerformerSubmit = () => {
-    console.log('Исполнитель создан');
-    createModal.onClose();
-  };
-
-  const handleEditPerformerSubmit = () => {
-    console.log('Данные сохранены');
-    editModal.onClose();
-  };
+  // const handleEditPerformer = (performerId: string | number) => {
+  //   setSelectedPerformerId(performerId);
+  //   editModal.onOpen();
+  // };
 
   return (
     <div className="flex flex-col items-center gap-11 pt-11 w-full">
@@ -47,12 +39,12 @@ export const PerformersPage: FC = () => {
         <Button onPress={handleCreatePerformer}>+ Добавить исполнителя</Button>
       </div>
 
-      <ul className="grid grid-cols-2 gap-8">
+      <ul className="grid grid-cols-2 gap-8 w-full">
         {performers.map((performer) => (
           <li key={performer.id}>
             <PerformerCard
               performer={performer}
-              onEditPerformer={handleEditPerformer}
+              // onEditPerformer={handleEditPerformer}
             />
           </li>
         ))}
@@ -62,16 +54,14 @@ export const PerformersPage: FC = () => {
         isOpen={createModal.isOpen}
         onClose={createModal.onClose}
         onOpenChange={createModal.onOpenChange}
-        action={<Button onPress={handleCreatePerformerSubmit}>Добавить</Button>}
       />
 
-      <EditPerformerModal
+      {/* <EditPerformerModal
         isOpen={editModal.isOpen}
         onClose={editModal.onClose}
         onOpenChange={editModal.onOpenChange}
         performer={selectedPerformer ?? performers[0]}
-        action={<Button onPress={handleEditPerformerSubmit}>Сохранить</Button>}
-      />
+      /> */}
     </div>
   );
 };

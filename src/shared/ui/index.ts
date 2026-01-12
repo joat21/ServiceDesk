@@ -10,3 +10,4 @@ export { type ModalProps } from './Modal';
 export { Rating } from './Rating';
 export { NumberInput } from './NumberInput';
 export { PageLoader } from './PageLoader';
+export { SearchedUserItem } from './SearchedUserItem';

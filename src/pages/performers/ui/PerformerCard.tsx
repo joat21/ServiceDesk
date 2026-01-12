@@ -1,32 +1,34 @@
 import type { FC } from 'react';
-import { Button } from '@heroui/react';
+// import { Button } from '@heroui/react';
 import type { Performer } from '@/entities/performer';
 import { Card, Rating } from '@/shared/ui';
-import { EditIcon } from '@/shared/ui/icons';
+// import { EditIcon } from '@/shared/ui/icons';
 
 interface PerformerCardProps {
   performer: Performer;
-  onEditPerformer: (performerId: string | number) => void;
+  // onEditPerformer: (performerId: string | number) => void;
 }
 
 export const PerformerCard: FC<PerformerCardProps> = ({
   performer,
-  onEditPerformer,
+  // onEditPerformer,
 }) => {
   return (
     <Card className="gap-8 px-4 py-6 w-full h-full">
       <div className="flex flex-col gap-1.5">
         <div className="flex justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <h2 className="text-2xl font-medium">{performer.fullName}</h2>
-            <Button
+            <h2 className="text-2xl font-medium">
+              {performer.surname} {performer.name} {performer.patronymic}
+            </h2>
+            {/* <Button
               size="sm"
               variant="light"
               onPress={() => onEditPerformer(performer.id)}
               isIconOnly
             >
               <EditIcon />
-            </Button>
+            </Button> */}
           </div>
 
           <Rating value={performer.rating} />
@@ -38,7 +40,7 @@ export const PerformerCard: FC<PerformerCardProps> = ({
       <div>
         <h3 className="mb-3 text-xl font-medium">Категории заявок</h3>
         <ul className="flex flex-wrap gap-2.5">
-          {performer.categories.map((category) => (
+          {performer.category.map((category) => (
             <li
               key={category}
               className="px-3 py-1 rounded-lg min-w-36 font-medium text-center bg-[#FFDADA]"
@@ -52,7 +54,7 @@ export const PerformerCard: FC<PerformerCardProps> = ({
       <div>
         <h3 className="mb-3 text-xl font-medium">Офисы</h3>
         <ul className="flex flex-col">
-          {performer.offices.map((office) => (
+          {performer.office.map((office) => (
             <li key={office}>{office}</li>
           ))}
         </ul>
