@@ -19,6 +19,7 @@ import { CategoriesPage } from '@/pages/categories';
 import { OnboardingPage } from '@/pages/onboardnig';
 import { NotFoundPage } from '@/pages/not-found';
 import { NoAccessPage } from '@/pages/no-access';
+import { DashboardPage } from '@/pages/analyst-dashboard';
 
 import { Role } from '@/entities/user';
 
@@ -42,6 +43,10 @@ function App() {
 
           <Route element={<RequireRole roles={[Role.Employee]} />}>
             <Route path="create-ticket" element={<CreateTicketPage />} />
+          </Route>
+
+          <Route element={<RequireRole roles={[Role.Analyst]} />}>
+            <Route path="dashboard" element={<DashboardPage />} />
           </Route>
 
           <Route path="tickets/:id" element={<TicketPage />} />
