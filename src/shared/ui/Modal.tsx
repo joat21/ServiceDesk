@@ -43,7 +43,6 @@ export const Modal: FC<ModalProps> = ({
           {action}
         </ModalFooter>
       </ModalContent>
-      Modal
     </HeroModal>
   );
 };

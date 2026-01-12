@@ -4,10 +4,8 @@ import { Link } from '@heroui/react';
 import { TicketsFilters } from './TicketsFilters';
 import { TicketsTable } from './TicketsTable';
 
-import { useTickets } from '@/features/tickets';
-
 import { usePriorities } from '@/entities/priority';
-import type { TicketsFilter } from '@/entities/ticket';
+import { type TicketsFilter, useTickets } from '@/entities/ticket';
 import { useAuthUser } from '@/entities/user';
 
 import { Button, Card } from '@/shared/ui';

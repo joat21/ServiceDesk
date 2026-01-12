@@ -1,7 +1,7 @@
 import { Statistics } from './Statistics';
 import { MyTicketsTable } from './MyTicketsTable';
-import { useTickets } from '@/features/tickets';
 import { usePerformerStatistics } from '@/entities/statistics';
+import { useTickets } from '@/entities/ticket';
 import { useAuthUser } from '@/entities/user';
 import { Card } from '@/shared/ui';
 

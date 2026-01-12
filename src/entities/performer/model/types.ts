@@ -1,9 +1,11 @@
 export interface Performer {
   id: string | number;
-  fullName: string;
+  name: string;
+  surname: string;
+  patronymic: string;
   systemId: string;
   email: string;
   rating: number;
-  categories: string[];
-  offices: string[];
+  category: string[];
+  office: string[];
 }

@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { Role, useAuthUser } from '@/entities/user';
 import { EmployeeTicketsPage } from './employee';
 import { PerformerTicketsPage } from './performer';
+import { AdminTicketsPage } from './admin';
 
 export const TicketsPage: FC = () => {
   const user = useAuthUser();
@@ -15,7 +16,7 @@ export const TicketsPage: FC = () => {
   }
 
   if (user.roleName === Role.Admin) {
-    return <h1>Управление заявками у админа</h1>;
+    return <AdminTicketsPage />;
   }
 
   return null;

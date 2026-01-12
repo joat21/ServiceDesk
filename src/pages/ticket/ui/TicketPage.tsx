@@ -2,8 +2,7 @@ import type { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { Details } from './Details';
 import { History } from './History';
-import { useTicket } from '@/features/tickets';
-import { useTicketHistory } from '@/entities/ticket';
+import { useTicketHistory, useTicket } from '@/entities/ticket';
 import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
 import { CreateTicketComment } from '@/features/create-ticket-comment';
 

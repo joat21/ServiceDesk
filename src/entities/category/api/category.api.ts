@@ -1,14 +1,6 @@
 import type { Category } from '../model/types';
 import { api } from '@/shared/api/base';
-
-export type ResponseWithPagination<T> = {
-  content: T[];
-  pagination: {
-    pageIndex: number;
-    totalPages: number;
-    totalRecords: number;
-  };
-};
+import type { ResponseWithPagination } from '@/shared/types';
 
 export const getCategories = () =>
   api
