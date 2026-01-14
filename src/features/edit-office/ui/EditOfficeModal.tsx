@@ -1,9 +1,14 @@
-import type { FC } from 'react';
-import { Form, ModalBody } from '@heroui/react';
+import { useEffect, useState, type FC, type Key } from 'react';
+import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
 import { useEditOffice } from '../model/useEditOffice';
 import type { Office } from '@/entities/office';
-import { Button, Input, Modal, type ModalProps } from '@/shared/ui';
-import { splitAddress } from '@/shared/lib/splitAddress';
+import { Autocomplete, Button, Modal, type ModalProps } from '@/shared/ui';
+import { useDebounce } from '@/shared/lib/useDebounce';
+import {
+  buildAddress,
+  getLocality,
+  useAddressSuggestions,
+} from '@/shared/lib/address';
 
 interface EditOfficeModalProps extends Omit<ModalProps, 'children'> {
   office: Office | null;
@@ -14,17 +19,42 @@ export const EditOfficeModal: FC<EditOfficeModalProps> = ({
   onClose,
   ...props
 }) => {
+  const [addressData, setAddressData] = useState({ city: '', address: '' });
+  const [address, setAddress] = useState(office?.fullAddress);
+
+  useEffect(() => {
+    if (!office) return;
+    setAddress(office.fullAddress);
+  }, [office]);
+
+  const debouncedAddress = useDebounce(address, 300);
+
+  const { data: addressSuggestions, isLoading } = useAddressSuggestions(
+    debouncedAddress ?? ''
+  );
+
   const editOffice = useEditOffice();
+
+  const handleInputChange = (value: string) => {
+    setAddress(value);
+  };
+
+  const handleSelectionChange = (key: Key | null) => {
+    const suggestion = addressSuggestions?.find((s) => s.value === key);
+    setAddressData({
+      // костыли с типизацией
+      city: getLocality(suggestion?.data)!,
+      address: buildAddress(suggestion?.data)!,
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
 
     editOffice.mutate(
       {
         officeId: office?.id ?? '',
-        city: formData.get('city')?.toString() ?? '',
-        address: formData.get('address')?.toString() ?? '',
+        ...addressData,
       },
       {
         onSuccess: () => {
@@ -48,22 +78,27 @@ export const EditOfficeModal: FC<EditOfficeModalProps> = ({
     >
       <ModalBody>
         <Form id="edit-office" onSubmit={handleSubmit}>
-          <Input
-            name="city"
-            label="Город"
-            placeholder="Введите название города"
-            // временно делаю сплит строки руками
-            defaultValue={splitAddress(office?.fullAddress)?.city}
-            isRequired
-          />
-          <Input
+          <Autocomplete
             name="address"
             label="Адрес"
             placeholder="Введите адрес"
-            // временно делаю сплит строки руками
-            defaultValue={splitAddress(office?.fullAddress)?.address}
+            items={addressSuggestions ?? []}
+            inputValue={address}
+            onInputChange={handleInputChange}
+            onSelectionChange={handleSelectionChange}
+            defaultFilter={() => true}
+            isLoading={isLoading}
             isRequired
-          />
+          >
+            {(suggestion) => (
+              <AutocompleteItem
+                key={suggestion.value}
+                textValue={suggestion.value}
+              >
+                <span>{suggestion.value}</span>
+              </AutocompleteItem>
+            )}
+          </Autocomplete>
         </Form>
       </ModalBody>
     </Modal>
