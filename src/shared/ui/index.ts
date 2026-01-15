@@ -15,3 +15,4 @@ export { DeadlineChip } from './DeadlineChip';
 export { Table } from './Table';
 export { TicketInfoCell } from './TicketInfoCell';
 export { ViewButton } from './ViewButton';
+export { TicketsFilters } from './TicketsFilters';

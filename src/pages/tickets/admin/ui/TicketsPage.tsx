@@ -28,7 +28,7 @@ export const TicketsPage = () => {
       <Card className="px-4 pt-6 pb-8 border border-[#c3c0c0] rounded-xl w-full">
         <h1 className="mb-7 text-2xl font-semibold">Управление заявками</h1>
         <TicketsTable
-          tickets={tickets ?? []}
+          tickets={tickets?.content}
           isLoading={isFetching}
           onOpenAssignModal={handleAssignPerformer}
         />

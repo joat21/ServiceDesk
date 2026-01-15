@@ -1,49 +1,51 @@
-import type { FC } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import { SelectItem } from '@heroui/react';
 import { PRIORITY_LABELS, type Priority } from '@/entities/priority';
+import { STATUS_LABELS, type Status } from '@/entities/status';
 import type { TicketsFilter } from '@/entities/ticket';
 import { Input, Select } from '@/shared/ui';
 import { FilterIcon, SearchIcon } from '@/shared/ui/icons';
-
-const statuses = [
-  { id: 1, name: 'На рассмотрении' },
-  { id: 2, name: 'Принято в работу' },
-  { id: 3, name: 'Передано подрядчику' },
-  { id: 4, name: 'Отклонено' },
-  { id: 5, name: 'Выполнено' },
-];
+import { useDebounce } from '@/shared/lib/useDebounce';
 
 const deadlineOptions = [
-  { id: 1, name: 'Просроченные' },
-  { id: 2, name: 'Сегодня' },
-  { id: 3, name: 'Завтра' },
-  { id: 4, name: 'На этой неделе' },
+  { key: 'asc', name: 'Ближайший срок' },
+  { key: 'desc', name: 'Дальний срок' },
 ];
 
 interface TicketsFiltersProps {
-  priorities: Priority[] | undefined;
+  priorities?: Priority[];
+  statuses?: Status[];
   filters: TicketsFilter;
   setFilters: React.Dispatch<React.SetStateAction<TicketsFilter>>;
 }
 
 export const TicketsFilters: FC<TicketsFiltersProps> = ({
   priorities,
+  statuses,
   filters,
   setFilters,
 }) => {
+  const [search, setSearch] = useState(filters.search);
+  const debouncedSearch = useDebounce(search, 300);
+
+  useEffect(() => {
+    setFilters((prev) => ({
+      ...prev,
+      search: debouncedSearch,
+    }));
+  }, [debouncedSearch, setFilters]);
+
   return (
     <div className="flex justify-between gap-5 mb-6">
       <Input
         placeholder="Поиск по заявкам..."
-        value={filters.search}
+        value={search}
         classNames={{
           base: 'max-w-56 min-h-8 h-8',
           inputWrapper: 'min-h-8 h-8',
         }}
         startContent={<SearchIcon />}
-        onChange={(e) =>
-          setFilters((prev) => ({ ...prev, search: e.target.value }))
-        }
+        onChange={(e) => setSearch(e.target.value)}
       />
       <Select
         aria-label="Приоритет"
@@ -73,7 +75,7 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
       <Select
         aria-label="Статус"
         placeholder="Все статусы"
-        items={statuses}
+        items={statuses ?? []}
         classNames={{
           base: 'max-w-56 min-h-8 h-8',
           trigger: 'min-h-8 h-8',
@@ -89,7 +91,9 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
           }));
         }}
       >
-        {(status) => <SelectItem key={status.id}>{status.name}</SelectItem>}
+        {(status) => (
+          <SelectItem key={status.id}>{STATUS_LABELS[status.code]}</SelectItem>
+        )}
       </Select>
       <Select
         aria-label="Дедлайн"
@@ -101,14 +105,16 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
           value: 'text-[#666] text-base',
         }}
         startContent={<FilterIcon />}
-        selectedKeys={filters.deadline ? [filters.deadline] : []}
+        selectedKeys={filters.dueAt ? [filters.dueAt] : []}
         onSelectionChange={(keys) => {
           const value = Array.from(keys)[0] as string;
-          setFilters((prev) => ({ ...prev, deadline: value ?? null }));
+          setFilters((prev) => ({ ...prev, dueAt: value ?? null }));
         }}
       >
         {(deadlineOption) => (
-          <SelectItem key={deadlineOption.id}>{deadlineOption.name}</SelectItem>
+          <SelectItem key={deadlineOption.key}>
+            {deadlineOption.name}
+          </SelectItem>
         )}
       </Select>
     </div>

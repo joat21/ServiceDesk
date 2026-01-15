@@ -5,3 +5,8 @@ export type StatusName =
   | 'outsourced'
   | 'completed'
   | 'rejected';
+
+export interface Status {
+  id: string;
+  code: StatusName;
+}

@@ -10,7 +10,7 @@ import { PageLoader } from '@/shared/ui';
 export const TicketPage: FC = () => {
   const { id = '' } = useParams();
 
-  const { data: ticket, isLoading: isTicketLoading } = useTicket(Number(id));
+  const { data: ticket, isLoading: isTicketLoading } = useTicket(id);
   const { data: history } = useTicketHistory(id);
 
   if (isTicketLoading) return <PageLoader />;

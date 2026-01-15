@@ -4,18 +4,18 @@ import type { StatusName } from '@/entities/status/model/types';
 import type { Role } from '@/entities/user';
 
 export interface Ticket {
-  id: number;
+  id: string;
+  number: string;
   theme: string;
   description: string;
-  status: StatusName;
+  office: string;
   priority: PriorityName;
+  status: StatusName;
   category: string;
-  deadline: string;
+  dueAt: string;
   performer: string;
-  number: string;
   createdAt: string;
   photo: string[];
-  office: string;
   location: string;
   isExpired: boolean;
 }
@@ -24,7 +24,7 @@ export interface TicketsFilter {
   search?: string;
   priorityId?: number | null;
   statusId?: number | null;
-  deadline?: string | null;
+  dueAt?: string | null;
 }
 
 export interface TicketHistoryItem {

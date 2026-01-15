@@ -40,13 +40,13 @@ const createColumns = (params: {
     render: (ticket: Ticket) => <PrioirityChip value={ticket.priority} />,
   },
   {
-    key: 'deadline',
+    key: 'dueAt',
     label: 'Дедлайн',
     render: (ticket: Ticket) =>
       ticket.isExpired ? (
-        <DeadlineChip deadline={ticket.deadline} />
+        <DeadlineChip deadline={ticket.dueAt} />
       ) : (
-        formatDateTime(ticket.deadline, 'numeric')
+        formatDateTime(ticket.dueAt, 'numeric')
       ),
   },
   {
