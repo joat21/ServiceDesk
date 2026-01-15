@@ -1,29 +1,27 @@
 import type { FC } from 'react';
 import {
-  Button,
-  getKeyValue,
-  Link,
-  Table,
-  TableBody,
+  Spinner,
+  TableRow,
   TableCell,
   TableColumn,
+  TableBody,
   TableHeader,
-  TableRow,
+  getKeyValue,
 } from '@heroui/react';
-
 import { PrioirityChip } from '@/entities/priority';
 import { StatusChip } from '@/entities/status';
 import type { Ticket } from '@/entities/ticket';
-
-import { ViewIcon } from '@/shared/ui/icons';
-import { formatDate } from '@/shared/lib/dateTime';
+import { formatDateTime } from '@/shared/lib/dateTime';
+import { DeadlineChip, Table, ViewButton } from '@/shared/ui';
 
 const columns = [
   { key: 'number', label: 'Номер' },
   { key: 'theme', label: 'Заявка' },
-
-  { key: 'actions', label: '' },
-
+  {
+    key: 'actions',
+    label: '',
+    render: (ticket: Ticket) => <ViewButton href={`/tickets/${ticket.id}`} />,
+  },
   {
     key: 'priority',
     label: 'Приоритет',
@@ -34,18 +32,26 @@ const columns = [
     label: 'Статус',
     render: (ticket: Ticket) => <StatusChip value={ticket.status} />,
   },
-  { key: 'deadline', label: 'Дедлайн' },
+  {
+    key: 'deadline',
+    label: 'Дедлайн',
+    render: (ticket: Ticket) =>
+      ticket.isExpired ? (
+        <DeadlineChip deadline={ticket.deadline} />
+      ) : (
+        formatDateTime(ticket.deadline, 'numeric')
+      ),
+  },
 ];
 
 const columnsMap = Object.fromEntries(columns.map((c) => [c.key, c]));
 
 interface TicketsTableProps {
-  tickets: Ticket[];
+  tickets?: Ticket[];
+  isLoading?: boolean;
 }
 
-export const TicketsTable: FC<TicketsTableProps> = ({ tickets }) => {
-  const rows = tickets.map((ticket) => ({ key: ticket.id, ...ticket }));
-
+export const TicketsTable: FC<TicketsTableProps> = ({ tickets, isLoading }) => {
   return (
     <Table
       classNames={{
@@ -53,7 +59,7 @@ export const TicketsTable: FC<TicketsTableProps> = ({ tickets }) => {
       }}
       aria-label="История заявок"
     >
-      <TableHeader columns={columns} className="">
+      <TableHeader columns={columns}>
         {(column) => (
           <TableColumn
             key={column.key}
@@ -63,29 +69,21 @@ export const TicketsTable: FC<TicketsTableProps> = ({ tickets }) => {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody items={rows} emptyContent={'Заявки не найдены'}>
-        {(item) => (
-          <TableRow key={item.key} className="border-t border-[#c3c0c0]">
-            {/* TODO: стремно выглядит, переписать */}
+      <TableBody
+        items={tickets ?? []}
+        isLoading={isLoading}
+        loadingContent={<Spinner />}
+        emptyContent={'Заявки не найдены'}
+      >
+        {(ticket) => (
+          <TableRow key={ticket.id}>
             {(columnKey) => {
               const column = columnsMap[columnKey];
               return (
                 <TableCell className="px-4 py-2 text-base">
-                  {columnKey === 'actions' && (
-                    <Button
-                      variant="light"
-                      as={Link}
-                      href={`/tickets/${item.key}`}
-                      className="p-2 rounded-lg min-w-0 w-fit"
-                    >
-                      <ViewIcon />
-                    </Button>
-                  )}
-                  {columnKey === 'deadline'
-                    ? formatDate(getKeyValue(item, columnKey))
-                    : column.render
-                      ? column.render(item)
-                      : getKeyValue(item, columnKey)}
+                  {column.render
+                    ? column.render(ticket)
+                    : getKeyValue(ticket, columnKey)}
                 </TableCell>
               );
             }}

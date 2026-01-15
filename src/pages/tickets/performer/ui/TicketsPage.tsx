@@ -1,5 +1,5 @@
 import { Statistics } from './Statistics';
-import { MyTicketsTable } from './MyTicketsTable';
+import { TicketsTable } from './TicketsTable';
 import { usePerformerStatistics } from '@/entities/statistics';
 import { useTickets } from '@/entities/ticket';
 import { useAuthUser } from '@/entities/user';
@@ -10,7 +10,11 @@ export const TicketsPage = () => {
 
   const { data: stats, isLoading: isStatsLoading } =
     usePerformerStatistics(userId);
-  const { data: tickets, isLoading: isTicketsLoading } = useTickets();
+  const {
+    data: tickets,
+    isLoading: isTicketsLoading,
+    isFetching,
+  } = useTickets();
 
   if (isStatsLoading || isTicketsLoading) {
     return <PageLoader />;
@@ -22,7 +26,7 @@ export const TicketsPage = () => {
       {stats && <Statistics stats={stats[0]} />}
       <Card className="px-4 pt-6 pb-8 border border-[#c3c0c0] rounded-xl w-full">
         <h2 className="mb-7 text-2xl font-semibold">Мои заявки</h2>
-        <MyTicketsTable tickets={tickets ?? []} />
+        <TicketsTable tickets={tickets} isLoading={isFetching} />
       </Card>
     </div>
   );

@@ -11,3 +11,7 @@ export { Rating } from './Rating';
 export { NumberInput } from './NumberInput';
 export { PageLoader } from './PageLoader';
 export { SearchedUserItem } from './SearchedUserItem';
+export { DeadlineChip } from './DeadlineChip';
+export { Table } from './Table';
+export { TicketInfoCell } from './TicketInfoCell';
+export { ViewButton } from './ViewButton';

@@ -10,7 +10,11 @@ export const TicketsPage = () => {
   const [assignTicketId, setAssignTicketId] = useState<string | number | null>(
     null
   );
-  const { data: tickets, isLoading: isTicketsLoading } = useTickets();
+  const {
+    data: tickets,
+    isLoading: isTicketsLoading,
+    isFetching,
+  } = useTickets();
 
   if (isTicketsLoading) return <PageLoader />;
 
@@ -25,6 +29,7 @@ export const TicketsPage = () => {
         <h1 className="mb-7 text-2xl font-semibold">Управление заявками</h1>
         <TicketsTable
           tickets={tickets ?? []}
+          isLoading={isFetching}
           onOpenAssignModal={handleAssignPerformer}
         />
       </Card>

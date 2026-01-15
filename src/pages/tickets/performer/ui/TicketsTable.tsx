@@ -1,29 +1,21 @@
-import { useMemo } from 'react';
+import type { FC } from 'react';
 import {
   Spinner,
-  TableBody,
-  TableCell,
   TableColumn,
-  TableHeader,
   TableRow,
+  TableCell,
+  TableBody,
+  TableHeader,
   getKeyValue,
 } from '@heroui/react';
-import type { Ticket } from '@/entities/ticket';
 import { PrioirityChip } from '@/entities/priority';
+import { StatusChip } from '@/entities/status';
+import type { Ticket } from '@/entities/ticket';
 import { formatDateTime } from '@/shared/lib/dateTime';
-import {
-  Button,
-  DeadlineChip,
-  Table,
-  TicketInfoCell,
-  ViewButton,
-} from '@/shared/ui';
+import { Table, ViewButton, DeadlineChip, TicketInfoCell } from '@/shared/ui';
 
-const createColumns = (params: {
-  onOpenAssignModal: (ticketId: string | number) => void;
-}) => [
+const columns = [
   { key: 'number', label: 'Номер' },
-
   {
     key: 'theme',
     label: 'Заявка',
@@ -40,6 +32,11 @@ const createColumns = (params: {
     render: (ticket: Ticket) => <PrioirityChip value={ticket.priority} />,
   },
   {
+    key: 'status',
+    label: 'Статус',
+    render: (ticket: Ticket) => <StatusChip value={ticket.status} />,
+  },
+  {
     key: 'deadline',
     label: 'Дедлайн',
     render: (ticket: Ticket) =>
@@ -49,47 +46,18 @@ const createColumns = (params: {
         formatDateTime(ticket.deadline, 'numeric')
       ),
   },
-  {
-    key: 'performer',
-    label: 'Исполнитель',
-    render: (ticket: Ticket) =>
-      ticket.performer ? (
-        ticket.performer
-      ) : (
-        <Button
-          variant="ghost"
-          className="text-black"
-          onPress={() => params.onOpenAssignModal(ticket.id)}
-        >
-          Назначить
-        </Button>
-      ),
-  },
 ];
+
+const columnsMap = Object.fromEntries(columns.map((c) => [c.key, c]));
 
 interface TicketsTableProps {
   tickets?: Ticket[];
   isLoading?: boolean;
-  onOpenAssignModal: (ticketId: string | number) => void;
 }
 
-export const TicketsTable = ({
-  tickets,
-  isLoading,
-  onOpenAssignModal,
-}: TicketsTableProps) => {
-  const columns = useMemo(
-    () => createColumns({ onOpenAssignModal }),
-    [onOpenAssignModal]
-  );
-
-  const columnsMap = useMemo(
-    () => Object.fromEntries(columns.map((c) => [c.key, c])),
-    [columns]
-  );
-
+export const TicketsTable: FC<TicketsTableProps> = ({ tickets, isLoading }) => {
   return (
-    <Table aria-label="Управление заявками">
+    <Table aria-label="Мои заявки">
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
@@ -100,11 +68,11 @@ export const TicketsTable = ({
         emptyContent={'Заявки не найдены'}
       >
         {(ticket) => (
-          <TableRow key={ticket.id}>
+          <TableRow key={ticket.id} className="border-t border-[#c3c0c0]">
             {(columnKey) => {
               const column = columnsMap[columnKey];
               return (
-                <TableCell>
+                <TableCell className="px-4 py-2 text-base">
                   {column.render
                     ? column.render(ticket)
                     : getKeyValue(ticket, columnKey)}

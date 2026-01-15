@@ -19,7 +19,7 @@ export const TicketsPage: FC = () => {
   });
 
   const user = useAuthUser();
-  const { data: tickets } = useTickets(filters);
+  const { data: tickets, isFetching } = useTickets(filters);
   const { data: priorities } = usePriorities();
 
   return (
@@ -39,7 +39,7 @@ export const TicketsPage: FC = () => {
           filters={filters}
           setFilters={setFilters}
         />
-        <TicketsTable tickets={tickets ?? []} />
+        <TicketsTable tickets={tickets} isLoading={isFetching} />
       </Card>
     </div>
   );

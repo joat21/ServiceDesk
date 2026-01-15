@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { SelectItem } from '@heroui/react';
-import type { Priority } from '@/entities/priority';
+import { PRIORITY_LABELS, type Priority } from '@/entities/priority';
 import type { TicketsFilter } from '@/entities/ticket';
 import { Input, Select } from '@/shared/ui';
 import { FilterIcon, SearchIcon } from '@/shared/ui/icons';
@@ -65,7 +65,9 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
         }}
       >
         {(priority) => (
-          <SelectItem key={priority.priorityId}>{priority.name}</SelectItem>
+          <SelectItem key={priority.priorityId}>
+            {PRIORITY_LABELS[priority.name]}
+          </SelectItem>
         )}
       </Select>
       <Select
