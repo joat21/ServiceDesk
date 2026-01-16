@@ -7,6 +7,7 @@ import { useStatuses } from '@/entities/status';
 import { useTickets, type TicketsFilter } from '@/entities/ticket';
 import { useAuthUser } from '@/entities/user';
 import { Card, PageLoader, TicketsFilters } from '@/shared/ui';
+import { Pagination } from '@heroui/react';
 
 export const TicketsPage = () => {
   const [filters, setFilters] = useState<TicketsFilter>({
@@ -14,6 +15,7 @@ export const TicketsPage = () => {
     priorityId: null,
     statusId: null,
     dueAt: null,
+    page: 1,
   });
 
   const { userId } = useAuthUser();
@@ -41,6 +43,13 @@ export const TicketsPage = () => {
           setFilters={setFilters}
         />
         <TicketsTable tickets={tickets?.content} isLoading={isFetching} />
+        <Pagination
+          className="self-end"
+          showControls
+          page={filters.page}
+          total={tickets?.pagination.totalPages ?? 1}
+          onChange={(page) => setFilters((prev) => ({ ...prev, page }))}
+        />
       </Card>
     </div>
   );

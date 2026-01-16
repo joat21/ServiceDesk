@@ -29,6 +29,7 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
     setFilters((prev) => ({
       ...prev,
       search: debouncedSearch,
+      page: 1,
     }));
   }, [debouncedSearch, setFilters]);
 
@@ -60,6 +61,7 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
           setFilters((prev) => ({
             ...prev,
             priorityId: Number.isNaN(id) ? null : id,
+            page: 1,
           }));
         }}
       >
@@ -82,7 +84,7 @@ export const TicketsFilters: FC<TicketsFiltersProps> = ({
         selectedKeys={filters.dueAt ? [filters.dueAt] : []}
         onSelectionChange={(keys) => {
           const value = Array.from(keys)[0] as string;
-          setFilters((prev) => ({ ...prev, dueAt: value ?? null }));
+          setFilters((prev) => ({ ...prev, dueAt: value ?? null, page: 1 }));
         }}
       >
         {(deadlineOption) => (

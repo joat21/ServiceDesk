@@ -25,6 +25,7 @@ export interface TicketsFilter {
   priorityId?: number | null;
   statusId?: number | null;
   dueAt?: string | null;
+  page?: number;
 }
 
 export interface TicketHistoryItem {

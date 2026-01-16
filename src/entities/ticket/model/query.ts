@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import type { Ticket, TicketsFilter } from './types';
 import { getTicket, getTicketHistory, getTickets } from '../api/ticket.api';
 import type { ResponseWithPagination } from '@/shared/types';
@@ -13,8 +13,10 @@ export const useTickets = (filters?: TicketsFilter) =>
       filters?.statusId,
       filters?.priorityId,
       filters?.dueAt,
+      filters?.page,
     ],
     queryFn: () => getTickets(filters),
+    placeholderData: keepPreviousData,
   });
 
 export const useTicket = (id: string) =>

@@ -57,7 +57,7 @@ interface TicketsTableProps {
 
 export const TicketsTable: FC<TicketsTableProps> = ({ tickets, isLoading }) => {
   return (
-    <Table aria-label="Мои заявки">
+    <Table classNames={{ base: 'mb-6' }} aria-label="Мои заявки">
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
@@ -68,11 +68,11 @@ export const TicketsTable: FC<TicketsTableProps> = ({ tickets, isLoading }) => {
         emptyContent={'Заявки не найдены'}
       >
         {(ticket) => (
-          <TableRow key={ticket.id} className="border-t border-[#c3c0c0]">
+          <TableRow key={ticket.id}>
             {(columnKey) => {
               const column = columnsMap[columnKey];
               return (
-                <TableCell className="px-4 py-2 text-base">
+                <TableCell>
                   {column.render
                     ? column.render(ticket)
                     : getKeyValue(ticket, columnKey)}

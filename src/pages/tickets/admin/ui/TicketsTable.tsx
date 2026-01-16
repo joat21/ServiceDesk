@@ -90,7 +90,7 @@ export const TicketsTable = ({
   );
 
   return (
-    <Table aria-label="Управление заявками">
+    <Table classNames={{ base: 'mb-6' }} aria-label="Управление заявками">
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>

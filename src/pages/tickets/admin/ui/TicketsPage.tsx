@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDisclosure } from '@heroui/react';
+import { Pagination, useDisclosure } from '@heroui/react';
 import { TicketsTable } from './TicketsTable';
 import { TicketsFilters } from './TicketsFilters';
 import { AssignPerformerModal } from '@/features/assign-performer';
@@ -13,6 +13,7 @@ export const TicketsPage = () => {
     priorityId: null,
     statusId: null,
     dueAt: null,
+    page: 1,
   });
 
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -40,6 +41,13 @@ export const TicketsPage = () => {
           tickets={tickets?.content}
           isLoading={isFetching}
           onOpenAssignModal={handleAssignPerformer}
+        />
+        <Pagination
+          className="self-end"
+          showControls
+          page={filters.page}
+          total={tickets?.pagination.totalPages ?? 1}
+          onChange={(page) => setFilters((prev) => ({ ...prev, page }))}
         />
       </Card>
 

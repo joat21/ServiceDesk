@@ -10,6 +10,7 @@ export const getTickets = async (filters?: TicketsFilter) => {
     params.append('priorityId', String(filters.priorityId));
   if (filters?.statusId) params.append('statusId', String(filters.statusId));
   if (filters?.dueAt) params.append('dueAt', filters.dueAt);
+  if (filters?.page) params.append('page', String(filters.page));
 
   const { data } = await api.get<ResponseWithPagination<Ticket>>(
     'https://socially-advantaged-moth.cloudpub.ru/ticket/panel',

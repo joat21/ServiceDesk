@@ -1,5 +1,5 @@
 import { useState, type FC } from 'react';
-import { Link } from '@heroui/react';
+import { Link, Pagination } from '@heroui/react';
 import { TicketsTable } from './TicketsTable';
 import { usePriorities } from '@/entities/priority';
 import { useStatuses } from '@/entities/status';
@@ -13,6 +13,7 @@ export const TicketsPage: FC = () => {
     priorityId: null,
     statusId: null,
     dueAt: null,
+    page: 1,
   });
 
   const user = useAuthUser();
@@ -39,6 +40,13 @@ export const TicketsPage: FC = () => {
           setFilters={setFilters}
         />
         <TicketsTable tickets={tickets?.content} isLoading={isFetching} />
+        <Pagination
+          className="self-end"
+          showControls
+          page={filters.page}
+          total={tickets?.pagination.totalPages ?? 1}
+          onChange={(page) => setFilters((prev) => ({ ...prev, page }))}
+        />
       </Card>
     </div>
   );
