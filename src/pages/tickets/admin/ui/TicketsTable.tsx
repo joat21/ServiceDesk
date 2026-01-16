@@ -39,6 +39,7 @@ const createColumns = (params: {
     label: 'Приоритет',
     render: (ticket: Ticket) => <PrioirityChip value={ticket.priority} />,
   },
+  { key: 'office', label: 'Офис' },
   {
     key: 'dueAt',
     label: 'Дедлайн',
