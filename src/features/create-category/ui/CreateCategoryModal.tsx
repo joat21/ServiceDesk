@@ -40,7 +40,7 @@ export const CreateCategoryModal: FC<Omit<ModalProps, 'children'>> = ({
     <Modal
       title="Создание категории"
       action={
-        <Button form="create-category" type="submit" disabled={isPending}>
+        <Button form="create-category" type="submit" isDisabled={isPending}>
           Создать
         </Button>
       }

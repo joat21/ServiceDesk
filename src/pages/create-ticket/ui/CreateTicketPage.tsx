@@ -117,7 +117,7 @@ export const CreateTicketPage: FC = () => {
           <Button variant="ghost" as={Link} href="/">
             Отмена
           </Button>
-          <Button type="submit" disabled={createTicket.isPending}>
+          <Button type="submit" isDisabled={createTicket.isPending}>
             Отправить заявку
           </Button>
         </div>

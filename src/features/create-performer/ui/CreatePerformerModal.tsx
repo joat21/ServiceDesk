@@ -82,7 +82,7 @@ export const CreatePerformerModal: FC<Omit<ModalProps, 'children'>> = ({
     <Modal
       title="Создание исполнителя"
       action={
-        <Button form="create-performer" type="submit" disabled={isPending}>
+        <Button form="create-performer" type="submit" isDisabled={isPending}>
           Создать
         </Button>
       }

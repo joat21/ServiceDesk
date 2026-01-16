@@ -3,12 +3,15 @@ import { HistoryItem } from './HistoryItem';
 import type { TicketHistoryItem } from '@/entities/ticket';
 import { Card } from '@/shared/ui';
 import { TicketHistoryIcon } from '@/shared/ui/icons';
+import { Spinner } from '@heroui/react';
 
 interface HistoryProps {
   history: TicketHistoryItem[];
 }
 
 export const History: FC<HistoryProps> = ({ history }) => {
+  if (!history) return <Spinner />;
+
   return (
     <Card className="px-7 py-5 rounded-xl w-full">
       <h2 className="flex items-center gap-3 mb-4 text-2xl font-semibold">

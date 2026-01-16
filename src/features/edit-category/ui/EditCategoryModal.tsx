@@ -47,7 +47,7 @@ export const EditCategoryModal: FC<EditCategoryModalProps> = ({
     <Modal
       title="Редактирование категории"
       action={
-        <Button form="edit-category" type="submit" disabled={isPending}>
+        <Button form="edit-category" type="submit" isDisabled={isPending}>
           Сохранить
         </Button>
       }

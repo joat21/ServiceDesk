@@ -1,1 +1,1 @@
-export { EditPerformerModal } from './ui/EditPerformerModal';
+// export { EditPerformerModal } from './ui/EditPerformerModal';

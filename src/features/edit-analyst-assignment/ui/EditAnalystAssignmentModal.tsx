@@ -81,7 +81,7 @@ export const EditAnalystAssignmentModal: FC<
         <Button
           form="analyst-assignment"
           type="submit"
-          disabled={editAnalystAssignment.isPending}
+          isDisabled={editAnalystAssignment.isPending}
         >
           Назначить
         </Button>

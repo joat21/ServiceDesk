@@ -26,11 +26,16 @@ export const TicketPage: FC = () => {
       <div className="flex gap-5 items-start">
         <div className="sticky top-5 flex flex-col gap-10 w-full">
           <Details ticket={ticket} />
-          <ChangeTicketStatus ticketId={ticket.id} />
+          {user.roleName === Role.Performer &&
+            ticket.status !== STATUS_ENUM.Completed &&
+            ticket.status !== STATUS_ENUM.Rejected && (
+              <ChangeTicketStatus ticketId={ticket.id} status={ticket.status} />
+            )}
         </div>
 
         <div className="flex flex-col gap-10 w-full">
           <History history={history ?? []} />
+          {/* выглядит конечно отвратительно, но кому щас легко? */}
           {(user.roleName === Role.Employee ||
             user.roleName === Role.Performer ||
             user.roleName === Role.Admin) &&

@@ -34,7 +34,7 @@ export const CreateTicketComment = ({ ticketId }: { ticketId: string }) => {
           type="submit"
           variant="ghost"
           startContent={<SendIcon />}
-          disabled={createTicketComment.isPending}
+          isDisabled={createTicketComment.isPending}
         >
           Отправить
         </Button>

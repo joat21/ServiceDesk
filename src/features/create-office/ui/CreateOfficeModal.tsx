@@ -51,7 +51,11 @@ export const CreateOfficeModal: FC<Omit<ModalProps, 'children' | 'action'>> = ({
     <Modal
       title="Добавление офиса"
       action={
-        <Button form="create-office" type="submit">
+        <Button
+          form="create-office"
+          type="submit"
+          isDisabled={createOffice.isPending}
+        >
           Добавить
         </Button>
       }

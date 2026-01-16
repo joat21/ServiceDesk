@@ -20,7 +20,7 @@ export const useTickets = (filters?: TicketsFilter) =>
   });
 
 export const useTicket = (id: string) =>
-  useQuery({ queryKey: [...tickets_key, id], queryFn: () => getTicket(id) });
+  useQuery({ queryKey: ['ticket', id], queryFn: () => getTicket(id) });
 
 export const useTicketHistory = (id: string) =>
   useQuery({

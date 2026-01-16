@@ -17,7 +17,7 @@ export const HistoryItem: FC<HistoryItemProps> = ({ item }) => {
         </span>
       </div>
       <span className="mb-4 text-lg text-[#666]">{item.username}</span>
-      <span className="mb-3 px-3 py-2 border border-[#c3c0c0] rounded-lg text-lg text-[#666] bg-[#f8f8f8]">
+      <span className="mb-3 px-3 py-2 border border-[#c3c0c0] rounded-lg text-lg text-[#666] bg-[#f8f8f8] whitespace-pre-wrap">
         {item.message}
       </span>
       {item.photos && item.photos.length > 0 && (

@@ -70,7 +70,11 @@ export const EditOfficeModal: FC<EditOfficeModalProps> = ({
     <Modal
       title="Редактирование офиса"
       action={
-        <Button form="edit-office" type="submit">
+        <Button
+          form="edit-office"
+          type="submit"
+          isDisabled={editOffice.isPending}
+        >
           Сохранить
         </Button>
       }

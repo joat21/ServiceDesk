@@ -42,7 +42,7 @@ export const EditPrioritiesModal: FC<EditPrioritiesModalProps> = ({
         <Button
           form="priority-factors"
           type="submit"
-          disabled={editPriorities.isPending}
+          isDisabled={editPriorities.isPending}
         >
           Сохранить
         </Button>

@@ -17,7 +17,7 @@ export const Button: FC<HeroButtonProps> = ({
   className,
   variant = 'solid',
   children,
-  disabled,
+  isDisabled,
   ...props
 }) => {
   return (
@@ -26,10 +26,9 @@ export const Button: FC<HeroButtonProps> = ({
       className={cn(
         'px-5 py-1 rounded-lg min-h-8 h-8 text-base data-[hover=true]:opacity-100 hover:opacity-100',
         variantClassMap[variant],
-        className,
-        disabled && 'cursor-not-allowed'
+        className
       )}
-      disabled={disabled}
+      isDisabled={isDisabled}
       {...props}
     >
       {children}

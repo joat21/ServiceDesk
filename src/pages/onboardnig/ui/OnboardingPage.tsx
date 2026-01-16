@@ -97,7 +97,7 @@ export const OnboardingPage = () => {
               </AutocompleteItem>
             )}
           </Autocomplete>
-          <Button className="self-end" type="submit" disabled={isPending}>
+          <Button className="self-end" type="submit" isDisabled={isPending}>
             Продолжить
           </Button>
         </Form>

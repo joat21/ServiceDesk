@@ -67,7 +67,7 @@ export const AssignPerformerModal: FC<AssignPerformerModalProps> = ({
     <Modal
       title="Назначение исполнителя"
       action={
-        <Button form="assign-performer" type="submit" disabled={isPending}>
+        <Button form="assign-performer" type="submit" isDisabled={isPending}>
           Назначить
         </Button>
       }
