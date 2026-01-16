@@ -7,7 +7,7 @@ import {
 import { getLocalTimeZone, parseDate, today } from '@internationalized/date';
 import type { TicketFormState } from '@/features/create-ticket';
 import type { Category } from '@/entities/category';
-import type { Priority } from '@/entities/priority';
+import { PRIORITY_LABELS, type Priority } from '@/entities/priority';
 import { DatePicker, Select } from '@/shared/ui';
 
 interface ClassificationSectionProps {
@@ -72,7 +72,9 @@ export const ClassificationSection: FC<ClassificationSectionProps> = ({
             onChange={handlePriorityChange}
           >
             {(priority) => (
-              <SelectItem key={priority.priorityId}>{priority.name}</SelectItem>
+              <SelectItem key={priority.priorityId}>
+                {PRIORITY_LABELS[priority.name]}
+              </SelectItem>
             )}
           </Select>
           <DatePicker
@@ -117,7 +119,9 @@ export const ClassificationSection: FC<ClassificationSectionProps> = ({
         onChange={handlePriorityChange}
       >
         {(priority) => (
-          <SelectItem key={priority.priorityId}>{priority.name}</SelectItem>
+          <SelectItem key={priority.priorityId}>
+            {PRIORITY_LABELS[priority.name]}
+          </SelectItem>
         )}
       </Select>
     </div>

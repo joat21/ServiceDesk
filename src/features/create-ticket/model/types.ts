@@ -1,11 +1,12 @@
 export interface TicketFormState {
   theme: string;
   description: string;
-  priorityId: string;
-  categoryId: string;
-  photo: string[];
+  photosUrl: string[];
   officeId: string;
+  priorityId: string | number;
+  categoryId: string;
   location: string;
-  relocationOfficeId: string | null;
-  relocationDate: string | null;
+
+  relocationOfficeId?: string | null;
+  relocationDate?: string | null;
 }

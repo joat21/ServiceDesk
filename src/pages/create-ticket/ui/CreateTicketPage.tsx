@@ -13,63 +13,16 @@ import {
   useCreateTicket,
 } from '@/features/create-ticket';
 
-// import { useCategories } from '@/entities/category';
+import { useCategories } from '@/entities/category';
 import { useOffices } from '@/entities/office';
 import { usePriorities } from '@/entities/priority';
 
 import { Button, Card } from '@/shared/ui';
 import createTicketFile from '@/assets/img/create-ticket.svg';
-import { PRIORITY_KEYS } from '@/entities/priority';
-
-const categories = [
-  {
-    id: 1,
-    name: 'Транспорт',
-    sla: 12,
-    description: '',
-  },
-  {
-    id: 2,
-    name: 'Офисные услуги',
-    sla: 72,
-    description: '',
-  },
-  {
-    id: 3,
-    name: 'Переезд',
-    sla: 72,
-    description: '',
-  },
-  {
-    id: 5,
-    name: 'Сантехника',
-    sla: 24,
-    description: '',
-  },
-  {
-    id: 4,
-    name: 'Техническое обслуживание',
-    sla: 24,
-    description: '',
-  },
-  {
-    id: 6,
-    name: 'Электрика',
-    sla: 12,
-    description: '',
-  },
-  {
-    id: 7,
-    name: 'Прочее',
-    sla: 24,
-    description: '',
-  },
-];
 
 export const CreateTicketPage: FC = () => {
   const navigate = useNavigate();
-  // TODO: починить использование хука
-  // const { data: categories } = useCategories();
+  const { data: categories } = useCategories();
   const { data: priorities } = usePriorities();
   const { data: offices } = useOffices();
 
@@ -82,14 +35,14 @@ export const CreateTicketPage: FC = () => {
     description: '',
     categoryId: '',
     priorityId: '',
-    photo: [],
+    photosUrl: [],
     officeId: '',
     location: '',
-    relocationOfficeId: null,
-    relocationDate: null,
+    // relocationOfficeId: null,
+    // relocationDate: null,
   });
 
-  const selectedCategory = categories?.find(
+  const selectedCategory = categories?.content.find(
     (c) => String(c.id) === formState.categoryId
   );
   const isRelocation = selectedCategory?.name === 'Переезд';
@@ -104,38 +57,12 @@ export const CreateTicketPage: FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log({
-      ...formState,
-      photo: files.map((file) => file.url),
-    });
+
     createTicket.mutate(
       {
         ...formState,
-        photo: files.map((file) => file.url ?? ''),
-
-        // Поля ниже заполняются на фронте только пока используется моковый API,
-        // так как моковый API не может по categoryId мне вернуть название этой категории
-        // а эти данные о заявках мне нужно отображать в истории заявок
-        category:
-          categories?.find((c) => String(c.id) === formState.categoryId)
-            ?.name ?? 'Прочее',
-        priority:
-          PRIORITY_KEYS[
-            priorities?.find(
-              (p) => String(p.priorityId) === formState.priorityId
-            )?.name ?? 'Низкий'
-          ],
-        office:
-          offices?.find((o) => String(o.id) === formState.officeId)
-            ?.fullAddress ?? 'Екатеринбург, ул. Генеральская, 8',
-        relocationOffice:
-          offices?.find((o) => String(o.id) === formState.relocationOfficeId)
-            ?.fullAddress ?? 'Екатеринбург, ул. Генеральская, 8',
-        performer: 'Иванов И.И',
-        status: 'pending',
-        createdAt: new Date().toISOString(),
-        deadline: new Date().toISOString(),
-        number: 'TK-0004',
+        priorityId: Number(formState.priorityId),
+        photosUrl: files.map((file) => file.url ?? ''),
       },
       {
         onSuccess: () => {
@@ -172,7 +99,7 @@ export const CreateTicketPage: FC = () => {
           />
 
           <ClassificationSection
-            categories={categories}
+            categories={categories?.content}
             priorities={priorities}
             formState={formState}
             handleFieldChange={handleFieldChange}
@@ -190,7 +117,9 @@ export const CreateTicketPage: FC = () => {
           <Button variant="ghost" as={Link} href="/">
             Отмена
           </Button>
-          <Button type="submit">Отправить заявку</Button>
+          <Button type="submit" disabled={createTicket.isPending}>
+            Отправить заявку
+          </Button>
         </div>
       </Card>
     </div>
