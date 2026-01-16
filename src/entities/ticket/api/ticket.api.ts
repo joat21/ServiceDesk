@@ -20,9 +20,13 @@ export const getTickets = async (filters?: TicketsFilter) => {
 };
 
 export const getTicket = (id: string) =>
-  api.get<Ticket>(`/tickets/${id}`).then((r) => r.data);
+  api
+    .get<Ticket>(`https://socially-advantaged-moth.cloudpub.ru/ticket/${id}`)
+    .then((r) => r.data);
 
 export const getTicketHistory = (id: string) =>
   api
-    .get<TicketHistoryItem[]>(`/ticket-history?ticketId=${id}`)
+    .get<
+      TicketHistoryItem[]
+    >(`https://socially-advantaged-moth.cloudpub.ru/ticket/${id}/comments`)
     .then((r) => r.data);

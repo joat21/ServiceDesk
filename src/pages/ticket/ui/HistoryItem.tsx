@@ -16,13 +16,13 @@ export const HistoryItem: FC<HistoryItemProps> = ({ item }) => {
           {formatDateTime(item.createdAt, 'numeric')}
         </span>
       </div>
-      <span className="mb-4 text-lg text-[#666]">{item.actor.name}</span>
+      <span className="mb-4 text-lg text-[#666]">{item.username}</span>
       <span className="mb-3 px-3 py-2 border border-[#c3c0c0] rounded-lg text-lg text-[#666] bg-[#f8f8f8]">
         {item.message}
       </span>
-      {item.photo && item.photo.length > 0 && (
+      {item.photos && item.photos.length > 0 && (
         <ul className="flex flex-wrap gap-2">
-          {item.photo.map((url) => (
+          {item.photos.map((url) => (
             <li
               key={url}
               className="flex items-center justify-center border border-[#c3c0c0] rounded-lg w-40 h-40 bg-[#f8f8f8] overflow-hidden"

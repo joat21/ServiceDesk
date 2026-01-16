@@ -13,7 +13,7 @@ interface DetailsProps {
 
 export const Details: FC<DetailsProps> = ({ ticket }) => {
   return (
-    <Card className="sticky top-5 px-7 py-5 rounded-xl w-full">
+    <Card className="px-7 py-5 rounded-xl w-full">
       <h1 className="mb-4 text-2xl font-semibold">Детали заявки</h1>
       <div className="flex flex-col gap-4 p-0">
         <DetailsItem label="Тема заявки">{ticket.theme}</DetailsItem>
@@ -28,10 +28,10 @@ export const Details: FC<DetailsProps> = ({ ticket }) => {
           </div>
         </DetailsItem>
 
-        {ticket.photo.length > 0 && (
+        {ticket.photos.length > 0 && (
           <DetailsItem label="Фото">
             <ul className="flex flex-wrap gap-2">
-              {ticket.photo.map((url) => (
+              {ticket.photos.map((url) => (
                 <li
                   key={url}
                   className="flex items-center justify-center border border-[#c3c0c0] rounded-lg w-40 h-40 bg-[#f8f8f8] overflow-hidden"
@@ -52,7 +52,9 @@ export const Details: FC<DetailsProps> = ({ ticket }) => {
             <DetailsItem label="Статус">
               {STATUS_LABELS[ticket.status]}
             </DetailsItem>
-            <DetailsItem label="Исполнитель">{ticket.performer}</DetailsItem>
+            <DetailsItem label="Исполнитель">
+              {ticket.performerName}
+            </DetailsItem>
             <DetailsItem label="Создано">
               {formatDateTime(ticket.createdAt)}
             </DetailsItem>
@@ -61,9 +63,9 @@ export const Details: FC<DetailsProps> = ({ ticket }) => {
             <DetailsItem label="Приоритет">
               {PRIORITY_LABELS[ticket.priority]}
             </DetailsItem>
-            <DetailsItem label="Категория">{ticket.category}</DetailsItem>
+            <DetailsItem label="Категория">{ticket.categoryName}</DetailsItem>
             <DetailsItem label="Дедлайн">
-              {formatDateTime(ticket.deadline)}
+              {formatDateTime(ticket.dueAt)}
             </DetailsItem>
           </div>
         </div>

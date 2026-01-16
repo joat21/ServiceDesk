@@ -53,18 +53,15 @@ const createColumns = (params: {
   {
     key: 'performer',
     label: 'Исполнитель',
-    render: (ticket: Ticket) =>
-      ticket.performer ? (
-        ticket.performer
-      ) : (
-        <Button
-          variant="ghost"
-          className="text-black"
-          onPress={() => params.onOpenAssignModal(ticket.id)}
-        >
-          Назначить
-        </Button>
-      ),
+    render: (ticket: Ticket) => (
+      <Button
+        variant="ghost"
+        className="text-black"
+        onPress={() => params.onOpenAssignModal(ticket.id)}
+      >
+        Назначить
+      </Button>
+    ),
   },
 ];
 

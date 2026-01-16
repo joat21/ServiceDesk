@@ -6,6 +6,7 @@ import { CreateTicketComment } from '@/features/create-ticket-comment';
 import { useTicketHistory, useTicket } from '@/entities/ticket';
 import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
 import { PageLoader } from '@/shared/ui';
+import { ChangeTicketStatus } from '@/features/change-ticket-status';
 
 export const TicketPage: FC = () => {
   const { id = '' } = useParams();
@@ -20,7 +21,11 @@ export const TicketPage: FC = () => {
     <div className="relative flex flex-col gap-6 py-11 w-full">
       <BackToHomeButton />
       <div className="flex gap-5 items-start">
-        <Details ticket={ticket} />
+        <div className="sticky top-5 flex flex-col gap-10 w-full">
+          <Details ticket={ticket} />
+          <ChangeTicketStatus ticketId={ticket.id} />
+        </div>
+
         <div className="flex flex-col gap-10 w-full">
           <History history={history ?? []} />
           <CreateTicketComment ticketId={ticket.id} />
