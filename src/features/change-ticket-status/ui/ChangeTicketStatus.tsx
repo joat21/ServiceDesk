@@ -1,4 +1,4 @@
-import { useDisclosure } from '@heroui/react';
+import { addToast, useDisclosure } from '@heroui/react';
 import { RejectTicketModal } from './RejectTicketModal';
 import { FullfillTicketModal } from './FullfillTicketModal';
 import { useStartWork } from '../model/query';
@@ -18,7 +18,13 @@ export const ChangeTicketStatus = ({
 
   const startWork = useStartWork();
 
-  const handleStartWork = () => startWork.mutate(ticketId);
+  const handleStartWork = () =>
+    startWork.mutate(ticketId, {
+      onSuccess: () =>
+        addToast({ title: 'Заявка принята к исполнению', severity: 'success' }),
+      onError: () =>
+        addToast({ title: 'Произошла ошибка', severity: 'danger' }),
+    });
 
   return (
     <Card className="p-4">
@@ -28,7 +34,7 @@ export const ChangeTicketStatus = ({
           variant="ghost"
           className="text-black"
           onPress={handleStartWork}
-          isDisabled={status === STATUS_ENUM.InProgress}
+          isDisabled={status === STATUS_ENUM.InProgress || startWork.isPending}
         >
           Взять в работу
         </Button>

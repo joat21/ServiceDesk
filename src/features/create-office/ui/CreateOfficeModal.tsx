@@ -1,5 +1,5 @@
 import { useState, type FC, type Key } from 'react';
-import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
+import { addToast, AutocompleteItem, Form, ModalBody } from '@heroui/react';
 import { useCreateOffice } from '../model/useCreateOffice';
 import { Autocomplete, Button, Modal, type ModalProps } from '@/shared/ui';
 import { useDebounce } from '@/shared/lib/useDebounce';
@@ -40,10 +40,11 @@ export const CreateOfficeModal: FC<Omit<ModalProps, 'children' | 'action'>> = ({
 
     createOffice.mutate(addressData, {
       onSuccess: () => {
-        alert('Офис добавлен');
+        addToast({ title: 'Офис добавлен', severity: 'success' });
         onClose?.();
       },
-      onError: () => alert('Произошла ошибка'),
+      onError: () =>
+        addToast({ title: 'Произошла ошибка', severity: 'danger' }),
     });
   };
 

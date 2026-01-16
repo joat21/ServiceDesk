@@ -1,5 +1,11 @@
 import { useState, type FC, type Key } from 'react';
-import { AutocompleteItem, Form, ModalBody, SelectItem } from '@heroui/react';
+import {
+  addToast,
+  AutocompleteItem,
+  Form,
+  ModalBody,
+  SelectItem,
+} from '@heroui/react';
 import { useCategories } from '@/entities/category';
 import { useOffices } from '@/entities/office';
 import {
@@ -70,10 +76,11 @@ export const CreatePerformerModal: FC<Omit<ModalProps, 'children'>> = ({
       },
       {
         onSuccess: () => {
-          alert('Изменения сохранены');
+          addToast({ title: 'Исполнитель добавлен', severity: 'success' });
           onClose?.();
         },
-        onError: () => alert('Произошла ошибка'),
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
       }
     );
   };

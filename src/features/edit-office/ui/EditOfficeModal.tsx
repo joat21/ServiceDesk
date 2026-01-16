@@ -62,7 +62,7 @@ export const EditOfficeModal: FC<EditOfficeModalProps> = ({
           onClose?.();
         },
         onError: () =>
-          addToast({ title: 'Изменения сохранены', severity: 'danger' }),
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
       }
     );
   };

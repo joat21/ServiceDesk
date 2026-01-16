@@ -1,5 +1,5 @@
 import { useState, type FC, type Key } from 'react';
-import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
+import { addToast, AutocompleteItem, Form, ModalBody } from '@heroui/react';
 import type { AdminAssignment } from '@/entities/admin-assignment';
 import { useSearchUser } from '@/entities/user';
 import {
@@ -53,13 +53,8 @@ export const EditAdminAssignmentModal: FC<EditAdminAssignmentModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!selectedUserId) return;
 
-    if (!selectedUserId) {
-      console.log('выбери юзера');
-      return;
-    }
-
-    console.log(selectedUserId);
     editAdminAssignment.mutate(
       {
         userId: selectedUserId,
@@ -67,10 +62,11 @@ export const EditAdminAssignmentModal: FC<EditAdminAssignmentModalProps> = ({
       },
       {
         onSuccess: () => {
-          alert('Изменения сохранены');
+          addToast({ title: 'Изменения сохранены', severity: 'success' });
           onClose?.();
         },
-        onError: () => alert('Произошла ошибка'),
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
       }
     );
   };

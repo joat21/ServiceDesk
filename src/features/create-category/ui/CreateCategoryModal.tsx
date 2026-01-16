@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Form, ModalBody } from '@heroui/react';
+import { addToast, Form, ModalBody } from '@heroui/react';
 import {
   Button,
   Input,
@@ -28,10 +28,14 @@ export const CreateCategoryModal: FC<Omit<ModalProps, 'children'>> = ({
       },
       {
         onSuccess: () => {
-          alert('Категория добавлена');
+          addToast({
+            title: 'Заявка принята к исполнению',
+            severity: 'success',
+          });
           onClose?.();
         },
-        onError: () => alert('Произошла ошибка'),
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
       }
     );
   };

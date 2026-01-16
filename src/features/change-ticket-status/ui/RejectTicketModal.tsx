@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Form, ModalBody, type ModalProps } from '@heroui/react';
+import { addToast, Form, ModalBody, type ModalProps } from '@heroui/react';
 import { Button, Modal, Textarea } from '@/shared/ui';
 import { useRejectTicket } from '../model/query';
 
@@ -18,10 +18,21 @@ export const RejectTicketModal: FC<RejectTicketModalProps> = ({
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    rejectTicket.mutate({
-      ticketId,
-      message: formData.get('comment')?.toString() ?? '',
-    });
+    rejectTicket.mutate(
+      {
+        ticketId,
+        message: formData.get('comment')?.toString() ?? '',
+      },
+      {
+        onSuccess: () =>
+          addToast({
+            title: 'Заявка отклонена',
+            severity: 'success',
+          }),
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
+      }
+    );
   };
 
   return (

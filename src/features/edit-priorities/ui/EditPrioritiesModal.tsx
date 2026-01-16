@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Form, ModalBody } from '@heroui/react';
+import { addToast, Form, ModalBody } from '@heroui/react';
 import { useEditPriorities } from '../model/useEditPriorities';
 import { PRIORITY_LABELS, type Priority } from '@/entities/priority';
 import { Button, Modal, NumberInput, type ModalProps } from '@/shared/ui';
@@ -28,10 +28,11 @@ export const EditPrioritiesModal: FC<EditPrioritiesModalProps> = ({
 
     editPriorities.mutate(payload, {
       onSuccess: () => {
-        alert('Изменения сохранены');
+        addToast({ title: 'Изменения сохранены', severity: 'success' });
         onClose?.();
       },
-      onError: () => alert('Произошла ошибка'),
+      onError: () =>
+        addToast({ title: 'Произошла ошибка', severity: 'danger' }),
     });
   };
 

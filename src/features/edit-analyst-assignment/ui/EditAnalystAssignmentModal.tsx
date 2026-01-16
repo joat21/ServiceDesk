@@ -1,5 +1,5 @@
 import { useState, type FC, type Key } from 'react';
-import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
+import { addToast, AutocompleteItem, Form, ModalBody } from '@heroui/react';
 import { useEditAnalystAssignment } from '../model/useEditAnalystAssignment';
 import type { AnalystAssignment } from '@/entities/analyst-assignment';
 import { useSearchUser } from '@/entities/user';
@@ -66,10 +66,11 @@ export const EditAnalystAssignmentModal: FC<
       },
       {
         onSuccess: () => {
-          alert('Изменения сохранены');
+          addToast({ title: 'Изменения сохранены', severity: 'success' });
           onClose?.();
         },
-        onError: () => alert('Произошла ошибка'),
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
       }
     );
   };

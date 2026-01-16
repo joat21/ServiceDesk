@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Form, ModalBody } from '@heroui/react';
+import { addToast, Form, ModalBody } from '@heroui/react';
 import type { Category } from '@/entities/category';
 import {
   Button,
@@ -35,10 +35,11 @@ export const EditCategoryModal: FC<EditCategoryModalProps> = ({
       },
       {
         onSuccess: () => {
-          alert('Изменения сохранены');
+          addToast({ title: 'Изменения сохранены', severity: 'success' });
           onClose?.();
         },
-        onError: () => alert('Произошла ошибка'),
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
       }
     );
   };

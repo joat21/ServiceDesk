@@ -1,4 +1,4 @@
-import { Form } from '@heroui/react';
+import { addToast, Form } from '@heroui/react';
 import { Button, Card, Textarea } from '@/shared/ui';
 import { SendIcon } from '@/shared/ui/icons';
 import { useCreateTicketComment } from '../model/useCreateTicketComment';
@@ -15,7 +15,13 @@ export const CreateTicketComment = ({ ticketId }: { ticketId: string }) => {
         ticketId,
         message: formData.get('comment')?.toString() ?? '',
       },
-      { onSuccess: () => formData.set('comment', '') }
+      {
+        onSuccess: () => {
+          addToast({ title: 'Комментарий добавлен', severity: 'success' });
+        },
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
+      }
     );
   };
 

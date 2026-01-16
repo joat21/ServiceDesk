@@ -1,5 +1,11 @@
 import { useState, type FC } from 'react';
-import { Form, ModalBody, Spinner, type ModalProps } from '@heroui/react';
+import {
+  addToast,
+  Form,
+  ModalBody,
+  Spinner,
+  type ModalProps,
+} from '@heroui/react';
 import { Button, Modal, NumberInput, Textarea } from '@/shared/ui';
 import { CameraIcon, PlusIcon } from '@/shared/ui/icons';
 import { api } from '@/shared/api/base';
@@ -55,12 +61,23 @@ export const FullfillTicketModal: FC<FullfillTicketModalProps> = ({
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    fullfillTicket.mutate({
-      ticketId,
-      message: formData.get('comment')?.toString() ?? '',
-      total: Number(formData.get('total')),
-      photosUrl: files.map((f) => f.url ?? ''),
-    });
+    fullfillTicket.mutate(
+      {
+        ticketId,
+        message: formData.get('comment')?.toString() ?? '',
+        total: Number(formData.get('total')),
+        photosUrl: files.map((f) => f.url ?? ''),
+      },
+      {
+        onSuccess: () =>
+          addToast({
+            title: 'Заявка завершена',
+            severity: 'success',
+          }),
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
+      }
+    );
   };
 
   return (

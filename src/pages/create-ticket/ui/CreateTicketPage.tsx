@@ -1,6 +1,6 @@
 import { useState, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Link } from '@heroui/react';
+import { addToast, Form, Link } from '@heroui/react';
 
 import { MainInfoSection } from './MainInfoSection';
 import { AttachmentsSection } from './AttachmentsSection';
@@ -66,8 +66,11 @@ export const CreateTicketPage: FC = () => {
       },
       {
         onSuccess: () => {
+          addToast({ title: 'Заявка создана', severity: 'success' });
           navigate('/');
         },
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
       }
     );
   };
