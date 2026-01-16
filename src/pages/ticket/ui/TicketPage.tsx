@@ -7,9 +7,12 @@ import { useTicketHistory, useTicket } from '@/entities/ticket';
 import { BackToHomeButton } from '@/shared/routing/BackToHomeButton';
 import { PageLoader } from '@/shared/ui';
 import { ChangeTicketStatus } from '@/features/change-ticket-status';
+import { Role, useAuthUser } from '@/entities/user';
+import { STATUS_ENUM } from '@/entities/status';
 
 export const TicketPage: FC = () => {
   const { id = '' } = useParams();
+  const user = useAuthUser();
 
   const { data: ticket, isLoading: isTicketLoading } = useTicket(id);
   const { data: history } = useTicketHistory(id);
@@ -28,7 +31,13 @@ export const TicketPage: FC = () => {
 
         <div className="flex flex-col gap-10 w-full">
           <History history={history ?? []} />
-          <CreateTicketComment ticketId={ticket.id} />
+          {(user.roleName === Role.Employee ||
+            user.roleName === Role.Performer ||
+            user.roleName === Role.Admin) &&
+            ticket.status !== STATUS_ENUM.Completed &&
+            ticket.status !== STATUS_ENUM.Rejected && (
+              <CreateTicketComment ticketId={ticket.id} />
+            )}
         </div>
       </div>
     </div>

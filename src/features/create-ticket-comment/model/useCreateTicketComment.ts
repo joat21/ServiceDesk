@@ -5,7 +5,7 @@ export const useCreateTicketComment = () => {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: { ticketId: string | number; comment: string }) =>
+    mutationFn: (data: { ticketId: string; message: string }) =>
       createTicketComment(data),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['ticket-history'] }),
   });

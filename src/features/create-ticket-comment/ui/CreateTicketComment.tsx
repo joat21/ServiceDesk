@@ -3,21 +3,20 @@ import { Button, Card, Textarea } from '@/shared/ui';
 import { SendIcon } from '@/shared/ui/icons';
 import { useCreateTicketComment } from '../model/useCreateTicketComment';
 
-export const CreateTicketComment = ({
-  ticketId,
-}: {
-  ticketId: string | number;
-}) => {
+export const CreateTicketComment = ({ ticketId }: { ticketId: string }) => {
   const createTicketComment = useCreateTicketComment();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    createTicketComment.mutate({
-      ticketId,
-      comment: formData.get('comment')?.toString() ?? '',
-    });
+    createTicketComment.mutate(
+      {
+        ticketId,
+        message: formData.get('comment')?.toString() ?? '',
+      },
+      { onSuccess: () => formData.set('comment', '') }
+    );
   };
 
   return (
@@ -35,6 +34,7 @@ export const CreateTicketComment = ({
           type="submit"
           variant="ghost"
           startContent={<SendIcon />}
+          disabled={createTicketComment.isPending}
         >
           Отправить
         </Button>
