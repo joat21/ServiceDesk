@@ -1,5 +1,6 @@
 import { useState, type FC, type Key } from 'react';
 import {
+  addToast,
   AutocompleteItem,
   Form,
   ModalBody,
@@ -56,10 +57,11 @@ export const AssignPerformerModal: FC<AssignPerformerModalProps> = ({
 
     mutate(undefined, {
       onSuccess: () => {
-        alert('Изменения сохранены');
+        addToast({ title: 'Изменения сохранены', severity: 'success' });
         onClose?.();
       },
-      onError: () => alert('Произошла ошибка'),
+      onError: () =>
+        addToast({ title: 'Произошла ошибка', severity: 'danger' }),
     });
   };
 

@@ -1,9 +1,9 @@
 import { api } from '@/shared/api/base';
 import type { PerformerStatistics } from '../model/types';
 
-export const getPerformerStatistics = (performerId: string | number) =>
-  // возвращаеся массив - особенность моков
-  // TODO: удалить потом
+export const getPerformerStatistics = () =>
   api
-    .get<PerformerStatistics[]>(`/performer-stats?id=${performerId}`)
+    .get<PerformerStatistics>(
+      `https://socially-advantaged-moth.cloudpub.ru/ticket/aggregatePanel`
+    )
     .then((r) => r.data);

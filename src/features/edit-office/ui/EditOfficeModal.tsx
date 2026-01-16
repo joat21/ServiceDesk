@@ -1,5 +1,5 @@
 import { useEffect, useState, type FC, type Key } from 'react';
-import { AutocompleteItem, Form, ModalBody } from '@heroui/react';
+import { addToast, AutocompleteItem, Form, ModalBody } from '@heroui/react';
 import { useEditOffice } from '../model/useEditOffice';
 import type { Office } from '@/entities/office';
 import { Autocomplete, Button, Modal, type ModalProps } from '@/shared/ui';
@@ -58,10 +58,11 @@ export const EditOfficeModal: FC<EditOfficeModalProps> = ({
       },
       {
         onSuccess: () => {
-          alert('Изменения сохранены');
+          addToast({ title: 'Изменения сохранены', severity: 'success' });
           onClose?.();
         },
-        onError: () => alert('Произошла ошибка'),
+        onError: () =>
+          addToast({ title: 'Изменения сохранены', severity: 'danger' }),
       }
     );
   };

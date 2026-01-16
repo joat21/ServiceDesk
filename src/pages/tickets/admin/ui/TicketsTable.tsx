@@ -18,6 +18,7 @@ import {
   TicketInfoCell,
   ViewButton,
 } from '@/shared/ui';
+import { STATUS_ENUM } from '@/entities/status';
 
 const createColumns = (params: {
   onOpenAssignModal: (ticketId: string | number) => void;
@@ -44,7 +45,9 @@ const createColumns = (params: {
     key: 'dueAt',
     label: 'Дедлайн',
     render: (ticket: Ticket) =>
-      ticket.isExpired ? (
+      ticket.isExpired &&
+      ticket.status !== STATUS_ENUM.Completed &&
+      ticket.status !== STATUS_ENUM.Rejected ? (
         <DeadlineChip deadline={ticket.dueAt} />
       ) : (
         formatDateTime(ticket.dueAt, 'numeric')

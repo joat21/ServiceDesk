@@ -14,6 +14,7 @@ export const useStartWork = () => {
       qc.invalidateQueries({ queryKey: ['tickets'] });
       qc.invalidateQueries({ queryKey: ['ticket-history'] });
       qc.invalidateQueries({ queryKey: ['ticket', ticketId] });
+      qc.invalidateQueries({ queryKey: ['performer-statistics'] });
     },
   });
 };
@@ -28,6 +29,7 @@ export const useRejectTicket = () => {
       qc.invalidateQueries({ queryKey: ['tickets'] });
       qc.invalidateQueries({ queryKey: ['ticket-history'] });
       qc.invalidateQueries({ queryKey: ['ticket', data.ticketId] });
+      qc.invalidateQueries({ queryKey: ['performer-statistics'] });
     },
   });
 };
@@ -46,6 +48,7 @@ export const useFullfillTicket = () => {
       qc.invalidateQueries({ queryKey: ['tickets'] });
       qc.invalidateQueries({ queryKey: ['ticket-history'] });
       qc.invalidateQueries({ queryKey: ['ticket', data.ticketId] });
+      qc.invalidateQueries({ queryKey: ['performer-statistics'] });
     },
   });
 };

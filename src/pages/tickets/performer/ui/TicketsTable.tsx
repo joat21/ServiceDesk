@@ -9,7 +9,7 @@ import {
   getKeyValue,
 } from '@heroui/react';
 import { PrioirityChip } from '@/entities/priority';
-import { StatusChip } from '@/entities/status';
+import { STATUS_ENUM, StatusChip } from '@/entities/status';
 import type { Ticket } from '@/entities/ticket';
 import { formatDateTime } from '@/shared/lib/dateTime';
 import { Table, ViewButton, DeadlineChip, TicketInfoCell } from '@/shared/ui';
@@ -40,7 +40,9 @@ const columns = [
     key: 'dueAt',
     label: 'Дедлайн',
     render: (ticket: Ticket) =>
-      ticket.isExpired ? (
+      ticket.isExpired &&
+      ticket.status !== STATUS_ENUM.Completed &&
+      ticket.status !== STATUS_ENUM.Rejected ? (
         <DeadlineChip deadline={ticket.dueAt} />
       ) : (
         formatDateTime(ticket.dueAt, 'numeric')
