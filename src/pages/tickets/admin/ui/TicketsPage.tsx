@@ -17,13 +17,11 @@ export const TicketsPage = () => {
   });
 
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-  const [assignTicketId, setAssignTicketId] = useState<string | number | null>(
-    null
-  );
+  const [assignTicketId, setAssignTicketId] = useState<string | null>(null);
   const { data: tickets, isFetching } = useTickets(filters);
   const { data: priorities } = usePriorities();
 
-  const handleAssignPerformer = (ticketId: string | number) => {
+  const handleAssignPerformer = (ticketId: string) => {
     setAssignTicketId(ticketId);
     onOpen();
   };

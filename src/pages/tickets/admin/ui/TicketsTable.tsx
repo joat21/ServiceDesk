@@ -21,7 +21,7 @@ import {
 import { STATUS_ENUM } from '@/entities/status';
 
 const createColumns = (params: {
-  onOpenAssignModal: (ticketId: string | number) => void;
+  onOpenAssignModal: (ticketId: string) => void;
 }) => [
   { key: 'number', label: 'Номер' },
 
@@ -71,7 +71,7 @@ const createColumns = (params: {
 interface TicketsTableProps {
   tickets?: Ticket[];
   isLoading?: boolean;
-  onOpenAssignModal: (ticketId: string | number) => void;
+  onOpenAssignModal: (ticketId: string) => void;
 }
 
 export const TicketsTable = ({
