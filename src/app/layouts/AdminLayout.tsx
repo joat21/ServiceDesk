@@ -18,7 +18,7 @@ export const AdminLayout = () => {
           collapsed={collapsed}
           setCollapsed={setCollapsed}
         />
-        <main className="flex flex-1 px-6">
+        <main className="flex flex-1 mb-6 px-6">
           <div className="mx-auto max-w-7xl w-full">
             <Outlet />
           </div>

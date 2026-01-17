@@ -5,7 +5,11 @@ export const useAssignPerformer = () => {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: assignPerformer,
+    mutationFn: (data: {
+      ticketId: string;
+      userId: string;
+      categoryId: string;
+    }) => assignPerformer(data),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['tickets'] }),
   });
 };

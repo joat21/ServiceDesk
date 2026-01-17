@@ -1,1 +1,1 @@
-export { LeaveFeedbackModal } from './ui/LeavefeedbackModal';
+export { LeaveFeedbackModal } from './ui/LeaveFeedbackModal';

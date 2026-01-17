@@ -12,10 +12,11 @@ import { Autocomplete, Button, Modal } from '@/shared/ui';
 import { useAssignPerformer } from '../model/useAssignPerformer';
 
 interface AssignPerformerModalProps extends Omit<ModalProps, 'children'> {
-  ticketId: string | number;
+  ticketId: string;
 }
 
 export const AssignPerformerModal: FC<AssignPerformerModalProps> = ({
+  ticketId,
   onClose,
   ...props
 }) => {
@@ -51,18 +52,21 @@ export const AssignPerformerModal: FC<AssignPerformerModalProps> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!selectedUserId) {
+    if (!selectedUserId || !selectedCategoryId) {
       return;
     }
 
-    mutate(undefined, {
-      onSuccess: () => {
-        addToast({ title: 'Изменения сохранены', severity: 'success' });
-        onClose?.();
-      },
-      onError: () =>
-        addToast({ title: 'Произошла ошибка', severity: 'danger' }),
-    });
+    mutate(
+      { ticketId, userId: selectedUserId, categoryId: selectedCategoryId },
+      {
+        onSuccess: () => {
+          addToast({ title: 'Изменения сохранены', severity: 'success' });
+          onClose?.();
+        },
+        onError: () =>
+          addToast({ title: 'Произошла ошибка', severity: 'danger' }),
+      }
+    );
   };
 
   return (
@@ -84,7 +88,7 @@ export const AssignPerformerModal: FC<AssignPerformerModalProps> = ({
             placeholder="Выберите категорию"
             selectedKey={selectedCategoryId}
             onSelectionChange={handleCategorySelectionChange}
-            items={categories}
+            items={categories.filter((c) => c.name !== 'Прочее')}
             isLoading={isCategoriesLoading}
             isRequired
           >
