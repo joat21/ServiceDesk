@@ -1,17 +1,23 @@
 import type { FC } from 'react';
+import { useDisclosure } from '@heroui/react';
 import { DetailsItem } from './DetailsItem';
 import { PRIORITY_LABELS } from '@/entities/priority';
+import { STATUS_ENUM, STATUS_LABELS } from '@/entities/status';
 import type { Ticket } from '@/entities/ticket';
-import { Card } from '@/shared/ui';
+import { LeaveFeedbackModal } from '@/features/leave-feedback';
+import { Button, Card } from '@/shared/ui';
 import { MapPinIcon } from '@/shared/ui/icons';
 import { formatDateTime } from '@/shared/lib/dateTime';
-import { STATUS_LABELS } from '@/entities/status';
+import { Role, useAuthUser } from '@/entities/user';
 
 interface DetailsProps {
   ticket: Ticket;
 }
 
 export const Details: FC<DetailsProps> = ({ ticket }) => {
+  const user = useAuthUser();
+  const leaveFeedbackModal = useDisclosure();
+
   return (
     <Card className="px-7 py-5 rounded-xl w-full">
       <h1 className="mb-4 text-2xl font-semibold">Детали заявки</h1>
@@ -69,7 +75,25 @@ export const Details: FC<DetailsProps> = ({ ticket }) => {
             </DetailsItem>
           </div>
         </div>
+
+        {!ticket.isReviewed &&
+          user.roleName === Role.Employee &&
+          ticket.status === STATUS_ENUM.Completed && (
+            <Button
+              className="self-start"
+              onPress={() => leaveFeedbackModal.onOpen()}
+            >
+              Оставить отзыв
+            </Button>
+          )}
       </div>
+
+      <LeaveFeedbackModal
+        ticketId={ticket.id}
+        isOpen={leaveFeedbackModal.isOpen}
+        onClose={leaveFeedbackModal.onClose}
+        onOpenChange={leaveFeedbackModal.onOpenChange}
+      />
     </Card>
   );
 };

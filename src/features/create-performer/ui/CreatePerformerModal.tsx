@@ -123,7 +123,7 @@ export const CreatePerformerModal: FC<Omit<ModalProps, 'children'>> = ({
             name="categoryIds"
             label="Категории"
             placeholder="Выберите категории"
-            items={categories}
+            items={categories.filter((c) => c.name !== 'Прочее')}
             isRequired
             selectionMode="multiple"
           >

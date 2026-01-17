@@ -17,6 +17,7 @@ export interface Ticket {
   photos: string[];
   location: string;
   isExpired: boolean;
+  isReviewed: boolean;
 }
 
 export interface TicketsFilter {
