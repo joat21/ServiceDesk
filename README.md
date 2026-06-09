@@ -1,54 +1,49 @@
-# React + TypeScript + Vite
+# ServiceDesk
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ServiceDesk — корпоративный портал для автоматизации внутренних обращений сотрудников компании. Система позволяет создавать заявки различных категорий, маршрутизировать их исполнителям, контролировать сроки выполнения и управлять справочниками системы через набор административных интерфейсов.
 
-Currently, two official plugins are available:
+## Роль в проекте
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Проект разрабатывался командой аналитик, дизайнер, 2 бэкендера, фронтендер.
 
-## Expanding the ESLint configuration
+В рамках проекта я отвечал за разработку клиентской части приложения на React и TypeScript, участвовал в проектировании пользовательских сценариев, реализовывал интерфейсы для нескольких ролей пользователей и интегрировал клиент с API.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 💻 Основной функционал
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Создание и обработка заявок
+- создание обращений
+- прикрепление вложений
+- история изменений
+- комментарии участников процесса
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Ролевая модель доступа
+- сотрудник
+- исполнитель
+- региональный администратор
+- суперадминистратор
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Управление исполнителями и зонами ответственности
+- назначение категорий
+- распределение офисов
+- маршрутизация обращений
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Администрирование системы
+- управление категориями
+- настройка SLA
+- назначение администраторов
+
+## Реализованные интерфейсы
+- личный кабинет сотрудника
+- журнал заявок
+- карточка обращения
+- управление исполнителями
+- управление офисами
+- управление категориями
+- интерфейсы глобального администрирования (категории, SLA, приоритеты)
+
+## 🛠️ Стек технологий
+- React
+- TypeScript
+- TanStack Query
+- Tailwind CSS
+- HeroUI
